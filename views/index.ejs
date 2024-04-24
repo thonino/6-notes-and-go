@@ -2,11 +2,14 @@
 <html>
 
 <head>
-  <title>Hello EJS</title>
+  <%- include('./partials/bootstrap') %>
+  <title>Home page</title>
 </head>
 
 <body>
-  <h1>Welcome to EJS, <%= name %>!</h1>
+  <%- include('./partials/nav') %>
+  <h1>My Quiz !</h1>
+  <a class="btn btn-success ms-2 mt-3" href="/product/new">Add Theme</a>
 </body>
 
 </html>
