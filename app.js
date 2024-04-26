@@ -47,7 +47,8 @@ app.set('view engine', 'ejs');
 
 // Routes de base
 app.get("/", (req, res) => {
-  res.render("index", { name: "Visitor" });
+  const user = req.session.user;
+  res.render("index", { user: user, name: "Visitor" });
 });
 
 

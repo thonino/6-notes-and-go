@@ -16,6 +16,7 @@
         </li>
     </ul>
     <ul class="navbar-nav ms-auto me-2">
+      <% if (!user) { %>
         <li class="nav-item">
           <a class="nav-link text-success" href="/register">
             <i class="bi bi-box-arrow-in-right btn btn-success btn-sm"> Inscription</i>
@@ -26,18 +27,20 @@
             <i class="bi bi-box-arrow-in-right btn btn-success btn-sm"> Connexion</i>
           </a>
         </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/account">
-              <i class="bi bi-person-circle btn btn-success btn-sm"> Mon Compte</i>
-            </a>
-          </li>
-          <li class="nav-item">
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link " href="/logout">
-              <i class="bi bi-box-arrow-left btn btn-danger btn-sm"> Déconnexion</i>
-            </a>
-          </li>
+      <% } else { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/account">
+            <i class="bi bi-person-circle btn btn-success btn-sm"> Mon Compte</i>
+          </a>
+        </li>
+        <li class="nav-item">
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link " href="/logout">
+            <i class="bi bi-box-arrow-left btn btn-danger btn-sm"> Déconnexion</i>
+          </a>
+        </li>
+        <% } %>
     </ul>
   </div>
 </nav>
