@@ -9,14 +9,79 @@
   </head>
   <body>
     <%- include('./partials/nav') %>
-      <div class="container col-6 text-center text-capitalize">
+      <div class="container col-6 text-center">
         <h1> Account ! </h1>
         <% if (!user) { %>
-          </p>Connectez vous pour acceder à la page ! </p>
+          <p>Connectez-vous pour accéder à la page !</p>
         <% } else { %>
-            <h3> Name : <%= user.name %> </h3>
-            <h3> Email : <%= user.email %> </h3>
+          <div class="mb-3">
+            <h3 class="text-capitalize mb-0"> 
+              Name : <%= user.name %>
+            </h3>
+          </div>
+          <div class="mb-3">
+            <h3 class="mb-0"> 
+              Email : <%= user.email %> 
+
+              <button id="showInputEmail" class="btn btn-info btn-sm">
+                <i class="bi bi-pencil-fill"></i>
+              </button>
+
+              <div id="inputEmail" class="mt-3 d-none ">
+                <input type="text" class="form-control" placeholder="Write your new email">
+                <button class="btn btn-info ms-1">Save</button>
+              </div>
+
+            </h3>
+          </div>
+          <div class="mb-3">
+            <h3 class="mb-0">
+              My Password
+
+              <button id="showInputPassword" class="btn btn-warning btn-sm">
+                <i class="bi bi-pencil-fill"></i>
+              </button>
+
+              <div id="inputPassword" class="mt-3 d-none">
+                <input type="password" class="form-control" placeholder="Write your new password">
+                <button class="btn btn-warning ms-1">Save</button>
+              </div>
+
+            </h3>
+            <h3 class="mb-0">
+              Delete Account
+              <button class="btn btn-danger btn-sm">
+                <i class="bi bi-trash-fill"></i>
+              </button>
+          </div>
         <% } %>
       </div>
+      <script>
+        // Toggle InputEmail
+        var showInputEmail = document.getElementById('showInputEmail');
+        var inputEmail = document.getElementById('inputEmail');
+        showInputEmail.addEventListener('click', function () {
+          if (inputEmail.classList.contains('d-none')) {
+            inputEmail.classList.remove('d-none');
+            inputEmail.classList.add('d-flex');
+          } else {
+            inputEmail.classList.remove('d-flex');
+            inputEmail.classList.add('d-none');
+          }
+        });
+
+        // Toggle InputPassword
+        var showInputPassword = document.getElementById('showInputPassword');
+        var inputPassword = document.getElementById('inputPassword');
+        showInputPassword.addEventListener('click', function () {
+          if (inputPassword.classList.contains('d-none')) {
+            inputPassword.classList.remove('d-none');
+            inputPassword.classList.add('d-flex');
+          } else {
+            inputPassword.classList.remove('d-flex');
+            inputPassword.classList.add('d-none');
+          }
+        });
+      </script>
   </body>
 </html>

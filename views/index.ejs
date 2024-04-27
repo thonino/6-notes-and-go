@@ -8,12 +8,12 @@
 
 <body>
   <%- include('./partials/nav') %>
-  <div class=" container ms-2 mt-3">
+  <div class="ms-2 mt-3 text-center">
     <% if (user) { %>
       <h1 class="text-success"> Hi <%= user.name %> !</h1>
     <% } %>
     <h2>Create your own quizzes by adding words!</h2>
-    <p>If you added at least 10 words, you can start a quiz</p>
+    <p class="text-warning">If you added at least 10 words, you can start a quiz</p>
   </div>
 </body>
 
