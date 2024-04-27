@@ -48,9 +48,13 @@ app.set('view engine', 'ejs');
 // Routes de base
 app.get("/", (req, res) => {
   const user = req.session.user;
-  res.render("index", { user: user, name: "Visitor" });
+  res.render("index", { user: user });
 });
 
+app.get("/account", (req, res) => {
+  const user = req.session.user;
+  res.render("account", { user: user });
+});
 
 // GET REGISTER
 app.get('/register', (req, res) => {

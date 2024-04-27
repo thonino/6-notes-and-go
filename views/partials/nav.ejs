@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark ">
-  <a class="navbar-brand ms-2 text-success fw-bold" href="/">My Quiz</a>
+  <a class="navbar-brand ms-2 text-success fw-bold" href="/">My Exercises</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -19,25 +19,25 @@
       <% if (!user) { %>
         <li class="nav-item">
           <a class="nav-link text-success" href="/register">
-            <i class="bi bi-box-arrow-in-right btn btn-success btn-sm"> Inscription</i>
+            <i class="bi bi-box-arrow-in-right btn btn-success btn-sm"> Sign-up</i>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/login">
-            <i class="bi bi-box-arrow-in-right btn btn-success btn-sm"> Connexion</i>
+            <i class="bi bi-box-arrow-in-right btn btn-success btn-sm"> Login</i>
           </a>
         </li>
       <% } else { %>
         <li class="nav-item">
           <a class="nav-link" href="/account">
-            <i class="bi bi-person-circle btn btn-success btn-sm"> Mon Compte</i>
+            <i class="bi bi-person-circle btn btn-success btn-sm"> Account</i>
           </a>
         </li>
         <li class="nav-item">
         </li>
         <li class="nav-item ">
           <a class="nav-link " href="/logout">
-            <i class="bi bi-box-arrow-left btn btn-danger btn-sm"> Déconnexion</i>
+            <i class="bi bi-box-arrow-left btn btn-danger btn-sm"> Logout</i>
           </a>
         </li>
         <% } %>
