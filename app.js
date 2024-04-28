@@ -56,6 +56,28 @@ app.get("/account", (req, res) => {
   res.render("account", { user: user });
 });
 
+// PUT EDIT ACCOUNT
+app.put("/account/:id", (req, res) => {
+  let email = req.body.email;
+  let password = req.body.password;
+  if (req.body.email) { email = req.body.email; }
+  if (req.body.password) {
+    password = bcrypt.hashSync(req.body.password, 10);
+  }
+  const editData = { email, password };
+  User.findByIdAndUpdate(req.params.id, editData)
+    .then(() => {
+      res.redirect(`/logout`);
+    })
+    .catch((err) => {
+      console.log(err);
+      res
+        .status(500)
+        .send("Une erreur s'est produite lors de la mise à jour du compte.");
+    });
+});
+
+
 // GET REGISTER
 app.get('/register', (req, res) => {
   const user = req.session.user;
@@ -92,7 +114,6 @@ User.findOne({ name: req.body.name }).then(user => {
 .catch(err => console.log(err));
 });
 
-
 // GET LOGOUT
 app.get('/logout', (req, res) => {
   req.session.destroy((err) => {
@@ -100,6 +121,7 @@ app.get('/logout', (req, res) => {
     else {res.redirect('/login');}
   });
 });
+
 
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

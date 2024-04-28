@@ -12,42 +12,53 @@
       <div class="container col-6 text-center">
         <h1> Account ! </h1>
         <% if (!user) { %>
-          <p>Connectez-vous pour accéder à la page !</p>
+          <p>Please log in to access this page !</p>
         <% } else { %>
           <div class="mb-3">
             <h3 class="text-capitalize mb-0"> 
               Name : <%= user.name %>
             </h3>
           </div>
+          <!-- Change Email -->
           <div class="mb-3">
             <h3 class="mb-0"> 
               Email : <%= user.email %> 
-
               <button id="showInputEmail" class="btn btn-info btn-sm">
                 <i class="bi bi-pencil-fill"></i>
               </button>
-
-              <div id="inputEmail" class="mt-3 d-none ">
-                <input type="text" class="form-control" placeholder="Write your new email">
-                <button class="btn btn-info ms-1">Save</button>
-              </div>
-
+              <form 
+                id="inputEmail" 
+                class="mt-3 d-none" 
+                action="/account/<%= user._id %>?_method=PUT" 
+                method="POST"
+              >
+                <input type="hidden" name="_method" value="PUT">
+                <input type="text" class="form-control" name="email" placeholder="Write your new email">
+                <button type="submit" class="btn btn-info ms-1">Save</button>
+              </form>
             </h3>
           </div>
+          <!-- Change Password -->
           <div class="mb-3">
             <h3 class="mb-0">
               My Password
-
               <button id="showInputPassword" class="btn btn-warning btn-sm">
                 <i class="bi bi-pencil-fill"></i>
               </button>
-
-              <div id="inputPassword" class="mt-3 d-none">
-                <input type="password" class="form-control" placeholder="Write your new password">
-                <button class="btn btn-warning ms-1">Save</button>
-              </div>
-
+              <form 
+                id="inputPassword" 
+                class="mt-3 d-none"
+                action="/account/<%= user._id %>?_method=PUT" 
+                method="POST"
+              >
+                <input type="hidden" name="_method" value="PUT">
+                <input type="password" class="form-control" name="password" placeholder="Write your new password">
+                <button type="submit" class="btn btn-warning ms-1">Save</button>
+              </form>
             </h3>
+          </div>
+          <!-- Delete Account -->
+          <div class="mb-3">
             <h3 class="mb-0">
               Delete Account
               <button class="btn btn-danger btn-sm">
