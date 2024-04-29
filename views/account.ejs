@@ -32,8 +32,12 @@
                 action="/account/<%= user._id %>?_method=PUT" 
                 method="POST"
               >
-                <input type="hidden" name="_method" value="PUT">
-                <input type="text" class="form-control" name="email" placeholder="Write your new email">
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  name="email" 
+                  placeholder="Write your new email"
+                >
                 <button type="submit" class="btn btn-info ms-1">Save</button>
               </form>
             </h3>
@@ -51,20 +55,34 @@
                 action="/account/<%= user._id %>?_method=PUT" 
                 method="POST"
               >
-                <input type="hidden" name="_method" value="PUT">
-                <input type="password" class="form-control" name="password" placeholder="Write your new password">
+                <input 
+                  type="password" 
+                  class="form-control" 
+                  name="password" 
+                  placeholder="Write your new password"
+                >
                 <button type="submit" class="btn btn-warning ms-1">Save</button>
               </form>
             </h3>
           </div>
-          <!-- Delete Account -->
-          <div class="mb-3">
+          <!-- Delete Account  -->
+          <form 
+            id="deleteForm"
+            class="mb-3" 
+            action="/account/delete/<%= user._id %>?_method=DELETE" 
+            method="POST"
+          >
             <h3 class="mb-0">
               Delete Account
-              <button class="btn btn-danger btn-sm">
+              <button 
+                type="button" 
+                class="btn btn-danger btn-sm" 
+                onclick="confirmDelete()"
+              >
                 <i class="bi bi-trash-fill"></i>
               </button>
-          </div>
+            </h3>
+          </form>
         <% } %>
       </div>
       <script>
@@ -93,6 +111,14 @@
             inputPassword.classList.add('d-none');
           }
         });
+
+        // DELETE CONFIRMATION
+        function confirmDelete() {
+            if (confirm('Are you sure you want delete your account?')) {
+              document.getElementById('deleteForm').submit(); 
+            }
+          }
+
       </script>
   </body>
 </html>

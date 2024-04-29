@@ -73,7 +73,18 @@ app.put("/account/:id", (req, res) => {
       console.log(err);
       res
         .status(500)
-        .send("Une erreur s'est produite lors de la mise à jour du compte.");
+        .send("Echec de la mise à jour du compte.");
+    });
+});
+
+// DELETE ACCOUNT
+app.delete("/account/delete/:id", (req, res) => {
+  User.findByIdAndDelete(req.params.id)
+    .then(() => {
+      res.redirect("/logout");
+    })
+    .catch((err) => {
+      console.log(err);
     });
 });
 
