@@ -2,11 +2,11 @@ require("dotenv").config();
 // express & express-session
 const express = require('express');
 const session = require('express-session');
+const path = require("path");
 const app = express();
 
 // bcrypt
 const bcrypt = require('bcrypt');
-
 
 // Middleware pour parser le JSON
 app.use(express.json());
@@ -19,6 +19,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 require("dotenv").config();
 const mongoose = require("mongoose");
 const User = require("./models/User");
+const Category = require("./models/Category");
+const Note = require("./models/Note");
+const Theme = require("./models/Theme");
+const Quiz = require("./models/Quiz");
 const url = process.env.DATABASE_URL;
 mongoose
   .connect(url)
@@ -28,7 +32,6 @@ mongoose
   .catch((err) => {
     console.error("MongoDB connection error:", err);
   });
-
 
   app.use(
     session({
@@ -45,11 +48,26 @@ mongoose
 // EJS : 
 app.set('view engine', 'ejs');
 
-// Routes de base
-app.get("/", (req, res) => {
-  const user = req.session.user;
-  res.render("index", { user: user });
+// Définir le dossier public pour servir des fichiers statiques
+app.use(express.static(path.join(__dirname, 'public')));
+
+// ROUTE BASE
+app.get("/", async (req, res) => {
+  try {
+    const user = req.session.user;
+    let themes;
+    if (user) {
+      themes = await Theme.find({ userId: user._id });
+    } else {
+      themes = await Theme.find({});
+    }
+    res.render("index", { user, themes });
+  } catch (err) {
+    console.error("Error fetching themes:", err);
+    res.render("error", { message: "Error fetching themes" });
+  }
 });
+
 
 app.get("/account", (req, res) => {
   const user = req.session.user;
@@ -132,6 +150,21 @@ app.get('/logout', (req, res) => {
   });
 });
 
+// POST ADD THEME
+app.post('/addtheme', function(req, res){
+const themeData = new Theme({
+  themeName: req.body.themeName,
+  userId: req.body.userId,
+  })
+  themeData
+    .save()
+    .then(() => {
+      res.redirect("/");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

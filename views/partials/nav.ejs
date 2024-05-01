@@ -1,22 +1,12 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark ">
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <a class="navbar-brand ms-2 text-success fw-bold" href="/">My Exercises</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-    aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav me-2">
-      <a class="nav-link" href="/">
-        <i class="bi bi-journal-text btn btn-success btn-sm"> All Themes</i>
-      </a>
-        <li class="nav-item">
-          <a class="nav-link" href="/">
-            <i class="bi bi-journal-plus btn btn-dark btn-sm"> Add Theme </i>
-          </a>
-        </li>
-    </ul>
-    <ul class="navbar-nav ms-auto me-2">
-      <% if (!user) { %>
+    <% if (!user) { %>
+      <ul class="navbar-nav ms-auto">
         <li class="nav-item">
           <a class="nav-link text-success" href="/register">
             <i class="bi bi-box-arrow-in-right btn btn-success btn-sm"> Sign-up</i>
@@ -27,20 +17,49 @@
             <i class="bi bi-box-arrow-in-right btn btn-success btn-sm"> Sign-in</i>
           </a>
         </li>
+      </ul>
       <% } else { %>
-        <li class="nav-item">
-          <a class="nav-link" href="/account">
-            <i class="bi bi-person-circle btn btn-info btn-sm"> Account</i>
-          </a>
-        </li>
-        <li class="nav-item">
-        </li>
-        <li class="nav-item ">
-          <a class="nav-link " href="/logout">
-            <i class="bi bi-box-arrow-left btn btn-danger btn-sm"> Logout</i>
-          </a>
-        </li>
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <i class="bi bi-plus-lg btn btn-success btn-sm"> New Theme </i>
+            </button>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/account">
+              <i class="bi bi-person-circle btn btn-info btn-sm"> Account</i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">
+              <i class="bi bi-box-arrow-left btn btn-danger btn-sm"> Logout</i>
+            </a>
+          </li>
+        </ul>
         <% } %>
-    </ul>
   </div>
 </nav>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add A New Theme</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="text-center" action="/addtheme" method="POST">
+          <div class="mb-3">
+            <input type="text" class="form-control" name="themeName" placeholder="Theme name">
+            <% if (user && user._id) { %>
+              <input type="hidden" name="userId" value="<%= user._id %>">
+              <% } %>
+          </div>
+          <button type="submit" class="btn btn-success">Add</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,18 +3,28 @@
 
 <head>
   <%- include('./partials/bootstrap') %>
-  <title>My Exercises Home page</title>
+    <title>My Exercises Home page</title>
 </head>
-
-<body>
-  <%- include('./partials/nav') %>
-  <div class="ms-2 mt-3 text-center">
-    <% if (user) { %>
-      <h1 class="text-success"> Hi <%= user.name %> !</h1>
-    <% } %>
-    <h2>Create your own quizzes by adding words!</h2>
-    <p class="text-warning">If you added at least 10 words, you can start a quiz</p>
-  </div>
-</body>
-
+  <body>
+    <%- include('./partials/nav') %>
+      <div class="container mt-2">
+        <div class="col-md-6 offset-md-3 text-center">
+          <% if (user && user.name ) { %>
+            <% if (themes.length> 0) { %>
+              <select class="form-select custom-select">
+                <% themes.forEach(theme=> { %>
+                  <option>
+                    <%= theme.themeName %>
+                  </option>
+                  <% }) %>
+              </select>
+            <% } else { %>
+                <p>No themes found.</p>
+            <% } %>
+          <% } else { %>
+            <h1> Log in or create an account to use the app !</h1>
+          <% } %>
+        </div>
+      </div>
+  </body>
 </html>
