@@ -88,7 +88,6 @@ app.delete("/account/delete/:id", (req, res) => {
     });
 });
 
-
 // GET REGISTER
 app.get('/register', (req, res) => {
   const user = req.session.user;
@@ -115,8 +114,8 @@ res.render('LoginForm', { user: user });});
 
 // POST LOGIN
 app.post('/login', (req, res) => {
-User.findOne({ name: req.body.name }).then(user => {
-  if (!user) {res.send('Name invalide');}
+User.findOne({ email: req.body.email }).then(user => {
+  if (!user) {res.send('email invalide');}
   if (!bcrypt.compareSync(req.body.password, user.password)) {
     res.send('Mot de passe invalide');}
   req.session.user = user;
