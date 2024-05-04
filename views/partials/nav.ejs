@@ -26,21 +26,31 @@
             </button>
           </li>
           <li class="nav-item">
-
-          <li class="nav-item">
-              <% if (themes.length> 0) { %>
-                <select id="themeSelect" class="form-select custom-select text-center ">
+            <% if (themes.length> 0) { %>
+              <form id="themeForm" action="/selectTheme" method="POST">
+                <select 
+                  id="themeSelect" 
+                  name="theme" 
+                  class="form-select form-select-sm custom-select bg-dark text-info fw-bold mt-2"
+                >
+                  <option hidden>Theme</option>
                   <% themes.forEach(theme=> { %>
-                    <option class="d-flex" value="<%= theme.themeName %>">
-                      <%= theme.themeName %>
-                    </option>
-                    <% }) %>
+                  <option value="<%= theme.themeName %>" >
+                    <%= theme.themeName %>
+                  </option>
+                  <% }) %>
                 </select>
-                <% } else { %>
-                  <h2>You can add a new theme to begin !</h2>
-                  <% } %>
+              </form>
+            <% } %>
           </li>
-          
+          <% if (selectedTheme) { %>
+          <li class="nav-item ms-2" >
+            <p  class="text-info fw-bold" style="margin-top:11px">
+              <i class="bi bi-book-fill  "></i> 
+              <%= selectedTheme %>
+            </p>
+          </li>
+          <% }%>
         </ul>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
@@ -65,10 +75,6 @@
         <h5 class="modal-title">Add A New Theme</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-header">
-        <h5 class="modal-title">Add A New Theme</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
       <div class="modal-body">
         <form class="text-center" action="/addtheme" method="POST">
           <div class="mb-3">
@@ -83,3 +89,12 @@
     </div>
   </div>
 </div>
+<script>
+  // STORAGE VALUE SELECTED
+  const themeSelect = document.getElementById('themeSelect');
+    if (themeSelect) {
+      themeSelect.addEventListener('change', function () {
+        document.getElementById('themeForm').submit();
+      });
+    }
+</script>

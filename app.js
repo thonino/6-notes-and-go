@@ -51,8 +51,9 @@ app.set('view engine', 'ejs');
 // Définir le dossier public pour servir des fichiers statiques
 app.use(express.static(path.join(__dirname, 'public')));
 
-// ROUTE BASE
-app.get("/", async (req, res) => {
+
+// Middleware Charger thèmes et user 
+const loadThemesAndUser = async (req, res, next) => {
   try {
     const user = req.session.user;
     let themes;
@@ -61,18 +62,61 @@ app.get("/", async (req, res) => {
     } else {
       themes = await Theme.find({});
     }
-    res.render("index", { user, themes });
+    // Rend l'utilisateur disponible pour toutes les vues
+    res.locals.user = user;
+
+    // Rend les thèmes disponibles pour toutes les vues
+    res.locals.themes = themes;
+
+    // Récupérer le thème sélectionné depuis la session 
+    res.locals.selectedTheme = req.session.selectedTheme;
+
+    next();
   } catch (err) {
-    console.error("Error fetching themes:", err);
-    res.render("error", { message: "Error fetching themes" });
+    console.error("Error fetching themes and user:", err);
+    res.render("error", { message: "Error fetching themes and user" });
+  }
+};
+
+// Middleware pour charger les thèmes sur toutes les routes
+app.use(loadThemesAndUser);
+
+// Route pour la sélection de thème
+app.post('/selectTheme', (req, res) => {
+  const selectedTheme = req.body.theme;
+  req.session.selectedTheme = selectedTheme;
+  res.redirect(req.get('referer')); 
+});
+
+// Route pour la page d'index
+app.get("/", async (req, res) => {
+  try {
+    res.render("index", {
+      user: res.locals.user,
+      themes: res.locals.themes,
+      selectedTheme: res.locals.selectedTheme,
+    });
+  } 
+  catch (err) {
+    console.error("Error rendering index:", err);
+    res.render("error", { message: "Error rendering index" });
   }
 });
 
-
+// Route pour la page du compte
 app.get("/account", (req, res) => {
-  const user = req.session.user;
-  res.render("account", { user: user });
+  try {
+    res.render("account", {
+      user: res.locals.user,
+      themes: res.locals.themes,
+      selectedTheme: res.locals.selectedTheme,
+    });
+  } catch (err) {
+    console.error("Error rendering account:", err);
+    res.render("error", { message: "Error rendering account" });
+  }
 });
+
 
 // PUT EDIT ACCOUNT
 app.put("/account/:id", (req, res) => {
@@ -108,8 +152,7 @@ app.delete("/account/delete/:id", (req, res) => {
 
 // GET REGISTER
 app.get('/register', (req, res) => {
-  const user = req.session.user;
-  res.render('RegisterForm', { user: user });
+  res.render("RegisterForm", {user: res.locals.user});
 });
 
 // POST REGISTER
@@ -127,8 +170,8 @@ const userData = new User({
 });
 
 // GET LOGIN
-app.get('/login', (req, res) => {const user = req.session.user;
-res.render('LoginForm', { user: user });});
+app.get('/login', (req, res) => {
+res.render("LoginForm", { user: res.locals.user });});
 
 // POST LOGIN
 app.post('/login', (req, res) => {
