@@ -25,6 +25,22 @@
               <i class="bi bi-plus-lg btn btn-info btn-sm"> New Theme </i>
             </button>
           </li>
+          <li class="nav-item">
+
+          <li class="nav-item">
+              <% if (themes.length> 0) { %>
+                <select id="themeSelect" class="form-select custom-select text-center ">
+                  <% themes.forEach(theme=> { %>
+                    <option class="d-flex" value="<%= theme.themeName %>">
+                      <%= theme.themeName %>
+                    </option>
+                    <% }) %>
+                </select>
+                <% } else { %>
+                  <h2>You can add a new theme to begin !</h2>
+                  <% } %>
+          </li>
+          
         </ul>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
@@ -45,6 +61,10 @@
 <div class="modal fade" id="exampleModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add A New Theme</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
       <div class="modal-header">
         <h5 class="modal-title">Add A New Theme</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
