@@ -1,14 +1,14 @@
-require("dotenv").config();
 // express & express-session
+require("dotenv").config();
 const express = require('express');
 const session = require('express-session');
 const path = require("path");
 const app = express();
 
-// bcrypt
+// Bcrypt
 const bcrypt = require('bcrypt');
 
-// Middleware pour parser le JSON
+// Parser for JSON
 app.use(express.json());
 
 const bodyParser = require("body-parser");
@@ -25,52 +25,45 @@ const Theme = require("./models/Theme");
 const Quiz = require("./models/Quiz");
 const url = process.env.DATABASE_URL;
 mongoose
-  .connect(url)
-  .then(() => {
-    console.log("MongoDB connected");
+.connect(url)
+.then(() => {
+  console.log("MongoDB connected");
+})
+.catch((err) => {
+  console.error("MongoDB connection error:", err);
+});
+app.use(
+  session({
+    secret: "your-secret-key",
+    resave: false,
+    saveUninitialized: true,
   })
-  .catch((err) => {
-    console.error("MongoDB connection error:", err);
-  });
+);
 
-  app.use(
-    session({
-      secret: "your-secret-key",
-      resave: false,
-      saveUninitialized: true,
-    })
-  );
-
-  // Method-override :
+// Method-override :
   const methodOverride = require('method-override');
   app.use(methodOverride('_method'));
 
 // EJS : 
 app.set('view engine', 'ejs');
 
-// Définir le dossier public pour servir des fichiers statiques
+// Public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// Middleware Charger thèmes et user 
-const loadThemesAndUser = async (req, res, next) => {
+// Make available for all
+const makeAvailable = async (req, res, next) => {
   try {
     const user = req.session.user;
-    let themes;
+    let themes, notes;
     if (user) {
-      themes = await Theme.find({ userId: user._id });
-    } else {
-      themes = await Theme.find({});
-    }
-    // Rend l'utilisateur disponible pour toutes les vues
+      themes = await Theme.find({userId: user._id});
+      notes = await Note.find({userId: user._id});
+    } 
     res.locals.user = user;
-
-    // Rend les thèmes disponibles pour toutes les vues
     res.locals.themes = themes;
-
-    // Récupérer le thème sélectionné depuis la session 
+    res.locals.notes = notes;
     res.locals.selectedTheme = req.session.selectedTheme;
-
     next();
   } catch (err) {
     console.error("Error fetching themes and user:", err);
@@ -78,22 +71,28 @@ const loadThemesAndUser = async (req, res, next) => {
   }
 };
 
-// Middleware pour charger les thèmes sur toutes les routes
-app.use(loadThemesAndUser);
+// Call for use
+app.use(makeAvailable);
 
-// Route pour la sélection de thème
+// ------------------------------------------------------------//
+//                             ROOTS                           //
+// ------------------------------------------------------------//
+
+
+// SESSION SELECTED THEME
 app.post('/selectTheme', (req, res) => {
   const selectedTheme = req.body.theme;
   req.session.selectedTheme = selectedTheme;
   res.redirect(req.get('referer')); 
 });
 
-// Route pour la page d'index
+// INDEX
 app.get("/", async (req, res) => {
   try {
     res.render("index", {
       user: res.locals.user,
       themes: res.locals.themes,
+      notes: res.locals.notes,
       selectedTheme: res.locals.selectedTheme,
     });
   } 
@@ -103,7 +102,7 @@ app.get("/", async (req, res) => {
   }
 });
 
-// Route pour la page du compte
+// ACCOUNT
 app.get("/account", (req, res) => {
   try {
     res.render("account", {
@@ -117,8 +116,7 @@ app.get("/account", (req, res) => {
   }
 });
 
-
-// PUT EDIT ACCOUNT
+// PUT ACCOUNT
 app.put("/account/:id", (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
@@ -208,6 +206,43 @@ const themeData = new Theme({
       console.log(err);
     });
 });
+
+// POST ADD NOTE AND CATEGORY
+app.post("/addnote", function (req, res) {
+  // Création de la nouvelle catégorie
+  const categoryData = new Category({
+    categoryName: req.body.categoryName || "uncategorized",
+    themeName: req.body.themeName,
+    userId: req.body.userId,
+  });
+  categoryData
+    .save()
+    .then(() => {
+      // Création de la nouvelle note
+      const noteData = new Note({
+        front: req.body.front,
+        back: req.body.back,
+        categoryName: categoryData.categoryName,
+        themeName: req.body.themeName,
+        userId: req.body.userId,
+      });
+      noteData
+        .save()
+        .then(() => {
+          res.redirect("/");
+        })
+        .catch((err) => {
+          console.log(err);
+          res.status(500).send("Error creating note");
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send("Error creating category");
+    });
+});
+
+
 
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

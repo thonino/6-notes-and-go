@@ -4,16 +4,12 @@ document.addEventListener("DOMContentLoaded", function () {
   var inputEmail = document.getElementById("inputEmail");
   if (showInputEmail) {
     showInputEmail.addEventListener("click", function () {
-      if (inputEmail.classList.contains("d-none")) {
-        inputEmail.classList.remove("d-none");
-        inputEmail.classList.add("d-flex");
-      } else {
-        inputEmail.classList.remove("d-flex");
-        inputEmail.classList.add("d-none");
-      }
+      inputEmail.classList.toggle("d-none");
+      inputEmail.classList.toggle("d-flex");
     });
   }
 });
+
 
 // Toggle InputPassword
 document.addEventListener("DOMContentLoaded", function () {
@@ -21,13 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var inputPassword = document.getElementById("inputPassword");
   if (showInputPassword) {
     showInputPassword.addEventListener("click", function () {
-      if (inputPassword.classList.contains("d-none")) {
-        inputPassword.classList.remove("d-none");
-        inputPassword.classList.add("d-flex");
-      } else {
-        inputPassword.classList.remove("d-flex");
-        inputPassword.classList.add("d-none");
-      }
+      inputPassword.classList.toggle("d-none");
+      inputPassword.classList.toggle("d-flex");
     });
   }
 });
@@ -39,9 +30,16 @@ function confirmDelete() {
   }
 }
 
-// MODAL 
+// MODAL THEME 
 document.addEventListener("DOMContentLoaded", function () {
-  var myModal = new bootstrap.Modal(
-    document.getElementById("exampleModal")
+  var themeModal = new bootstrap.Modal(
+    document.getElementById("themeModal")
   );
 });
+
+// MODAL NOTE
+// document.addEventListener("DOMContentLoaded", function () {
+//   var noteModal = new bootstrap.Modal(
+//     document.getElementById("noteModal")
+//   );
+// });

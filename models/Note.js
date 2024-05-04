@@ -1,9 +1,10 @@
 // Mongodb et Mongoose :
 const mongoose = require("mongoose");
 const noteSchema = new mongoose.Schema({
-  Front: { type: "String" },
-  Back: { type: "String" },
-  themeName: { type: "String" },
+  front: { type: "String" },
+  back: { type: "String" },
   categoryName: { type: "String" },
+  themeName: { type: "String" },
+  userId: { type: "String" },
 });
 module.exports = mongoose.model("Note", noteSchema);

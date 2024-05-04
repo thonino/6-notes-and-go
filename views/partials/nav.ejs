@@ -21,7 +21,7 @@
       <% } else { %>
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <button class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button class="nav-link" data-bs-toggle="modal" data-bs-target="#themeModal">
               <i class="bi bi-plus-lg btn btn-info btn-sm"> New Theme </i>
             </button>
           </li>
@@ -68,29 +68,30 @@
   </div>
 </nav>
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1">
+<div class="modal fade" id="themeModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Add A New Theme</h5>
+        <h5 class="modal-title">New Theme</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form class="text-center" action="/addtheme" method="POST">
+        <form class="" action="/addtheme" method="POST">
           <div class="mb-3">
-            <input type="text" class="form-control" name="themeName" placeholder="Theme name">
+            <label for="Theme name" class="form-label">Theme Name</label>
+            <input type="text" class="form-control" name="themeName" placeholder="Enter your theme name">
             <% if (user && user._id) { %>
               <input type="hidden" name="userId" value="<%= user._id %>">
               <% } %>
           </div>
-          <button type="submit" class="btn btn-success">Add</button>
+          <button type="submit" class="btn btn-info">Add Theme</button>
         </form>
       </div>
     </div>
   </div>
 </div>
 <script>
-  // STORAGE VALUE SELECTED
+  // SUBMIT SELECTED
   const themeSelect = document.getElementById('themeSelect');
     if (themeSelect) {
       themeSelect.addEventListener('change', function () {
