@@ -38,11 +38,25 @@
                   <input type="text" class="form-control" name="back" placeholder="write its answer...">
                 </div>
                 <div class="mb-3">
-                  <label for="categoryName" class="form-label">Category Name</label>
-                  <input type="text" class="form-control" name="categoryName" placeholder="Write the category name...">
+                  <% if (categories && categories.length> 0) { %>
+                    <select name="selectedCategory" class="form-select text-capitalize bg-secondary text-white mt-2"
+                      onchange="hideContainer(this)">
+                      <option hidden>category</option>
+                      <option value="newCat">new category</option>
+                      <% categories.forEach(category=> { %>
+                        <option value="<%= category.categoryName %>">
+                          <%= category.categoryName %>
+                        </option>
+                        <% }) %>
+                    </select>
+                    <% } %>
+                      <div id="categoryContainer">
+                        <label for="newCategory" class="form-label ms-1 mt-1 fw-bold text-success">Create a new category</label>
+                        <input type="text" class="form-control" name="newCategory" placeholder="write the category name...">
+                      </div>
                 </div>
-                  <input type="hidden" name="themeName" value="<%= selectedTheme %>">
-                  <input type="hidden" name="userId" value="<%= user._id %>">
+                <input type="hidden" name="themeName" value="<%= selectedTheme %>">
+                <input type="hidden" name="userId" value="<%= user._id %>">
                 <button type="submit" class="btn btn-primary">Add Note</button>
               </form>
             </div>

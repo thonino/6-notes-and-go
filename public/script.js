@@ -30,12 +30,23 @@ function confirmDelete() {
   }
 }
 
+// HIDE CATEGORY INPUT
+function hideContainer(selected) {
+  var categoryContainer = document.getElementById("categoryContainer");
+  if (selected.value === "newCat" || selected.value === "") {
+    categoryContainer.style.display = "block";
+  } else {
+    categoryContainer.style.display = "none";
+  }
+}
+
+
 // MODAL THEME 
-document.addEventListener("DOMContentLoaded", function () {
-  var themeModal = new bootstrap.Modal(
-    document.getElementById("themeModal")
-  );
-});
+// document.addEventListener("DOMContentLoaded", function () {
+//   var themeModal = new bootstrap.Modal(
+//     document.getElementById("themeModal")
+//   );
+// });
 
 // MODAL NOTE
 // document.addEventListener("DOMContentLoaded", function () {

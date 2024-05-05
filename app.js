@@ -55,15 +55,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 const makeAvailable = async (req, res, next) => {
   try {
     const user = req.session.user;
-    let themes, notes;
+    const selectedTheme = req.session.selectedTheme;
+    let themes, notes, categories;
     if (user) {
       themes = await Theme.find({userId: user._id});
       notes = await Note.find({userId: user._id});
+      categories = await Category.find({ userId: user._id, themeName: selectedTheme });
     } 
     res.locals.user = user;
     res.locals.themes = themes;
     res.locals.notes = notes;
-    res.locals.selectedTheme = req.session.selectedTheme;
+    res.locals.categories = categories;
+    res.locals.selectedTheme = selectedTheme;
     next();
   } catch (err) {
     console.error("Error fetching themes and user:", err);
@@ -93,6 +96,7 @@ app.get("/", async (req, res) => {
       user: res.locals.user,
       themes: res.locals.themes,
       notes: res.locals.notes,
+      caterogies: res.locals.caterogies,
       selectedTheme: res.locals.selectedTheme,
     });
   } 
@@ -208,41 +212,47 @@ const themeData = new Theme({
 });
 
 // POST ADD NOTE AND CATEGORY
-app.post("/addnote", function (req, res) {
-  // Création de la nouvelle catégorie
-  const categoryData = new Category({
-    categoryName: req.body.categoryName || "uncategorized",
-    themeName: req.body.themeName,
-    userId: req.body.userId,
-  });
-  categoryData
-    .save()
-    .then(() => {
-      // Création de la nouvelle note
-      const noteData = new Note({
-        front: req.body.front,
-        back: req.body.back,
-        categoryName: categoryData.categoryName,
-        themeName: req.body.themeName,
-        userId: req.body.userId,
-      });
-      noteData
-        .save()
-        .then(() => {
-          res.redirect("/");
-        })
-        .catch((err) => {
-          console.log(err);
-          res.status(500).send("Error creating note");
-        });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).send("Error creating category");
+app.post("/addnote", async function (req, res) {
+  let newCategoryName = req.body.selectedCategory;
+  if (newCategoryName === "newCat") {
+    newCategoryName = req.body.newCategory;
+  }
+  if (!newCategoryName || typeof newCategoryName !== "string") {
+    newCategoryName = "uncategorized";
+  }
+  const themeName = req.body.themeName;
+  const userId = req.body.userId;
+  try {
+    // Recherche de la catégorie existante
+    let existingCategory = await Category.findOne({
+      categoryName: newCategoryName,
+      themeName,
+      userId,
     });
+    // Si aucune catégorie correspondante n'est trouvée et que
+    // categoryName n'est pas vide, créez une nouvelle catégorie
+    if (!existingCategory && newCategoryName) {
+      existingCategory = await Category.create({
+        categoryName: newCategoryName,
+        themeName,
+        userId,
+      });
+    }
+    // Création de la note avec la catégorie déterminée
+    const noteData = new Note({
+      front: req.body.front,
+      back: req.body.back,
+      categoryName: newCategoryName,
+      themeName,
+      userId,
+    });
+    await noteData.save();
+    res.redirect("/");
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Error adding note");
+  }
 });
-
-
 
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
