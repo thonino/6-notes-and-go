@@ -229,8 +229,7 @@ app.post("/addnote", async function (req, res) {
       themeName,
       userId,
     });
-    // Si aucune catégorie correspondante n'est trouvée et que
-    // categoryName n'est pas vide, créez une nouvelle catégorie
+    // Si aucune catégorie correspondante n'est trouvée 
     if (!existingCategory && newCategoryName) {
       existingCategory = await Category.create({
         categoryName: newCategoryName,

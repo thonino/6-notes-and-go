@@ -30,10 +30,9 @@ function confirmDelete() {
   }
 }
 
-// HIDE CATEGORY INPUT
 function hideContainer(selected) {
   var categoryContainer = document.getElementById("categoryContainer");
-  if (selected.value === "newCat" || selected.value === "") {
+  if (selected.value === "newCat" || selected.value === "uncategorized") {
     categoryContainer.style.display = "block";
   } else {
     categoryContainer.style.display = "none";
