@@ -7,6 +7,7 @@
   <body>
     <%- include('./partials/nav') %>
     <div class="mt-2 text-center d-flex justify-content-center">
+      <!-- New Note -->
       <% if (user && themes && selectedTheme) { %>
           <div class="col-3">
             <button 
@@ -17,8 +18,33 @@
               <i class="bi bi-plus-lg "> New Note </i>
             </button>
           </div>
-        
       </div>
+      <!-- List Note -->
+      <div class="container col-6 mt-2">
+        <% notes.forEach(note=> { %>
+          <div class="row mb-3">
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-text">
+                    <%= note.front %>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-text">
+                    <%= note.back %>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+      </div>
+
       <!-- Modal -->
       <div class="modal fade" id="noteModal" tabindex="-1">
         <div class="modal-dialog">
@@ -60,6 +86,7 @@
             </div>
           </div>
         </div>
+        
       </div>
     <% } %>
     <script src="script.js"></script>

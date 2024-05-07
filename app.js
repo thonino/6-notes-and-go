@@ -50,7 +50,6 @@ app.set('view engine', 'ejs');
 // Public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 // Make available for all
 const makeAvailable = async (req, res, next) => {
   try {
@@ -59,7 +58,7 @@ const makeAvailable = async (req, res, next) => {
     let themes, notes, categories;
     if (user) {
       themes = await Theme.find({userId: user._id});
-      notes = await Note.find({userId: user._id});
+      notes = await Note.find({ userId: user._id, themeName: selectedTheme });
       categories = await Category.find({ userId: user._id, themeName: selectedTheme });
     } 
     res.locals.user = user;
@@ -73,9 +72,7 @@ const makeAvailable = async (req, res, next) => {
     res.render("error", { message: "Error fetching themes and user" });
   }
 };
-
-// Call for use
-app.use(makeAvailable);
+app.use(makeAvailable);// Call for use
 
 // ------------------------------------------------------------//
 //                             ROOTS                           //
