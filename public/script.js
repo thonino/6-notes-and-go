@@ -28,16 +28,26 @@ function confirmDeleteUser() {
     document.getElementById("deleteUser").submit();
   }
 }
-function confirmDeleteNoe() {
-  if (confirm("Are you sure you want delete your account ?")) {
-    document.getElementById("deleteNote").submit();
+function confirmDeleteNote(noteId) {
+  if (confirm("Are you sure you want to delete this Note?")) {
+    console.log("Deleting note with ID:", noteId);
+    document.getElementById(`deleteNote${noteId}`).submit();
   }
 }
 
 // HIDE CREATE CATEGORY
 function hideContainer(selected) {
   var categoryContainer = document.getElementById("categoryContainer");
-  if (selected.value === "newCat" || selected.value === "uncategorized") {
+  if (selected.value === "newCat") {
+    categoryContainer.style.display = "block";
+  } else {
+    categoryContainer.style.display = "none";
+  }
+}
+// HIDE CREATE CATEGORY 2
+function hideContainer2(selected) {
+  var categoryContainer = document.getElementById("categoryContainer2");
+  if (selected.value === "newCat") {
     categoryContainer.style.display = "block";
   } else {
     categoryContainer.style.display = "none";

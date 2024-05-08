@@ -74,9 +74,8 @@ const makeAvailable = async (req, res, next) => {
 };
 app.use(makeAvailable);// Call for use
 
-// ------------------------------------------------------------//
-//                             ROOTS                           //
-// ------------------------------------------------------------//
+
+//---------------------------------ROOTS---------------------------------//
 
 
 // SESSION SELECTED THEME
@@ -208,7 +207,7 @@ const themeData = new Theme({
     });
 });
 
-// POST ADD NOTE AND CATEGORY
+// ADD NOTE AND CATEGORY
 app.post("/addnote", async function (req, res) {
   let newCategoryName = req.body.selectedCategory;
   if (newCategoryName === "newCat") {
@@ -249,6 +248,83 @@ app.post("/addnote", async function (req, res) {
     res.status(500).send("Error adding note");
   }
 });
+
+// PUT NOTE 
+app.put("/editnote/:id", async (req, res) => {
+  let front = req.body.front;
+  let back = req.body.back;
+  let newCategoryName = req.body.selectedCategory;
+
+  // Vérification si une nouvelle catégorie est sélectionnée
+  if (newCategoryName === "newCat") {
+    newCategoryName = req.body.newCategory;
+  }
+
+  // Vérification de la validité de la catégorie
+  if (!newCategoryName || typeof newCategoryName !== "string") {
+    newCategoryName = "uncategorized";
+  }
+
+  const themeName = req.body.themeName;
+  const userId = req.body.userId;
+
+  try {
+    // Recherche de la note à mettre à jour
+    const noteToUpdate = await Note.findById(req.params.id);
+
+    // Si la note n'est pas trouvée, retourner une erreur
+    if (!noteToUpdate) {
+      return res.status(404).send("Note not found");
+    }
+
+    // Mettre à jour les données de la note
+    noteToUpdate.front = front;
+    noteToUpdate.back = back;
+    noteToUpdate.categoryName = newCategoryName;
+    noteToUpdate.themeName = themeName;
+    noteToUpdate.userId = userId;
+
+    // Sauvegarder les modifications de la note
+    await noteToUpdate.save();
+
+    // Recherche de la catégorie existante
+    let existingCategory = await Category.findOne({
+      categoryName: newCategoryName,
+      themeName,
+      userId,
+    });
+
+    // Si aucune catégorie correspondante n'est trouvée, créer une nouvelle catégorie
+    if (!existingCategory && newCategoryName) {
+      existingCategory = await Category.create({
+        categoryName: newCategoryName,
+        themeName,
+        userId,
+      });
+    }
+
+    // Rediriger vers la page d'accueil
+    res.redirect("/");
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Failed to update note");
+  }
+});
+
+
+
+
+// DELETE NOTE
+app.delete("/note/delete/:id", (req, res) => {
+  Note.findByIdAndDelete(req.params.id)
+    .then(() => {
+      res.redirect("/");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

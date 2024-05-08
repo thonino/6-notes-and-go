@@ -20,7 +20,7 @@
           </div>
       </div>
       <!-- List Note -->
-      <% notes.forEach((note, index) => { %>
+      <% notes.reverse().forEach((note, index) => { %>
         <div class="container d-flex mt-2 justify-content-center align-items-center mb-2">
           <div class="row col-6 ">
             <div class="col">
@@ -54,9 +54,9 @@
                 <i class="bi bi-pencil-fill"></i>
               </button>
             </div>
-            <form id="deleteNote" action="/note/delete/<%= note._id %>?_method=DELETE" method="POST">
-              <button type="button" class="btn btn-danger ms-2" onclick="confirmDeleteNote()">
-                <i class="bi bi-trash-fill"></i>
+            <form id="deleteNote<%=note._id%>" action="/note/delete/<%= note._id %>?_method=DELETE" method="POST">
+                <button type="button" class="btn btn-danger ms-2" onclick="confirmDeleteNote('<%= note._id %>')">
+                <i class="bi bi-trash-fill"> </i>
               </button>
             </form>
           </div>
@@ -114,7 +114,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <form action="/editnote" method="POST">
+                <form action="/editnote/<%= note._id %>?_method=PUT"  method="POST">
                   <div class="mb-3">
                     <label for="front" class="form-label">Front</label>
                     <input type="text" class="form-control" name="front" value="<%= note.front %>">
@@ -123,8 +123,8 @@
                     <label for="back" class="form-label">Back</label>
                     <input type="text" class="form-control" name="back" value="<%= note.back %>">
                   </div>
-                  <select name="editCategory" class="form-select text-capitalize bg-secondary text-white mt-2"
-                    onchange="hideContainer(this)">
+                  <select name="selectedCategory" class="form-select text-capitalize bg-secondary text-white mt-2"
+                    onchange="hideContainer2(this)">
                     <option hidden value="<%= note.categoryName %>">
                       <%= note.categoryName %>
                     </option>
@@ -135,8 +135,10 @@
                       </option>
                       <% }) %>
                   </select>
-                  <div id="categoryContainer<%= index %>" style="display: none;">
-                    <label for="newCategory" class="form-label ms-1 mt-1 fw-bold text-success">Create a new category</label>
+                  <div id="categoryContainer2" style="display: none;">
+                    <label for="newCategory" class="form-label ms-1 mt-1 fw-bold text-success">
+                      Create a new category
+                    </label>
                     <input type="text" class="form-control" name="newCategory" placeholder="Write the category name...">
                   </div>
                   <input type="hidden" name="themeName" value="<%= selectedTheme %>">
