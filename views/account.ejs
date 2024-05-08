@@ -67,7 +67,7 @@
           </div>
           <!-- Delete Account  -->
           <form 
-            id="deleteForm"
+            id="deleteUser"
             class="mb-3" 
             action="/account/delete/<%= user._id %>?_method=DELETE" 
             method="POST"
@@ -77,7 +77,7 @@
               <button 
                 type="button" 
                 class="btn btn-danger btn-sm" 
-                onclick="confirmDelete()"
+                onclick="confirmDeleteUser()"
               >
                 <i class="bi bi-trash-fill"></i>
               </button>

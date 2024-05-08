@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-
 // Toggle InputPassword
 document.addEventListener("DOMContentLoaded", function () {
   var showInputPassword = document.getElementById("showInputPassword");
@@ -24,12 +23,18 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // DELETE CONFIRMATION
-function confirmDelete() {
+function confirmDeleteUser() {
   if (confirm("Are you sure you want delete your account ?")) {
-    document.getElementById("deleteForm").submit();
+    document.getElementById("deleteUser").submit();
+  }
+}
+function confirmDeleteNoe() {
+  if (confirm("Are you sure you want delete your account ?")) {
+    document.getElementById("deleteNote").submit();
   }
 }
 
+// HIDE CREATE CATEGORY
 function hideContainer(selected) {
   var categoryContainer = document.getElementById("categoryContainer");
   if (selected.value === "newCat" || selected.value === "uncategorized") {
@@ -38,18 +43,3 @@ function hideContainer(selected) {
     categoryContainer.style.display = "none";
   }
 }
-
-
-// MODAL THEME 
-// document.addEventListener("DOMContentLoaded", function () {
-//   var themeModal = new bootstrap.Modal(
-//     document.getElementById("themeModal")
-//   );
-// });
-
-// MODAL NOTE
-// document.addEventListener("DOMContentLoaded", function () {
-//   var noteModal = new bootstrap.Modal(
-//     document.getElementById("noteModal")
-//   );
-// });

@@ -11,7 +11,7 @@
       <% if (user && themes && selectedTheme) { %>
           <div class="col-3">
             <button 
-              class="btn btn-primary btn-sm m-1" 
+              class="btn btn-primary m-1" 
               data-bs-toggle="modal" 
               data-bs-target="#noteModal"
             >
@@ -20,13 +20,13 @@
           </div>
       </div>
       <!-- List Note -->
-      <div class="container col-6 mt-2">
-        <% notes.forEach(note=> { %>
-          <div class="row mb-3">
+      <% notes.forEach((note, index) => { %>
+        <div class="container d-flex mt-2 justify-content-center align-items-center mb-2">
+          <div class="row col-6 ">
             <div class="col">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-text">
+                  <p class="card-text text-capitalize">
                     <%= note.front %>
                   </p>
                 </div>
@@ -35,17 +35,34 @@
             <div class="col">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-text">
+                  <p class="card-text text-capitalize">
                     <%= note.back %>
                   </p>
                 </div>
               </div>
             </div>
           </div>
-          <% }) %>
-      </div>
-
-      <!-- Modal -->
+          <div class="d-flex">
+            <div>
+              <button 
+                type="submit"
+                id="showEdit" 
+                class="btn btn-primary ms-2" 
+                data-bs-toggle="modal" 
+                data-bs-target="#editModal<%= index %>"
+              >
+                <i class="bi bi-pencil-fill"></i>
+              </button>
+            </div>
+            <form id="deleteNote" action="/note/delete/<%= note._id %>?_method=DELETE" method="POST">
+              <button type="button" class="btn btn-danger ms-2" onclick="confirmDeleteNote()">
+                <i class="bi bi-trash-fill"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      <% }) %>
+      <!-- Modal New Note-->
       <div class="modal fade" id="noteModal" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -86,9 +103,52 @@
             </div>
           </div>
         </div>
-        
       </div>
-    <% } %>
+      <!-- Modal Edit Note-->
+      <% notes.forEach((note, index)=> { %>
+        <div class="modal fade" id="editModal<%= index %>" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Edit Note</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form action="/editnote" method="POST">
+                  <div class="mb-3">
+                    <label for="front" class="form-label">Front</label>
+                    <input type="text" class="form-control" name="front" value="<%= note.front %>">
+                  </div>
+                  <div class="mb-3">
+                    <label for="back" class="form-label">Back</label>
+                    <input type="text" class="form-control" name="back" value="<%= note.back %>">
+                  </div>
+                  <select name="editCategory" class="form-select text-capitalize bg-secondary text-white mt-2"
+                    onchange="hideContainer(this)">
+                    <option hidden value="<%= note.categoryName %>">
+                      <%= note.categoryName %>
+                    </option>
+                    <option value="newCat">New Category</option>
+                    <% categories.forEach(category=> { %>
+                      <option value="<%= category.categoryName %>">
+                        <%= category.categoryName %>
+                      </option>
+                      <% }) %>
+                  </select>
+                  <div id="categoryContainer<%= index %>" style="display: none;">
+                    <label for="newCategory" class="form-label ms-1 mt-1 fw-bold text-success">Create a new category</label>
+                    <input type="text" class="form-control" name="newCategory" placeholder="Write the category name...">
+                  </div>
+                  <input type="hidden" name="themeName" value="<%= selectedTheme %>">
+                  <input type="hidden" name="userId" value="<%= user._id %>">
+                  <button type="submit" class="btn btn-primary mt-2">Save</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      <% } %>
     <script src="script.js"></script>
   </body>
 </html>
