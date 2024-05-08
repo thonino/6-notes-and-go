@@ -102,6 +102,23 @@ app.get("/", async (req, res) => {
   }
 });
 
+// NOTES
+app.get("/notes", async (req, res) => {
+  try {
+    res.render("notes", {
+      user: res.locals.user,
+      themes: res.locals.themes,
+      notes: res.locals.notes,
+      caterogies: res.locals.caterogies,
+      selectedTheme: res.locals.selectedTheme,
+    });
+  } 
+  catch (err) {
+    console.error("Error rendering notes:", err);
+    res.render("error", { message: "Error rendering Notes.ejs" });
+  }
+});
+
 // ACCOUNT
 app.get("/account", (req, res) => {
   try {
@@ -242,7 +259,7 @@ app.post("/addnote", async function (req, res) {
       userId,
     });
     await noteData.save();
-    res.redirect("/");
+    res.redirect("/notes");
   } catch (err) {
     console.log(err);
     res.status(500).send("Error adding note");
@@ -304,21 +321,18 @@ app.put("/editnote/:id", async (req, res) => {
     }
 
     // Rediriger vers la page d'accueil
-    res.redirect("/");
+    res.redirect("/notes");
   } catch (err) {
     console.log(err);
     res.status(500).send("Failed to update note");
   }
 });
 
-
-
-
 // DELETE NOTE
 app.delete("/note/delete/:id", (req, res) => {
   Note.findByIdAndDelete(req.params.id)
     .then(() => {
-      res.redirect("/");
+      res.redirect("/notes");
     })
     .catch((err) => {
       console.log(err);

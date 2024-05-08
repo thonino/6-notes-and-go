@@ -36,7 +36,7 @@
                   <option hidden>Theme</option>
                   <% themes.forEach(theme=> { %>
                   <option value="<%= theme.themeName %>" >
-                    <%= theme.themeName %>
+                    <%= theme.themeName %> 
                   </option>
                   <% }) %>
                 </select>
@@ -44,12 +44,15 @@
             <% } %>
           </li>
           <% if (selectedTheme) { %>
-          <li class="nav-item ms-2" >
-            <p  class="text-info fw-bold" style="margin-top:11px">
-              <i class="bi bi-book-fill  "></i> 
-              <%= selectedTheme %>
-            </p>
-          </li>
+            <li class="nav-item ms-2" >
+              <p  class="text-info fw-bold" style="margin-top:11px">
+                <i class="bi bi-book-fill  "></i> 
+                <%= selectedTheme %> : 
+              </p>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mt-1 fst-italic" href="/notes"> List Notes</a>
+            </li>
           <% }%>
         </ul>
         <ul class="navbar-nav ms-auto">
@@ -67,7 +70,7 @@
         <% } %>
   </div>
 </nav>
-<!-- Modal -->
+<!-- Theme Modal -->
 <div class="modal fade" id="themeModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -90,6 +93,7 @@
     </div>
   </div>
 </div>
+
 <script>
   // SUBMIT SELECTED
   const themeSelect = document.getElementById('themeSelect');
