@@ -10,7 +10,12 @@
       <!-- New Note -->
       <% if (user && themes && selectedTheme) { %>
         <div class="containter text-center d-flex flex-column">
-          <h1> Notes List </h1>
+          <% if (selectedTheme) { %>
+              <h1 class="text-info fw-bold" style="margin-top:11px">
+                <i class="bi bi-book-fill  "></i>
+                <%= selectedTheme %> :
+            </h1>
+            <% }%>
           <button class="nav-link mb-2" data-bs-toggle="modal" data-bs-target="#noteModal">
             <i class="bi bi-plus-lg btn btn-primary  "> Add Note</i>
           </button>

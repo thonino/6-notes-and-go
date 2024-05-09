@@ -82,7 +82,7 @@ app.use(makeAvailable);// Call for use
 app.post('/selectTheme', (req, res) => {
   const selectedTheme = req.body.theme;
   req.session.selectedTheme = selectedTheme;
-  res.redirect(req.get('referer')); 
+  res.redirect(`/notes`); 
 });
 
 // INDEX
