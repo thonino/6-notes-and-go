@@ -254,6 +254,7 @@ app.post("/addnote", async function (req, res) {
     const noteData = new Note({
       front: req.body.front,
       back: req.body.back,
+      example: req.body.example,
       categoryName: newCategoryName,
       themeName,
       userId,
@@ -270,6 +271,7 @@ app.post("/addnote", async function (req, res) {
 app.put("/editnote/:id", async (req, res) => {
   let front = req.body.front;
   let back = req.body.back;
+  let example = req.body.example;
   let newCategoryName = req.body.selectedCategory;
 
   // Vérification si une nouvelle catégorie est sélectionnée
@@ -297,6 +299,7 @@ app.put("/editnote/:id", async (req, res) => {
     // Mettre à jour les données de la note
     noteToUpdate.front = front;
     noteToUpdate.back = back;
+    noteToUpdate.example = example;
     noteToUpdate.categoryName = newCategoryName;
     noteToUpdate.themeName = themeName;
     noteToUpdate.userId = userId;

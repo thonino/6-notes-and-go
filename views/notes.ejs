@@ -22,46 +22,53 @@
         </div>
     </div>
     <!-- List Note -->
-      <div class="mt-2 text-center d-flex justify-content-center">
-        <div>
-          <% notes.reverse().forEach((note, index)=> { %>
-            <div class="container m-2 ">
-              <div class="row justify-content-center">
-                <!-- Utilisation de col-md-6 pour assurer que les deux colonnes aient toujours la même taille -->
-                <div class="col-md-6">
-                  <div class="card p-3">
-                    <p class="card-text">
-                      <%= note.front %>
-                    </p>
-                    <p class="card-text text-info">
-                      <%= note.categoryName %>
-                    </p>
+            <div class=" text-center d-flex justify-content-center">
+              <div>
+                <% notes.reverse().forEach((note, index)=> { %>
+                  <div class="container mt-2 ">
+                    <div class="row justify-content-center ">
+                      <div class="card p-0 col-6 d-flex flex-row ">
+                        <div class="col-md-6 d-flex align-items-center justify-content-center">
+                          <div class="bg-success">
+                            <p class="card-text  ">
+                              <%= note.front %>
+                            </p>
+                            <% if (note.example) { %>
+                              <p class="card-text text-primary ">
+                                <%= note.categoryName %>
+                              </p>
+                              <% } %>
+                          </div>
+                        </div>
+                        <div class="col-md-6 d-flex align-items-center justify-content-center ">
+                          <div class="bg-secondary rounded-end">
+                            <p class="card-text bg-warning">
+                              <%= note.back %>
+                            </p>
+                            <% if (note.example) { %>
+                              <p class="card-text text-white bg-danger">
+                                <%= note.example %>
+                              </p>
+                              <% } %>
+                          </div>
+                        </div>
+                        <div class="ms-2 d-flex align-items-center gap-2">
+                          <button type="submit" id="showEdit<%= index %>" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#editModal<%= index %>">
+                            <i class="bi bi-pencil-fill"></i>
+                          </button>
+                          <form id="deleteNote<%= note._id %>" action="/note/delete/<%= note._id %>?_method=DELETE" method="POST">
+                            <button type="button" class="btn btn-danger" onclick="confirmDeleteNote('<%= note._id %>')">
+                              <i class="bi bi-trash-fill"></i>
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="col-md-6 d-flex">
-                  <div class="card p-3 flex-grow-1">
-                    <p class="card-text">
-                      <%= note.back %>
-                    </p>
-                  </div>
-                  <div class="ms-2 d-flex flex-column justify-content-around">
-                    <button type="submit" id="showEdit<%= index %>" class="btn btn-primary" data-bs-toggle="modal"
-                      data-bs-target="#editModal<%= index %>">
-                      <i class="bi bi-pencil-fill"></i>
-                    </button>
-                    <form id="deleteNote<%= note._id %>" action="/note/delete/<%= note._id %>?_method=DELETE" method="POST">
-                      <button type="button" class="btn btn-danger" onclick="confirmDeleteNote('<%= note._id %>')">
-                        <i class="bi bi-trash-fill"></i>
-                      </button>
-                    </form>
-                  </div>
-                </div>
+                  <% }) %>
               </div>
             </div>
-            <% }) %>
-        </div>
-      </div>
-
 
 
       <!-- Modal New Note-->
@@ -81,6 +88,10 @@
                 <div class="mb-3">
                   <label for="back" class="form-label">Back</label>
                   <input type="text" class="form-control" name="back" placeholder="write its answer...">
+                </div>
+                <div class="mb-3">
+                  <label for="example" class="form-label">example</label>
+                  <input type="text" class="form-control" name="example" placeholder="write an example...">
                 </div>
                 <% if (categories) { %>
                   <select name="selectedCategory" class="form-select text-capitalize bg-secondary text-white mt-2"
@@ -126,6 +137,10 @@
                   <div class="mb-3">
                     <label for="back" class="form-label">Back</label>
                     <input type="text" class="form-control" name="back" value="<%= note.back %>">
+                  </div>
+                  <div class="mb-3">
+                    <label for="example" class="form-label">Example</label>
+                    <input type="text" class="form-control" name="example" value="<%= note.example %>">
                   </div>
                   <select name="selectedCategory" class="form-select text-capitalize bg-secondary text-white mt-2"
                     onchange="hideContainer2(this)">

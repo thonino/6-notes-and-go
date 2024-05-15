@@ -4,6 +4,7 @@ const noteSchema = new mongoose.Schema({
   front: { type: "String" },
   back: { type: "String" },
   categoryName: { type: "String" },
+  example: { type: "String" },
   themeName: { type: "String" },
   userId: { type: "String" },
 });
