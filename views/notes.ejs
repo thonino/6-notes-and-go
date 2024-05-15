@@ -17,58 +17,63 @@
             </h1>
             <% }%>
           <button class="nav-link mb-2" data-bs-toggle="modal" data-bs-target="#noteModal">
-            <i class="bi bi-plus-lg btn btn-primary  "> Add New Note</i>
+            <i class="bi bi-plus-lg btn btn-success  "> Add Note</i>
           </button>
         </div>
     </div>
     <!-- List Note -->
-            <div class=" text-center d-flex justify-content-center">
-              <div>
-                <% notes.reverse().forEach((note, index)=> { %>
-                  <div class="container mt-2 ">
-                    <div class="row justify-content-center ">
-                      <div class="card p-0 col-6 d-flex flex-row ">
-                        <div class="col-md-6 d-flex align-items-center justify-content-center">
-                          <div class="bg-success">
-                            <p class="card-text  ">
-                              <%= note.front %>
-                            </p>
-                            <% if (note.example) { %>
-                              <p class="card-text text-primary ">
-                                <%= note.categoryName %>
-                              </p>
-                              <% } %>
-                          </div>
-                        </div>
-                        <div class="col-md-6 d-flex align-items-center justify-content-center ">
-                          <div class="bg-secondary rounded-end">
-                            <p class="card-text bg-warning">
-                              <%= note.back %>
-                            </p>
-                            <% if (note.example) { %>
-                              <p class="card-text text-white bg-danger">
-                                <%= note.example %>
-                              </p>
-                              <% } %>
-                          </div>
-                        </div>
-                        <div class="ms-2 d-flex align-items-center gap-2">
-                          <button type="submit" id="showEdit<%= index %>" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#editModal<%= index %>">
-                            <i class="bi bi-pencil-fill"></i>
-                          </button>
-                          <form id="deleteNote<%= note._id %>" action="/note/delete/<%= note._id %>?_method=DELETE" method="POST">
-                            <button type="button" class="btn btn-danger" onclick="confirmDeleteNote('<%= note._id %>')">
-                              <i class="bi bi-trash-fill"></i>
-                            </button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <% }) %>
+    <div class="container mt-2 d-flex flex-column align-items-center">
+      <% notes.reverse().forEach((note, index)=> { %>
+          <div class="card col-6 mb-3">
+            <div class="text-center">
+              <div class="">
+                <h5 class="card-title p-1 bg-info">Face 1 </h5>
+                <p class="card-text p-2">
+                  <%= note.front %>
+                </p>
               </div>
+              <div class="">
+                <h5 class="card-title p-1 bg-primary text-white">Face 2 </h5>
+                <p class="card-text p-2 ">
+                  <%= note.back %>
+                </p>
+              </div>
+              <% if (note.example) { %>
+                <div class="">
+                  <h5 class="card-title p-1 bg-success">Example: </h5>
+                  <p class="card-text p-2">
+                    <%= note.example %>
+                  </p>
+                </div>
+                <% } %>
             </div>
+            <div class="d-flex justify-content-center gap-2 p-2 bg-light ">
+              <button 
+                type="submit" 
+                id="showEdit<%= index %>" 
+                class="btn btn-warning btn-sm " 
+                data-bs-toggle="modal"
+                data-bs-target="#editModal<%= index %>"
+              >
+                <i class="bi bi-pencil-fill"></i> Edit
+              </button>
+              <form 
+                class=""
+                id="deleteNote<%= note._id %>" 
+                action="/note/delete/<%= note._id %>?_method=DELETE" 
+                method="POST"
+              >
+                <button type="button" class="btn btn-danger btn-sm " onclick="confirmDeleteNote('<%= note._id %>')">
+                  <i class="bi bi-trash-fill"></i> Delete
+                </button>
+              </form>
+            </div>
+          </div>
+        <% }) %>
+    </div>
+
+
+
 
 
       <!-- Modal New Note-->
@@ -113,7 +118,7 @@
                     </div>
                     <input type="hidden" name="themeName" value="<%= selectedTheme %>">
                     <input type="hidden" name="userId" value="<%= user._id %>">
-                    <button type="submit" class="btn btn-primary mt-2">Add Note</button>
+                    <button type="submit" class="btn btn-success mt-2">Add Note</button>
               </form>
             </div>
           </div>
@@ -163,7 +168,7 @@
                   </div>
                   <input type="hidden" name="themeName" value="<%= selectedTheme %>">
                   <input type="hidden" name="userId" value="<%= user._id %>">
-                  <button type="submit" class="btn btn-primary mt-2">Save</button>
+                  <button type="submit" class="btn btn-warning mt-2">Save</button>
                 </form>
               </div>
             </div>
