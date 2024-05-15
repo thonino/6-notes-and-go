@@ -22,7 +22,7 @@
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
             <button class="nav-link" data-bs-toggle="modal" data-bs-target="#themeModal">
-              <i class="bi bi-plus-lg btn btn-info btn-sm"> New Theme </i>
+              <i class="bi bi-plus-lg btn btn-info btn-sm"> Add </i>
             </button>
           </li>
           <li class="nav-item">
@@ -46,12 +46,10 @@
           <% if (selectedTheme) { %>
             <li class="nav-item ms-2" >
               <p  class="text-info fw-bold" style="margin-top:11px">
-                <i class="bi bi-book-fill  "></i> 
-                <%= selectedTheme %> : 
+                <a class="text-info fw-bold" href="/notes">
+                  <%= selectedTheme %> 
+                </a>
               </p>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link mt-1 fst-italic text-white" href="/notes"> All-Notes</a>
             </li>
           <% }%>
         </ul>
