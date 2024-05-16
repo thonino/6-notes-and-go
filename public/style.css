@@ -1,0 +1,31 @@
+.capitalize-once::first-letter {
+  text-transform: uppercase;
+}
+
+.bg-1{background-color: #22577a;}
+.bg-2{background-color: #38a3a5;}
+.bg-3{background-color: #57cc99;}
+.bg-4{background-color: #80ed99;} .bg-4:hover{background-color: #38a3a5;}
+.bg-5{background-color: #c7f9cc;} .bg-5:hover{background-color: #38a3a5;}
+.bg-6{background-color: #d8f8db;}
+.bg-7{background-color: #c4e4e6;}
+.bg-8{background-color: #dadada;}
+.text-1{color: #22577a;}
+.text-2{color: #38a3a5;}
+.text-3{color: #57cc99;}
+.text-4{color: #80ed99;}
+.text-5{color: #c7f9cc;}
+
+.hidden {
+  display: none
+}
+
+.flex-fill {
+  min-width: 200px;
+}
+
+
+
+
+
+

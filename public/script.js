@@ -53,3 +53,11 @@ function hideContainer2(selected) {
     categoryContainer.style.display = "none";
   }
 }
+
+
+// syntaxe toggle 
+document.querySelector("#toggle").addEventListener("click", () => {
+  var settings = document.querySelectorAll(".cible");
+  settings.forEach((setting) => {setting.classList.toggle("hidden");
+  });
+});

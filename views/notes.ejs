@@ -17,60 +17,81 @@
             </h1>
             <% }%>
           <button class="nav-link mb-2" data-bs-toggle="modal" data-bs-target="#noteModal">
-            <i class="bi bi-plus-lg btn btn-success  "> Add Note</i>
+            <i class="bi bi-plus-lg btn bg-5  "> Add Note</i>
           </button>
+          <div class="text-center d-inline ">
+            <button id="toggle" class="btn btn-secondary "><i class="bi bi-gear-fill"></i></button>
+          </div>
         </div>
     </div>
     <!-- List Note -->
     <div class="container mt-2 d-flex flex-column align-items-center">
       <% notes.reverse().forEach((note, index)=> { %>
-          <div class="card col-6 mb-3">
-            <div class="text-center">
-              <div class="">
-                <h5 class="card-title p-1 bg-info">Face 1 </h5>
-                <p class="card-text p-2">
-                  <%= note.front %>
-                </p>
+        <div class="mb-3">
+          <div class="row text-center justify-content-center">
+            <% if (note.example) { %>
+              <div class="col-md-<%= note.example ? '4' : '6' %> d-flex">
+                <div class="bg-light flex-fill">
+                  <h5 class="card-title bg-2 text-white p-3 mb-0">Face 1</h5>
+                  <p class="card-text p-3 mb-0 capitalize-once">
+                    <%= note.front %>
+                  </p>
+                </div>
               </div>
-              <div class="">
-                <h5 class="card-title p-1 bg-primary text-white">Face 2 </h5>
-                <p class="card-text p-2 ">
-                  <%= note.back %>
-                </p>
+              <div class="col-md-<%= note.example ? '4' : '6' %> d-flex">
+                <div class="bg-light flex-fill">
+                  <h5 class="card-title bg-3 text-white p-3 mb-0">Face 2</h5>
+                  <p class="card-text p-3 mb-0 capitalize-once">
+                    <%= note.back %>
+                  </p>
+                </div>
               </div>
-              <% if (note.example) { %>
-                <div class="">
-                  <h5 class="card-title p-1 bg-success">Example: </h5>
-                  <p class="card-text p-2">
+              <div class="col-md-4 d-flex">
+                <div class="bg-light flex-fill">
+                  <h5 class="card-title bg-secondary text-white p-3 mb-0">Example</h5>
+                  <p class="card-text p-3 mb-0 capitalize-once">
                     <%= note.example %>
                   </p>
                 </div>
+              </div>
+              <% } else { %>
+                <div class="col-sm-<%= note.example ? '4' : '6' %> d-flex">
+                  <div class="bg-light flex-fill">
+                    <h5 class="card-title bg-2 text-white p-3 mb-0">Face 1</h5>
+                    <p class="card-text p-3 mb-0 capitalize-once">
+                      <%= note.front %>
+                    </p>
+                  </div>
+                </div>
+                <div class="col-sm-<%= note.example ? '4' : '6' %> d-flex">
+                  <div class="bg-light flex-fill">
+                    <h5 class="card-title bg-3 text-white p-3 mb-0">Face 2</h5>
+                    <p class="card-text p-3 mb-0 capitalize-once">
+                      <%= note.back %>
+                    </p>
+                  </div>
+                </div>
                 <% } %>
             </div>
-            <div class="d-flex justify-content-center gap-2 p-2 bg-light ">
-              <button 
-                type="submit" 
-                id="showEdit<%= index %>" 
-                class="btn btn-warning btn-sm " 
-                data-bs-toggle="modal"
-                data-bs-target="#editModal<%= index %>"
-              >
+          <div class="cible hidden">
+            <div class="d-flex justify-content-center mt-3">
+              <button type="submit" id="showEdit<%= index %>" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                data-bs-target="#editModal<%= index %>">
                 <i class="bi bi-pencil-fill"></i> Edit
               </button>
-              <form 
-                class=""
-                id="deleteNote<%= note._id %>" 
-                action="/note/delete/<%= note._id %>?_method=DELETE" 
-                method="POST"
-              >
-                <button type="button" class="btn btn-danger btn-sm " onclick="confirmDeleteNote('<%= note._id %>')">
+              <form class="ml-2" id="deleteNote<%= note._id %>" action="/note/delete/<%= note._id %>?_method=DELETE"
+                method="POST">
+                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDeleteNote('<%= note._id %>')">
                   <i class="bi bi-trash-fill"></i> Delete
                 </button>
               </form>
             </div>
           </div>
+        </div>
         <% }) %>
     </div>
+
+
 
 
 
@@ -118,7 +139,7 @@
                     </div>
                     <input type="hidden" name="themeName" value="<%= selectedTheme %>">
                     <input type="hidden" name="userId" value="<%= user._id %>">
-                    <button type="submit" class="btn btn-success mt-2">Add Note</button>
+                    <button type="submit" class="btn bg-5 mt-2">Add Note</button>
               </form>
             </div>
           </div>
