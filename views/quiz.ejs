@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/bootstrap') %>
+    <title>Quiz</title>
+  </head>
+  <body>
+    <%- include('./partials/nav') %>
+      <div class="container text-center">
+        <% if (!user) { %>
+          <h1>Please log in to your account !</h1>
+          <a class="" href="/login">
+            <i class="bi bi-box-arrow-in-right btn btn-success btn-lg"> Login </i>
+          </a>
+        <% } else { %>
+          <h1> Start your quiz !!</h1>
+          <% if (notes && notes.length> 9) { %>
+            <div class="text-center d-flex justify-content-center">
+              <form action="/selectCategory" method="POST" class="text-center">
+                <select 
+                  name="categoryName" 
+                  class="form-select form-select-sm custom-select text-2 fw-bold mt-2"
+                >
+                  <option hidden>Choose you category</option>
+                  <% categories.forEach(category=> { %>
+                    <option value="<%= category.categoryName %>">
+                      <%= category.categoryName %>
+                    </option>
+                  <% }) %>
+                </select>
+                <button type="submit" class="btn bg-3 m-2">
+                  Start !
+                </button>
+              </form>
+            </div>
+          <% } %>
+        <% } %>
+      </div>
+      <script src="/script.js"></script>
+  </body>
+</html>

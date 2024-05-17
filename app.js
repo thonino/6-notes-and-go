@@ -42,6 +42,7 @@ app.use(
 
 // Method-override :
   const methodOverride = require('method-override');
+const { log } = require("console");
   app.use(methodOverride('_method'));
 
 // EJS : 
@@ -49,6 +50,7 @@ app.set('view engine', 'ejs');
 
 // Public folder
 app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static("public"));
 
 // Make available for all
 const makeAvailable = async (req, res, next) => {
@@ -290,8 +292,6 @@ app.put("/editnote/:id", async (req, res) => {
   try {
     // Recherche de la note à mettre à jour
     const noteToUpdate = await Note.findById(req.params.id);
-
-    // Si la note n'est pas trouvée, retourner une erreur
     if (!noteToUpdate) {
       return res.status(404).send("Note not found");
     }
@@ -314,7 +314,7 @@ app.put("/editnote/:id", async (req, res) => {
       userId,
     });
 
-    // Si aucune catégorie correspondante n'est trouvée, créer une nouvelle catégorie
+    // S'il ne trouve pas de catégorie, créer new catégorie
     if (!existingCategory && newCategoryName) {
       existingCategory = await Category.create({
         categoryName: newCategoryName,
@@ -323,7 +323,6 @@ app.put("/editnote/:id", async (req, res) => {
       });
     }
 
-    // Rediriger vers la page d'accueil
     res.redirect("/notes");
   } catch (err) {
     console.log(err);
@@ -341,6 +340,73 @@ app.delete("/note/delete/:id", (req, res) => {
       console.log(err);
     });
 });
+
+// SESSION SELECTED CATEGORY
+app.post('/selectCategory', (req, res) => {
+  const selectedCategory = req.body.categoryName;
+  res.redirect(`/quiz/${selectedCategory}`); 
+});
+
+// Quiz
+app.get("/quiz", async (req, res) => {
+  try {
+    // Si une catégorie est sélectionnée, continuez comme prévu
+    res.render("quiz", {
+      user: res.locals.user,
+      themes: res.locals.themes,
+      notes: res.locals.notes,
+      caterogies: res.locals.caterogies,
+      selectedTheme: res.locals.selectedTheme,
+    });
+  } catch (err) {
+    console.error("Error rendering quiz:", err);
+    res.render("error", { message: "Error rendering Quiz.ejs" });
+  }
+});
+
+// Quiz game
+app.get("/quiz/:category", async (req, res) => {
+  try {
+    const selectedCategory = req.params.category;
+    let notes = [];
+    if (selectedCategory === "all") {
+      notes = await Note.find();
+    } else {
+      notes = await Note.find({ categoryName: selectedCategory });
+    }
+
+    const randomNotes = getRandomNotes(notes, 10);
+    
+    function getRandomNotes(notes, count) {
+      const randomNotes = [];
+      const totalNotes = notes.length;
+
+      const numNotes = Math.min(count, totalNotes);
+
+      for (let i = 0; i < numNotes; i++) {
+        const randomIndex = Math.floor(Math.random() * totalNotes);
+        randomNotes.push(notes[randomIndex]);
+      }
+
+      return randomNotes;
+    }
+
+    res.render("quizGame", {
+      user: res.locals.user,
+      themes: res.locals.themes,
+      notes: res.locals.notes,
+      selectedCategory: selectedCategory,
+      selectedTheme: res.locals.selectedTheme,
+      randomNotes: randomNotes,
+    });
+  } catch (err) {
+    console.error("Error rendering quiz:", err);
+    res.render("error", { message: "Error rendering Quiz.ejs" });
+  }
+});
+
+
+
 
 
 const PORT = 5000;

@@ -31,7 +31,7 @@
                 <select 
                   id="themeSelect" 
                   name="theme" 
-                  class="form-select form-select-sm custom-select bg-dark text-info fw-bold mt-2"
+                  class="form-select form-select-sm custom-select bg-dark text-2 fw-bold mt-2"
                 >
                   <option hidden>Theme</option>
                   <% themes.forEach(theme=> { %>
@@ -45,12 +45,21 @@
           </li>
           <% if (selectedTheme) { %>
             <li class="nav-item ms-2" >
-              <p  class="text-info fw-bold" style="margin-top:11px">
-                <a class="text-info fw-bold" href="/notes">
+              <p  class="fw-bold" style="margin-top:11px">
+                <a class="text-2 fw-bold" href="/notes">
                   <%= selectedTheme %> 
                 </a>
               </p>
             </li>
+            <% if (notes && notes.length> 9) { %>
+              <li class="nav-item ms-2">
+                <p class=" fw-bold" style="margin-top:11px">
+                  <a class="text-3 fw-bold" href="/quiz">
+                    Quiz
+                  </a>
+                </p>
+              </li>
+            <% }%>
           <% }%>
         </ul>
         <ul class="navbar-nav ms-auto">
@@ -92,12 +101,3 @@
   </div>
 </div>
 
-<script>
-  // SUBMIT SELECTED
-  const themeSelect = document.getElementById('themeSelect');
-    if (themeSelect) {
-      themeSelect.addEventListener('change', function () {
-        document.getElementById('themeForm').submit();
-      });
-    }
-</script>

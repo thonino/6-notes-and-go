@@ -4,7 +4,7 @@
 
 .bg-1{background-color: #22577a;}
 .bg-2{background-color: #38a3a5;}
-.bg-3{background-color: #57cc99;}
+.bg-3{background-color: #57cc99;} .bg-3:hover{background-color: #38a3a5;}
 .bg-4{background-color: #80ed99;} .bg-4:hover{background-color: #38a3a5;}
 .bg-5{background-color: #c7f9cc;} .bg-5:hover{background-color: #38a3a5;}
 .bg-6{background-color: #d8f8db;}
@@ -24,7 +24,10 @@
   min-width: 200px;
 }
 
-
+/* 
+body{
+  background-color: #abfcfd;
+} */
 
 
 

@@ -54,10 +54,10 @@ function hideContainer2(selected) {
   }
 }
 
-
-// syntaxe toggle 
-document.querySelector("#toggle").addEventListener("click", () => {
-  var settings = document.querySelectorAll(".cible");
-  settings.forEach((setting) => {setting.classList.toggle("hidden");
-  });
-});
+// SUBMIT SELECTED
+const themeSelect = document.getElementById('themeSelect');
+  if (themeSelect) {
+    themeSelect.addEventListener('change', function () {
+      document.getElementById('themeForm').submit();
+    });
+  }

@@ -2,7 +2,7 @@
 <html>
 <head>
   <%- include('./partials/bootstrap') %>
-    <title>My Exercises</title>
+  <title>Notes</title>
 </head>
   <body >
   <%- include('./partials/nav') %>
@@ -11,13 +11,20 @@
       <% if (user && themes && selectedTheme) { %>
         <div class="containter text-center d-flex flex-column">
           <% if (selectedTheme) { %>
-              <h1 class="text-info fw-bold" style="margin-top:11px">
+              <h1 class="text-2 fw-bold" style="margin-top:11px">
                 <i class="bi bi-book-fill  "></i>
                 <%= selectedTheme %>
+                <% if (notes && notes.length> 9) { %>
+                  <span class="btn btn-sm bg-3 fst-italic ">
+                    <a class="text-white fw-bold  text-decoration-none " href="/quiz">
+                      Start Quiz !!
+                    </a>
+                  </span>
+                <% }%>
             </h1>
-            <% }%>
+          <% }%>
           <button class="nav-link mb-2" data-bs-toggle="modal" data-bs-target="#noteModal">
-            <i class="bi bi-plus-lg btn bg-5  "> Add Note</i>
+            <i class="bi bi-plus-lg btn bg-5"> Add Note</i>
           </button>
           <div class="text-center d-inline ">
             <button id="toggle" class="btn btn-secondary "><i class="bi bi-gear-fill"></i></button>
@@ -31,7 +38,7 @@
           <div class="row text-center justify-content-center">
             <% if (note.example) { %>
               <div class="col-md-<%= note.example ? '4' : '6' %> d-flex">
-                <div class="bg-light flex-fill">
+                <div class="bg-7 flex-fill">
                   <h5 class="card-title bg-2 text-white p-3 mb-0">Face 1</h5>
                   <p class="card-text p-3 mb-0 capitalize-once">
                     <%= note.front %>
@@ -39,7 +46,7 @@
                 </div>
               </div>
               <div class="col-md-<%= note.example ? '4' : '6' %> d-flex">
-                <div class="bg-light flex-fill">
+                <div class="bg-6 flex-fill">
                   <h5 class="card-title bg-3 text-white p-3 mb-0">Face 2</h5>
                   <p class="card-text p-3 mb-0 capitalize-once">
                     <%= note.back %>
@@ -47,16 +54,18 @@
                 </div>
               </div>
               <div class="col-md-4 d-flex">
-                <div class="bg-light flex-fill">
-                  <h5 class="card-title bg-secondary text-white p-3 mb-0">Example</h5>
+                <div class="bg-8 flex-fill">
+                  <h5 class="card-title bg-secondary text-white p-3 mb-0 text-capitalize">
+                    <%= note.categoryName %> 
+                  </h5>
                   <p class="card-text p-3 mb-0 capitalize-once">
-                    <%= note.example %>
+                    Example : <%= note.example %>
                   </p>
                 </div>
               </div>
               <% } else { %>
                 <div class="col-sm-<%= note.example ? '4' : '6' %> d-flex">
-                  <div class="bg-light flex-fill">
+                  <div class="bg-7 flex-fill">
                     <h5 class="card-title bg-2 text-white p-3 mb-0">Face 1</h5>
                     <p class="card-text p-3 mb-0 capitalize-once">
                       <%= note.front %>
@@ -64,7 +73,7 @@
                   </div>
                 </div>
                 <div class="col-sm-<%= note.example ? '4' : '6' %> d-flex">
-                  <div class="bg-light flex-fill">
+                  <div class="bg-6 flex-fill">
                     <h5 class="card-title bg-3 text-white p-3 mb-0">Face 2</h5>
                     <p class="card-text p-3 mb-0 capitalize-once">
                       <%= note.back %>
@@ -74,7 +83,7 @@
                 <% } %>
             </div>
           <div class="cible hidden">
-            <div class="d-flex justify-content-center mt-3">
+            <div class="d-flex justify-content-center mt-3 gap-2">
               <button type="submit" id="showEdit<%= index %>" class="btn btn-warning btn-sm" data-bs-toggle="modal"
                 data-bs-target="#editModal<%= index %>">
                 <i class="bi bi-pencil-fill"></i> Edit
@@ -90,12 +99,6 @@
         </div>
         <% }) %>
     </div>
-
-
-
-
-
-
 
       <!-- Modal New Note-->
       <div class="modal fade" id="noteModal" tabindex="-1">
@@ -197,6 +200,15 @@
         </div>
         <% }) %>
       <% } %>
-    <script src="script.js"></script>
+    <script>
+    // syntaxe toggle 
+      document.querySelector("#toggle").addEventListener("click", () => {
+        var settings = document.querySelectorAll(".cible");
+        settings.forEach((setting) => {
+          setting.classList.toggle("hidden");
+        });
+      });
+    </script>
+    <script src="/script.js"></script>
   </body>
 </html>
