@@ -4,23 +4,41 @@
     <%- include('./partials/bootstrap') %>
     <title>Quiz Game</title>
   </head>
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/bootstrap') %>
+      <title>Quiz Game</title>
+  </head>
   <body>
     <%- include('./partials/nav') %>
-    <div class="container text-center">
-      <% if (!user) { %>
-        <h1>Please log in to your account !</h1>
-        <a class="" href="/login">
-          <i class="bi bi-box-arrow-in-right btn btn-success"> Login </i>
-        </a>
-      <% } else { %>
-        <h1>Quiz game !</h1>
-        <% if (selectedCategory) { %>
-          <% randomNotes.forEach(note => { %>
-            <p><%= note.front %></p>
-          <% }) %>
-        <% } %>
-      <% } %>
-    </div>
-    <script src="/script.js"></script>
+      <div class="container text-center">
+        <% if (!user) { %>
+          <h1>Please log in to your account!</h1>
+          <a class="btn btn-success" href="/login">
+            <i class="bi bi-box-arrow-in-right"></i> Login
+          </a>
+          <% } else { %>
+            <h1>Quiz Game!</h1>
+            <% if (selectedCategory) { %>
+              <% randomNotes.forEach(note=> { %>
+                <div class="row justify-content-center mt-3">
+                  <div class="col-md-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <input type="text" class="form-control mb-3" placeholder="Your answer">
+                        <p class="card-text">
+                          <%= note.back %>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% }) %>
+                  <% } %>
+                    <% } %>
+      </div>
+      <script src="/script.js"></script>
   </body>
 </html>
+
