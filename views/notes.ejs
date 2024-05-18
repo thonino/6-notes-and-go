@@ -9,25 +9,27 @@
     <div class="mt-2 text-center d-flex justify-content-center">
       <!-- New Note -->
       <% if (user && themes && selectedTheme) { %>
-        <div class="containter text-center d-flex flex-column">
+        <div class="containter  d-flex flex-column">
           <% if (selectedTheme) { %>
               <h1 class="text-2 fw-bold" style="margin-top:11px">
                 <i class="bi bi-book-fill  "></i>
                 <%= selectedTheme %>
-                <% if (notes && notes.length> 9) { %>
-                  <span class="btn btn-sm bg-3 fst-italic ">
-                    <a class="text-white fw-bold  text-decoration-none " href="/quiz">
-                      Start Quiz !!
-                    </a>
-                  </span>
-                <% }%>
             </h1>
           <% }%>
-          <button class="nav-link mb-2" data-bs-toggle="modal" data-bs-target="#noteModal">
-            <i class="bi bi-plus-lg btn bg-5"> Add Note</i>
-          </button>
-          <div class="text-center d-inline ">
-            <button id="toggle" class="btn btn-secondary "><i class="bi bi-gear-fill"></i></button>
+          <div class="d-flex justify-content-center gap-2 mb-2">
+            <button class="nav-link " data-bs-toggle="modal" data-bs-target="#noteModal">
+              <i class="bi bi-plus-lg btn btn-sm bg-2 text-white"> Add Note</i>
+            </button>
+            <div class="text-center d-inline ">
+              <button id="toggle" class="btn btn-sm btn-secondary"><i class="bi bi-gear-fill"></i></button>
+            </div>
+            <% if (notes && notes.length> 9) { %>
+              <span class="btn btn-sm bg-3 fst-italic ">
+                <a class="text-white   text-decoration-none " href="/quiz">
+                  Quiz !
+                </a>
+              </span>
+            <% }%>
           </div>
         </div>
     </div>
@@ -80,11 +82,11 @@
                     </p>
                   </div>
                 </div>
-                <% } %>
-            </div>
+            <% } %>
+          </div>
           <div class="cible hidden">
             <div class="d-flex justify-content-center mt-3 gap-2">
-              <button type="submit" id="showEdit<%= index %>" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+              <button type="submit" id="showEdit<%= index %>" class="btn bg-2 btn-sm" data-bs-toggle="modal"
                 data-bs-target="#editModal<%= index %>">
                 <i class="bi bi-pencil-fill"></i> Edit
               </button>
@@ -123,7 +125,7 @@
                   <input type="text" class="form-control" name="example" placeholder="write an example...">
                 </div>
                 <% if (categories) { %>
-                  <select name="selectedCategory" class="form-select text-capitalize bg-secondary text-white mt-2"
+                  <select name="selectedCategory" class="form-select text-capitalize bg-success text-white mt-2"
                     onchange="hideContainer(this)">
                     <option value="uncategorized" hidden>uncategorized</option>
                     <option value="newCat">new category</option>
@@ -142,7 +144,7 @@
                     </div>
                     <input type="hidden" name="themeName" value="<%= selectedTheme %>">
                     <input type="hidden" name="userId" value="<%= user._id %>">
-                    <button type="submit" class="btn bg-5 mt-2">Add Note</button>
+                    <button type="submit" class="btn bg-2 text-white mt-2">Add Note</button>
               </form>
             </div>
           </div>
@@ -192,7 +194,7 @@
                   </div>
                   <input type="hidden" name="themeName" value="<%= selectedTheme %>">
                   <input type="hidden" name="userId" value="<%= user._id %>">
-                  <button type="submit" class="btn btn-warning mt-2">Save</button>
+                  <button type="submit" class="btn bg-2 mt-2">Save</button>
                 </form>
               </div>
             </div>

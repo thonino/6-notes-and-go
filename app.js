@@ -49,8 +49,8 @@ const { log } = require("console");
 app.set('view engine', 'ejs');
 
 // Public folder
-app.use(express.static(path.join(__dirname, 'public')));
-// app.use(express.static("public"));
+// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static("public"));
 
 // Make available for all
 const makeAvailable = async (req, res, next) => {
@@ -350,13 +350,30 @@ app.post('/selectCategory', (req, res) => {
 // Quiz
 app.get("/quiz", async (req, res) => {
   try {
-    // Si une catégorie est sélectionnée, continuez comme prévu
+    const selectedTheme = res.locals.selectedTheme;
+    const allNotes = res.locals.notes.filter(note => note.themeName === selectedTheme);
+    // Compter le nombre d'occurrences de chaque catégorie dans le thème sélectionné
+    const categoryCounts = [];
+    allNotes.forEach(note => {
+      const index = categoryCounts.findIndex(
+        item => item.categoryName === note.categoryName
+      );
+      if (index !== -1) {
+        categoryCounts[index].count++;
+      } else {
+        categoryCounts.push({ categoryName: note.categoryName, count: 1 });
+      }
+    });
+    // Filtrer les catégories qui ont au moins 10 occurrences
+    const categoriesFilter = categoryCounts.filter(
+      item => item.count >= 10).map(item => item.categoryName
+      );
     res.render("quiz", {
       user: res.locals.user,
       themes: res.locals.themes,
       notes: res.locals.notes,
-      caterogies: res.locals.caterogies,
-      selectedTheme: res.locals.selectedTheme,
+      categories: categoriesFilter,
+      selectedTheme: selectedTheme,
     });
   } catch (err) {
     console.error("Error rendering quiz:", err);
@@ -368,26 +385,24 @@ app.get("/quiz", async (req, res) => {
 app.get("/quiz/:category", async (req, res) => {
   try {
     const selectedCategory = req.params.category;
-    let notes = [];
+    let notes;
+
     if (selectedCategory === "all") {
-      notes = await Note.find();
+      notes = res.locals.notes;
     } else {
-      notes = await Note.find({ categoryName: selectedCategory });
+      notes = res.locals.notes.filter(note => note.categoryName === selectedCategory);
     }
 
     const randomNotes = getRandomNotes(notes, 10);
-    
+
     function getRandomNotes(notes, count) {
       const randomNotes = [];
       const totalNotes = notes.length;
-
       const numNotes = Math.min(count, totalNotes);
-
       for (let i = 0; i < numNotes; i++) {
         const randomIndex = Math.floor(Math.random() * totalNotes);
         randomNotes.push(notes[randomIndex]);
       }
-
       return randomNotes;
     }
 
@@ -404,8 +419,6 @@ app.get("/quiz/:category", async (req, res) => {
     res.render("error", { message: "Error rendering Quiz.ejs" });
   }
 });
-
-
 
 
 
