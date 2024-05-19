@@ -37,9 +37,8 @@
     <div class="container mt-2 d-flex flex-column align-items-center">
       <% notes.reverse().forEach((note, index)=> { %>
         <div class="mb-3">
-          <div class="row text-center justify-content-center">
-            <% if (note.example) { %>
-              <div class="col-md-<%= note.example ? '4' : '6' %> d-flex">
+          <div class="row text-center d-flex justify-content-center">
+              <div class="col-md-4 d-flex">
                 <div class="bg-7 flex-fill">
                   <h5 class="card-title bg-2 text-white p-3 mb-0">Face 1</h5>
                   <p class="card-text p-3 mb-0 capitalize-once">
@@ -47,7 +46,7 @@
                   </p>
                 </div>
               </div>
-              <div class="col-md-<%= note.example ? '4' : '6' %> d-flex">
+              <div class="col-md-4 d-flex">
                 <div class="bg-6 flex-fill">
                   <h5 class="card-title bg-3 text-white p-3 mb-0">Face 2</h5>
                   <p class="card-text p-3 mb-0 capitalize-once">
@@ -55,6 +54,7 @@
                   </p>
                 </div>
               </div>
+              <% if (note.example) { %>
               <div class="col-md-4 d-flex">
                 <div class="bg-8 flex-fill">
                   <h5 class="card-title bg-secondary text-white p-3 mb-0 text-capitalize">
@@ -66,23 +66,17 @@
                 </div>
               </div>
               <% } else { %>
-                <div class="col-sm-<%= note.example ? '4' : '6' %> d-flex">
+                <div class="col-md-4 d-flex">
                   <div class="bg-7 flex-fill">
-                    <h5 class="card-title bg-2 text-white p-3 mb-0">Face 1</h5>
+                    <h5 class="card-title bg-1 text-white p-3 mb-0 text-capitalize">
+                      Category
+                    </h5>
                     <p class="card-text p-3 mb-0 capitalize-once">
-                      <%= note.front %>
+                      <%= note.categoryName %> 
                     </p>
                   </div>
                 </div>
-                <div class="col-sm-<%= note.example ? '4' : '6' %> d-flex">
-                  <div class="bg-6 flex-fill">
-                    <h5 class="card-title bg-3 text-white p-3 mb-0">Face 2</h5>
-                    <p class="card-text p-3 mb-0 capitalize-once">
-                      <%= note.back %>
-                    </p>
-                  </div>
-                </div>
-            <% } %>
+              <%  } %>
           </div>
           <div class="cible hidden">
             <div class="d-flex justify-content-center mt-3 gap-2">
@@ -101,7 +95,6 @@
         </div>
         <% }) %>
     </div>
-
       <!-- Modal New Note-->
       <div class="modal fade" id="noteModal" tabindex="-1">
         <div class="modal-dialog">
