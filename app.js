@@ -57,24 +57,26 @@ const makeAvailable = async (req, res, next) => {
   try {
     const user = req.session.user;
     const selectedTheme = req.session.selectedTheme;
-    let themes, notes, categories;
+    let themes, notes, categories, quiz;
     if (user) {
       themes = await Theme.find({userId: user._id});
       notes = await Note.find({ userId: user._id, themeName: selectedTheme });
       categories = await Category.find({ userId: user._id, themeName: selectedTheme });
+      quiz = await Quiz.find({ userId: user._id });
     } 
     res.locals.user = user;
     res.locals.themes = themes;
     res.locals.notes = notes;
     res.locals.categories = categories;
     res.locals.selectedTheme = selectedTheme;
+    res.locals.quiz = quiz;
     next();
   } catch (err) {
     console.error("Error fetching themes and user:", err);
     res.render("error", { message: "Error fetching themes and user" });
   }
 };
-app.use(makeAvailable);// Call for use
+app.use(makeAvailable);
 
 
 //---------------------------------ROOTS---------------------------------//
@@ -83,9 +85,23 @@ app.use(makeAvailable);// Call for use
 // SESSION SELECTED THEME
 app.post('/selectTheme', (req, res) => {
   const selectedTheme = req.body.theme;
+  
+  // Vérifier si req.session.themes est défini
+  if (req.session.themes && req.session.themes.length > 0) {
+    // Réinitialiser les autres thèmes sélectionnés
+    req.session.themes = req.session.themes.map(theme => ({
+      ...theme,
+      selected: theme.name === selectedTheme
+    }));
+  }
+
+  // Enregistrer le nouveau thème sélectionné dans la session
   req.session.selectedTheme = selectedTheme;
+
   res.redirect(`/notes`); 
 });
+
+
 
 // INDEX
 app.get("/", async (req, res) => {
@@ -386,14 +402,12 @@ app.get("/quiz/:category", async (req, res) => {
   try {
     const selectedCategory = req.params.category;
     let notes;
-
     if (selectedCategory === "all") {
       notes = res.locals.notes;
     } else {
       notes = res.locals.notes.filter(note => note.categoryName === selectedCategory);
     }
-
-    const randomNotes = getRandomNotes(notes, 10);
+    const randomNotes = getRandomNotes(notes, 5);
 
     function getRandomNotes(notes, count) {
       const randomNotes = [];
@@ -405,7 +419,6 @@ app.get("/quiz/:category", async (req, res) => {
       }
       return randomNotes;
     }
-
     res.render("quizGame", {
       user: res.locals.user,
       themes: res.locals.themes,
@@ -413,6 +426,60 @@ app.get("/quiz/:category", async (req, res) => {
       selectedCategory: selectedCategory,
       selectedTheme: res.locals.selectedTheme,
       randomNotes: randomNotes,
+    });
+  } catch (err) {
+    console.error("Error rendering quiz:", err);
+    res.render("error", { message: "Error rendering Quiz.ejs" });
+  }
+});
+
+// ADD quizz
+app.post("/addquiz", async function (req, res) {
+  try {
+    let score = 0;
+    let data = [];
+    for(let i = 0; i < 5; i++) {
+      if(req.body["front" + i] === req.body["answer" + i]){
+        score++;
+      }
+      data.push([
+        req.body["answer" + i],
+        req.body["front" + i],
+        req.body["back" + i],
+      ]);
+    }
+
+    // Récupérer le thème sélectionné depuis la session
+    const selectedTheme = req.session.selectedTheme;
+
+    // Créer le modèle de Quiz avec le thème sélectionné
+    const quizData = new Quiz({
+      userName: res.locals.user,
+      themeName: selectedTheme, 
+      score: score,
+      data: data,
+    });
+
+    // Enregistrer le quiz dans la base de données
+    await quizData.save();
+    res.redirect("/score");
+  }
+  catch (err) {
+    console.log(err);
+    res.render("error", { message: "error page addquiz" });
+  }
+});
+
+
+// Quiz game
+app.get("/score", async (req, res) => {
+  try {
+    res.render("score", {
+      user: res.locals.user,
+      themes: res.locals.themes,
+      notes: res.locals.notes,
+      selectedTheme: res.locals.selectedTheme,
+      quiz: res.locals.quiz,
     });
   } catch (err) {
     console.error("Error rendering quiz:", err);

@@ -18,15 +18,31 @@
           <a class="btn btn-success" href="/login">
             <i class="bi bi-box-arrow-in-right"></i> Login
           </a>
-          <% } else { %>
-            <h1>Quiz Gameééé!</h1>
-            <% if (selectedCategory) { %>
-              <% randomNotes.forEach(note=> { %>
+        <% } else { %>
+          <h1>Quiz Game!</h1>
+          <% if (selectedCategory) { %>
+            <form action="/addquiz" method="post">
+              <% randomNotes.forEach((note, index) => { %>
                 <div class="row justify-content-center mt-3">
                   <div class="col-md-6">
                     <div class="card bg-2">
                       <div class="card-body">
-                        <input type="text" class="form-control mb-3" placeholder="Your answer">
+                        <input 
+                          name="answer<%= index %>"
+                          type="text" 
+                          class="form-control mb-3" 
+                          placeholder="Your answer"
+                        >
+                        <input 
+                          type="hidden"
+                          name="front<%= index %>" 
+                          value="<%= note.front %>"
+                        />
+                        <input 
+                          type="hidden"
+                          name="back<%= index %>" 
+                          value="<%= note.back %>"
+                        />
                         <p class="card-text">
                           <%= note.back %>
                         </p>
@@ -34,9 +50,14 @@
                     </div>
                   </div>
                 </div>
-                <% }) %>
-                  <% } %>
-                    <% } %>
+              <% }) %>
+              <button type="submit" class="btn bg-3 m-2 mb-3"> 
+                <i class="bi bi-box-arrow-down"></i>
+                Save Answers
+              </button>
+            </form>
+          <% } %>
+        <% } %>
       </div>
       <script src="/script.js"></script>
   </body>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('./partials/bootstrap') %>
+      <title>Score</title>
+  </head>
+  <body>
+    <%- include('./partials/nav') %>
+    <div class="container text-center">
+      <% if (!user) { %>
+        <h1>Please log in to your account !</h1>
+        <a class="" href="/login">
+          <i class="bi bi-box-arrow-in-right btn btn-success "> Login </i>
+        </a>
+      <% } else { %>
+        <% if (quiz) { %>
+          <% quiz.reverse().forEach((quiz, index)=> { %>
+            <h1>score : <%= quiz.score %>></h1>
+          <% }) %>
+        <% } %>
+      <% } %>
+    </div>
+    <script src="/script.js"></script>
+  </body>
+</html>
