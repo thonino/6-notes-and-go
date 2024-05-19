@@ -13,10 +13,24 @@
           <i class="bi bi-box-arrow-in-right btn btn-success "> Login </i>
         </a>
       <% } else { %>
-        <% if (quiz) { %>
-          <% quiz.reverse().forEach((quiz, index)=> { %>
-            <h1>score : <%= quiz.score %>></h1>
-          <% }) %>
+        <% if (latestQuiz) { %>
+          <h1 class="text-2">Last Quiz</h1>
+          <p class="fs-5">
+            score :
+            <span class="text-2">
+              <%= latestQuiz.score %> /  5 
+            </span><br>
+            Theme :
+            <span class="text-2">
+              <%= latestQuiz.themeName %> 
+            </span><br>
+            Category :
+            <span class="text-2">
+              <%= latestQuiz.categoryName %> 
+            </span>
+          </p>
+        <% } else { %>
+          <p>not found data</p>
         <% } %>
       <% } %>
     </div>

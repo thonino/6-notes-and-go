@@ -448,19 +448,16 @@ app.post("/addquiz", async function (req, res) {
         req.body["back" + i],
       ]);
     }
-
-    // Récupérer le thème sélectionné depuis la session
     const selectedTheme = req.session.selectedTheme;
-
-    // Créer le modèle de Quiz avec le thème sélectionné
+    console.log(req.body.categoryName);
     const quizData = new Quiz({
-      userName: res.locals.user,
+      userId: res.locals.user,
       themeName: selectedTheme, 
+      categoryName: req.body.categoryName, 
       score: score,
       data: data,
     });
 
-    // Enregistrer le quiz dans la base de données
     await quizData.save();
     res.redirect("/score");
   }
@@ -470,22 +467,22 @@ app.post("/addquiz", async function (req, res) {
   }
 });
 
-
 // Quiz game
 app.get("/score", async (req, res) => {
   try {
+    const latestQuiz = await Quiz.findOne().sort({ _id: -1 }).limit(1);
+
     res.render("score", {
       user: res.locals.user,
-      themes: res.locals.themes,
       notes: res.locals.notes,
-      selectedTheme: res.locals.selectedTheme,
-      quiz: res.locals.quiz,
+      latestQuiz: latestQuiz, 
     });
   } catch (err) {
     console.error("Error rendering quiz:", err);
     res.render("error", { message: "Error rendering Quiz.ejs" });
   }
 });
+
 
 
 
