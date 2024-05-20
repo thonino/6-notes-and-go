@@ -6,34 +6,71 @@
   </head>
   <body>
     <%- include('./partials/nav') %>
-    <div class="container text-center">
-      <% if (!user) { %>
-        <h1>Please log in to your account !</h1>
-        <a class="" href="/login">
-          <i class="bi bi-box-arrow-in-right btn btn-success "> Login </i>
-        </a>
+    <div class="container text-center mt-3">
+    <% if (!user) { %>
+      <h1>Please log in to your account !</h1>
+      <a class="" href="/login">
+        <i class="bi bi-box-arrow-in-right btn btn-success"> Login </i>
+      </a>
       <% } else { %>
-        <% if (latestQuiz) { %>
-          <h1 class="text-2">Last Quiz</h1>
-          <p class="fs-5">
-            score :
-            <span class="text-2">
-              <%= latestQuiz.score %> /  5 
-            </span><br>
-            Theme :
-            <span class="text-2">
-              <%= latestQuiz.themeName %> 
-            </span><br>
-            Category :
-            <span class="text-2">
-              <%= latestQuiz.categoryName %> 
-            </span>
-          </p>
-        <% } else { %>
-          <p>not found data</p>
+          <% if (latestQuiz) { %>
+            <div class="card mb-3 rounded-0">
+              <div class="card-header bg-3 text-white rounded-0">
+                  Last Quiz
+              </div>
+              <div class="card-body">
+                <div class="row text-capitalize">
+                  <% latestQuiz.data.forEach(data => { %>
+                    <div class="col-md-4 mb-3">
+                      <div class="card rounded-0">
+                        <div class="card-header bg-2 text-white rounded-0 text-capitalize">
+                          <%= data[0] %>
+                        </div>
+                        <div class="card-body rounded-0">
+                          <p class="card-text text-capitalize">
+                            <%= data[1] %>
+                          </p>
+                          <% if (data[2]) { %>
+                            <p class="card-text text-decoration-line-through text-danger text-capitalize">
+                              <%= data[2] %>
+                            </p>
+                          <% } %>
+                        </div>
+                      </div>
+                    </div>
+                  <% }) %>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="row">
+                  <div class="col fw-bold">
+                    Score: 
+                    <span class="text-2 text-capitalize">
+                      <%= latestQuiz.score %> / 5
+                    </span>
+                  </div>
+                  <div class="col fw-bold">
+                    Theme: 
+                    <span class="text-2 text-capitalize">
+                      <%= latestQuiz.themeName %>
+                    </span>
+                  </div>
+                  <div class="col fw-bold">
+                    Category: 
+                    <span class="text-2 text-capitalize">
+                      <%= latestQuiz.categoryName %>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% } else { %>
+            <div class="alert alert-warning" role="alert">
+                No quiz data found.
+            </div>
+          <% } %>
         <% } %>
-      <% } %>
-    </div>
+      </div>
     <script src="/script.js"></script>
   </body>
 </html>

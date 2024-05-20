@@ -407,7 +407,7 @@ app.get("/quiz/:category", async (req, res) => {
     } else {
       notes = res.locals.notes.filter(note => note.categoryName === selectedCategory);
     }
-    const randomNotes = getRandomNotes(notes, 5);
+    const randomNotes = getRandomNotes(notes, 5); // EDIT FOR 10 NOTES
 
     function getRandomNotes(notes, count) {
       const randomNotes = [];
@@ -438,18 +438,23 @@ app.post("/addquiz", async function (req, res) {
   try {
     let score = 0;
     let data = [];
-    for(let i = 0; i < 5; i++) {
+    for(let i = 0; i < 5; i++) {  // EDIT FOR 10 NOTES
       if(req.body["front" + i] === req.body["answer" + i]){
+        data.push([
+          req.body["back" + i],
+          req.body["front" + i],
+        ]);
         score++;
       }
-      data.push([
-        req.body["answer" + i],
-        req.body["front" + i],
-        req.body["back" + i],
-      ]);
+      else{
+        data.push([
+          req.body["back" + i],
+          req.body["front" + i],
+          req.body["answer" + i],
+        ]);
+      }
     }
     const selectedTheme = req.session.selectedTheme;
-    console.log(req.body.categoryName);
     const quizData = new Quiz({
       userId: res.locals.user,
       themeName: selectedTheme, 
@@ -457,7 +462,6 @@ app.post("/addquiz", async function (req, res) {
       score: score,
       data: data,
     });
-
     await quizData.save();
     res.redirect("/score");
   }
@@ -467,10 +471,10 @@ app.post("/addquiz", async function (req, res) {
   }
 });
 
-// Quiz game
+// Score
 app.get("/score", async (req, res) => {
   try {
-    const latestQuiz = await Quiz.findOne().sort({ _id: -1 }).limit(1);
+    const latestQuiz = await Quiz.findOne({ userId: res.locals.user }).sort({ _id: -1 }).limit(1);
 
     res.render("score", {
       user: res.locals.user,

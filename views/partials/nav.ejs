@@ -1,28 +1,30 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-  <a class="navbar-brand ms-2 text-white fw-bold" href="/">My Exercises</a>
-  <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+  <a class="navbar-brand ms-2 " href="/" style="margin-top:-4px">
+    Logo
+  </a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <% if (!user) { %>
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto gap-2 me-2">
         <li class="nav-item">
-          <a class="nav-link text-success" href="/register">
+          <a class=" text-success" href="/register">
             <i class="bi bi-box-arrow-in-right btn btn-success btn-sm"> Sign-up</i>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/login">
+          <a class="" href="/login">
             <i class="bi bi-box-arrow-in-right btn btn-success btn-sm"> Login</i>
           </a>
         </li>
       </ul>
       <% } else { %>
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <button class="nav-link" data-bs-toggle="modal" data-bs-target="#themeModal">
-              <i class="bi bi-plus-lg btn bg-2 text-white  btn-sm"> 
+        <ul class="navbar-nav me-auto ">
+          <li class="nav-item ">
+            <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#themeModal">
+              <i class="bi bi-plus-lg btn bg-2 text-white btn-sm"> 
                 <span class="col-md d-md-inline d-none">Add </span>
               </i>
             </button>
@@ -33,7 +35,8 @@
                 <select 
                   id="themeSelect" 
                   name="theme" 
-                  class="form-select form-select-sm custom-select bg-dark text-2 fw-bold mt-2"
+                  class="form-select form-select-sm custom-select bg-dark text-2 fw-bold "
+                  style="margin-top:4px"
                 >
                   <option hidden>Theme</option>
                   <% themes.forEach(theme=> { %>
@@ -46,17 +49,17 @@
             <% } %>
           </li>
           <% if (selectedTheme) { %>
-            <li class="nav-item ms-2" >
-              <p  class="fw-bold" style="margin-top:11px">
-                <a class="text-2 fw-bold" href="/notes">
+            <li class="" >
+              <p style="margin-top:4px"> 
+                <a class="text-2 fw-bold ms-2" href="/notes">
                   <%= selectedTheme %> 
                 </a>
               </p>
             </li>
             <% if (notes && notes.length> 9) { %>
-              <li class="nav-item ms-2">
-                <p class=" fw-bold" style="margin-top:11px">
-                  <a class="text-3 fw-bold" href="/quiz">
+              <li class="">
+                <p style="margin-top:4px"> 
+                  <a class="text-3 fw-bold ms-2" href="/quiz">
                     Quiz
                   </a>
                 </p>
@@ -64,16 +67,23 @@
             <% }%>
           <% }%>
         </ul>
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav gap-2 me-2">
           <li class="nav-item">
-            <a class="nav-link " href="/account">
+            <a class=" " href="/score">
+              <i class="bi bi-controller btn bg-4 btn-sm">
+                <span class="col-md d-md-inline d-none">Scores</span>
+              </i>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="" href="/account">
               <i class="bi bi-person-circle btn bg-5 btn-sm"> 
                 <span class="col-md d-md-inline d-none">Account</span>
               </i>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link " href="/logout">
+          <li class="nav-item ">
+            <a class="" href="/logout">
               <i class="bi bi-box-arrow-left btn btn-danger btn-sm"> 
                 <span class="col-md d-md-inline d-none">Logout</span>
               </i>
@@ -83,6 +93,7 @@
         <% } %>
   </div>
 </nav>
+
 <!-- Theme Modal -->
 <div class="modal fade" id="themeModal" tabindex="-1">
   <div class="modal-dialog">
