@@ -20,6 +20,9 @@
               </div>
               <div class="card-body">
                 <div class="row text-capitalize">
+                  <p class=" mb-3 fs-4 fst-italic fw-bold <%= color %>">
+                    <%= prize %>
+                  </p>
                   <% latestQuiz.data.forEach(data => { %>
                     <div class="col-md-4 mb-3">
                       <div class="card rounded-0">
@@ -31,7 +34,7 @@
                             <%= data[1] %>
                           </p>
                           <% if (data[2]) { %>
-                            <p class="card-text text-decoration-line-through text-danger text-capitalize">
+                            <p class="card-text text-danger text-capitalize">
                               <%= data[2] %>
                             </p>
                           <% } %>
@@ -46,7 +49,7 @@
                   <div class="col fw-bold">
                     Score: 
                     <span class="text-2 text-capitalize">
-                      <%= latestQuiz.score %> / 5
+                      <%= latestQuiz.score %> / 6  <!-- EDIT FOR 10 NOTES --> 
                     </span>
                   </div>
                   <div class="col fw-bold">
@@ -57,7 +60,7 @@
                   </div>
                   <div class="col fw-bold">
                     Category: 
-                    <span class="text-2 text-capitalize">
+                    <span class="text-2 text-capitalize text-low">
                       <%= latestQuiz.categoryName %>
                     </span>
                   </div>

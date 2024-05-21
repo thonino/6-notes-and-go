@@ -407,18 +407,21 @@ app.get("/quiz/:category", async (req, res) => {
     } else {
       notes = res.locals.notes.filter(note => note.categoryName === selectedCategory);
     }
-    const randomNotes = getRandomNotes(notes, 5); // EDIT FOR 10 NOTES
+    const randomNotes = getRandomNotes(notes, 6); // EDIT FOR 10 NOTES
 
     function getRandomNotes(notes, count) {
       const randomNotes = [];
       const totalNotes = notes.length;
       const numNotes = Math.min(count, totalNotes);
-      for (let i = 0; i < numNotes; i++) {
+      while (randomNotes.length < numNotes) {
         const randomIndex = Math.floor(Math.random() * totalNotes);
-        randomNotes.push(notes[randomIndex]);
+        if (!randomNotes.includes(notes[randomIndex])) { 
+          randomNotes.push(notes[randomIndex]);
+        }
       }
       return randomNotes;
     }
+    
     res.render("quizGame", {
       user: res.locals.user,
       themes: res.locals.themes,
@@ -438,19 +441,22 @@ app.post("/addquiz", async function (req, res) {
   try {
     let score = 0;
     let data = [];
-    for(let i = 0; i < 5; i++) {  // EDIT FOR 10 NOTES
-      if(req.body["front" + i] === req.body["answer" + i]){
+    for (let i = 0; i < 6; i++) { // EDIT FOR 10 NOTES
+      let front = req.body["front" + i].toLowerCase(); 
+      let frontParts = req.body["front" + i].split("/");
+      let answer = req.body["answer" + i].toLowerCase();
+      if (answer === "") { answer = "no text"; }
+      if (front === answer || frontParts.some(part => part.toLowerCase() === answer)) {
         data.push([
           req.body["back" + i],
-          req.body["front" + i],
+          answer,
         ]);
         score++;
-      }
-      else{
+      } else {
         data.push([
           req.body["back" + i],
           req.body["front" + i],
-          req.body["answer" + i],
+          answer,
         ]);
       }
     }
@@ -475,17 +481,32 @@ app.post("/addquiz", async function (req, res) {
 app.get("/score", async (req, res) => {
   try {
     const latestQuiz = await Quiz.findOne({ userId: res.locals.user }).sort({ _id: -1 }).limit(1);
-
+    const score = latestQuiz.score;
+    let prize = "";
+    let color = "";
+    if (score > 4) {
+      prize = "Amazing !";
+      color = "text-success";
+    } else if (score >= 3) {
+      prize = "Good !";
+      color = "text-3";
+    } else {
+      prize = "Can do better !";
+      color = "text-danger";
+    }
     res.render("score", {
       user: res.locals.user,
       notes: res.locals.notes,
-      latestQuiz: latestQuiz, 
+      latestQuiz: latestQuiz,
+      prize,
+      color,
     });
   } catch (err) {
     console.error("Error rendering quiz:", err);
     res.render("error", { message: "Error rendering Quiz.ejs" });
   }
 });
+
 
 
 
