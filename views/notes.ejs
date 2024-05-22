@@ -23,7 +23,7 @@
             <div class="text-center d-inline ">
               <button id="toggle" class="btn btn-sm btn-secondary"><i class="bi bi-gear-fill"></i></button>
             </div>
-            <% if (notes && notes.length> 9) { %>
+            <% if (notes && notes.length > 5) { %>
               <span class="btn btn-sm bg-3 fst-italic ">
                 <a class="text-white   text-decoration-none " href="/quiz">
                   Quiz !
@@ -31,6 +31,23 @@
               </span>
             <% }%>
           </div>
+          <% if(categories && categories.length > 0){ %>
+            <form id="categoryFilterForm" action="/notes" method="POST">
+              <select 
+                id="categoryFilter"
+                name="categoryFilter" 
+                class="form-select text-2 text-capitalize mt-2"
+              >
+                <option hidden>By Category</option>
+                <option value="">All</option>
+                <% categories.forEach(category=> { %>
+                  <option value="<%= category.categoryName %>">
+                    <%= category.categoryName %>
+                  </option>
+                  <% }) %>
+              </select>
+            </form>
+            <% } %>
         </div>
     </div>
 
@@ -39,7 +56,7 @@
       <% notes.reverse().forEach((note, index)=> { %>
         <div class="mb-3">
           <div class="row text-center d-flex justify-content-center">
-            <div class="col-md-4">
+            <div class="col-4">
               <div class="card bg-7 rounded-0">
                 <h5 class="card-title bg-2 text-white p-3 mb-0">Face 1</h5>
                 <p class="card-text p-3 mb-0 capitalize-once">
@@ -47,7 +64,7 @@
                 </p>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-4">
               <div class="card bg-6 rounded-0">
                 <h5 class="card-title bg-3 text-white p-3 mb-0">Face 2</h5>
                 <p class="card-text p-3 mb-0 capitalize-once">
@@ -56,7 +73,7 @@
               </div>
             </div>
             <% if (note.example) { %>
-            <div class="col-md-4">
+            <div class="col-4">
               <div class="card bg-8 rounded-0">
                 <h5 class="card-title bg-secondary text-white p-3 mb-0 text-capitalize">
                   <%= note.categoryName %> 
@@ -67,7 +84,7 @@
               </div>
             </div>
             <% } else { %>
-            <div class="col-md-4">
+            <div class="col-4">
               <div class="card bg-7 rounded-0">
                 <h5 class="card-title bg-1 text-white p-3 mb-0 text-capitalize">
                   Category

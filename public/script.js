@@ -61,3 +61,11 @@ const themeSelect = document.getElementById('themeSelect');
       document.getElementById('themeForm').submit();
     });
   }
+  
+// SUBMIT SELECTED
+const categoryFilter = document.getElementById('categoryFilter');
+if (categoryFilter) {
+  categoryFilter.addEventListener('change', function () {
+    document.getElementById('categoryFilterForm').submit();
+  });
+}

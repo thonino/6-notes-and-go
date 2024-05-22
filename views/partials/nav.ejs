@@ -2,7 +2,7 @@
   <a class="navbar-brand ms-2 " href="/" style="margin-top:-4px">
     Logo
   </a>
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+  <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -31,11 +31,11 @@
           </li>
           <li class="nav-item">
             <% if (themes.length> 0) { %>
-              <form id="themeForm" action="/selectTheme" method="POST">
+              <form id="themeForm" action="/selectTheme" method="POST" class="ps-2 pe-2">
                 <select 
                   id="themeSelect" 
                   name="theme" 
-                  class="form-select form-select-sm custom-select bg-dark text-2 fw-bold "
+                  class="form-select form-select-sm bg-dark text-2 text-capitalize  "
                   style="margin-top:4px"
                 >
                   <option hidden>Theme</option>
@@ -67,7 +67,7 @@
             <% }%>
           <% }%>
         </ul>
-        <ul class="navbar-nav gap-2 me-2">
+        <ul class="navbar-nav gap-2 ms-2 me-2">
           <li class="nav-item">
             <a class=" " href="/score">
               <i class="bi bi-controller btn bg-4 btn-sm">

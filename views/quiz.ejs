@@ -19,7 +19,7 @@
           <% if (categories) { %>
             <div class="text-center d-flex justify-content-center">
               <form action="/selectCategory" method="POST" class="text-center">
-                <select name="categoryName" class="form-select form-select-sm custom-select text-2 fw-bold mt-2">
+                <select name="categoryName" class="form-select text-2 text-capitalize mt-2">
                   <option value="all" hidden>Choose a category</option>
                   <option value="all">All</option>
                   <% categories.forEach(category=> { %>

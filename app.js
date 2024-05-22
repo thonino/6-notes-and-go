@@ -120,23 +120,6 @@ app.get("/", async (req, res) => {
   }
 });
 
-// NOTES
-app.get("/notes", async (req, res) => {
-  try {
-    res.render("notes", {
-      user: res.locals.user,
-      themes: res.locals.themes,
-      notes: res.locals.notes,
-      caterogies: res.locals.caterogies,
-      selectedTheme: res.locals.selectedTheme,
-    });
-  } 
-  catch (err) {
-    console.error("Error rendering notes:", err);
-    res.render("error", { message: "Error rendering Notes.ejs" });
-  }
-});
-
 // ACCOUNT
 app.get("/account", (req, res) => {
   try {
@@ -241,6 +224,43 @@ const themeData = new Theme({
       console.log(err);
     });
 });
+
+
+// NOTES
+// Définition de la fonction pour le traitement des notes
+async function renderNotes(req, res, filter) {
+  try {
+    let notes = res.locals.notes;
+    if (filter) {
+      notes = notes.filter(note => note.categoryName === filter);
+    }
+    res.render("notes", {
+      user: res.locals.user,
+      themes: res.locals.themes,
+      notes,
+      categories: res.locals.categories,
+      selectedTheme: res.locals.selectedTheme,
+    });
+  } catch (err) {
+    console.error("Error rendering notes:", err);
+    res.render("error", { message: "Error rendering Notes.ejs" });
+  }
+}
+
+// Route GET "/notes"
+app.get("/notes", async (req, res) => {
+  const filter = req.body.categoryFilter;
+  await renderNotes(req, res, filter);
+});
+
+// Route POST "/notes"
+app.post("/notes", async (req, res) => {
+  const filter = req.body.categoryFilter;
+  await renderNotes(req, res, filter);
+});
+
+
+
 
 // ADD NOTE AND CATEGORY
 app.post("/addnote", async function (req, res) {
@@ -380,9 +400,9 @@ app.get("/quiz", async (req, res) => {
         categoryCounts.push({ categoryName: note.categoryName, count: 1 });
       }
     });
-    // Filtrer les catégories qui ont au moins 10 occurrences
+    // Filtrer les catégories qui ont au moins 6 occurrences
     const categoriesFilter = categoryCounts.filter(
-      item => item.count >= 10).map(item => item.categoryName
+      item => item.count >= 6).map(item => item.categoryName
       );
     res.render("quiz", {
       user: res.locals.user,
