@@ -9,9 +9,6 @@
     <div class="container text-center mt-3">
       <% if (!user) { %>
         <h1>Please log in to your account !</h1>
-        <a class="" href="/login">
-          <i class="bi bi-box-arrow-in-right btn btn-success "> Login </i>
-        </a>
       <% } else { %>
         <h1>Welcome <span class="text-success"><%= user.name %></span> !</h1>
       <% } %>

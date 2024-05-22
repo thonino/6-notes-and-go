@@ -6,91 +6,83 @@
     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
+  <div class="collapse navbar-collapse  ms-2 me-2" id="navbarNav">
     <% if (!user) { %>
-      <ul class="navbar-nav ms-auto gap-2 me-2">
+      <ul class="navbar-nav gap-2 ms-auto ">
+          <li class="nav-item">
+            <a class=" text-success" href="/register">
+              <i class="bi bi-box-arrow-in-right btn btn-success btn-sm"> Sign-up</i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a  href="/login">
+              <i class="bi bi-box-arrow-in-right btn btn-success btn-sm"> Login</i>
+            </a>
+          </li>
+      </ul>
+    <% } else { %>
+      <ul class="navbar-nav">
+        <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#themeModal">
+          <i class="bi bi-plus-lg btn bg-2 text-white btn-sm "> 
+            <span class="col-md d-md-inline d-inline d-sm-none">Add</span>
+          </i>
+        </button>
         <li class="nav-item">
-          <a class=" text-success" href="/register">
-            <i class="bi bi-box-arrow-in-right btn btn-success btn-sm"> Sign-up</i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="" href="/login">
-            <i class="bi bi-box-arrow-in-right btn btn-success btn-sm"> Login</i>
-          </a>
+          <% if (themes.length> 0) { %>
+            <form id="themeForm" action="/selectTheme" method="POST">
+              <select 
+                id="themeSelect" 
+                name="theme" 
+                class="form-select form-select-sm bg-dark text-2 text-capitalize"
+                style="margin-top:4px"
+              >
+                <option hidden>Theme</option>
+                <% themes.forEach(theme=> { %>
+                <option value="<%= theme.themeName %>" >
+                  <%= theme.themeName %> 
+                </option>
+                <% }) %>
+              </select>
+            </form>
+          <% } %>
         </li>
       </ul>
-      <% } else { %>
-        <ul class="navbar-nav me-auto ">
-          <li class="nav-item ">
-            <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#themeModal">
-              <i class="bi bi-plus-lg btn bg-2 text-white btn-sm"> 
-                <span class="col-md d-md-inline d-none">Add </span>
-              </i>
-            </button>
-          </li>
-          <li class="nav-item">
-            <% if (themes.length> 0) { %>
-              <form id="themeForm" action="/selectTheme" method="POST" class="ps-2 pe-2">
-                <select 
-                  id="themeSelect" 
-                  name="theme" 
-                  class="form-select form-select-sm bg-dark text-2 text-capitalize  "
-                  style="margin-top:4px"
-                >
-                  <option hidden>Theme</option>
-                  <% themes.forEach(theme=> { %>
-                  <option value="<%= theme.themeName %>" >
-                    <%= theme.themeName %> 
-                  </option>
-                  <% }) %>
-                </select>
-              </form>
-            <% } %>
-          </li>
-          <% if (selectedTheme) { %>
-            <li class="" >
-              <p style="margin-top:4px"> 
-                <a class="text-2 fw-bold ms-2" href="/notes">
-                  <%= selectedTheme %> 
-                </a>
-              </p>
-            </li>
-            <% if (notes && notes.length> 9) { %>
-              <li class="">
-                <p style="margin-top:4px"> 
-                  <a class="text-3 fw-bold ms-2" href="/quiz">
-                    Quiz
-                  </a>
-                </p>
-              </li>
-            <% }%>
-          <% }%>
-        </ul>
-        <ul class="navbar-nav gap-2 ms-2 me-2">
-          <li class="nav-item">
-            <a class=" " href="/score">
+      <ul class="navbar-nav mt-2 mt-sm-0 ms-sm-2 gap-2 ">
+        <% if (selectedTheme) { %>
+          <a  href="/notes">
+            <i class="bi bi-book-fill btn bg-2 btn-sm">
+              <span class="col-md d-md-inline d-inline d-sm-none">
+                <%= selectedTheme %> 
+              </span>
+            </i>
+          </a>
+          <% if (notes && notes.length> 9) { %>
+            <a  href="/quiz" class="text-decoration-none">
               <i class="bi bi-controller btn bg-4 btn-sm">
-                <span class="col-md d-md-inline d-none">Scores</span>
+                <span class="col-md d-md-inline d-inline d-sm-none">Quiz</span>
               </i>
             </a>
-          </li>
-          <li class="nav-item ">
-            <a class="" href="/account">
-              <i class="bi bi-person-circle btn bg-5 btn-sm"> 
-                <span class="col-md d-md-inline d-none">Account</span>
-              </i>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="" href="/logout">
-              <i class="bi bi-box-arrow-left btn btn-danger btn-sm"> 
-                <span class="col-md d-md-inline d-none">Logout</span>
-              </i>
-            </a>
-          </li>
-        </ul>
+          <% }%>
+          <a  href="/score" class="">
+            <i class="bi bi-file-earmark-check btn bg-3 btn-sm">
+              <span class="col-md d-md-inline d-inline d-sm-none">Scores</span>
+            </i>
+          </a>
         <% } %>
+      </ul>
+      <ul class="navbar-nav gap-2 mt-2 mt-sm-0 ms-auto">
+          <a href="/account" class="text-decoration-none">
+            <i class="bi bi-person-circle btn bg-5 btn-sm "> 
+              <span class="col-md d-md-inline d-inline d-sm-none">Account</span>
+            </i>   
+          </a>
+          <a href="/logout" class="text-decoration-none">
+            <i class="bi bi-box-arrow-left btn btn-danger btn-sm"> 
+              <span class="col-md d-md-inline d-inline d-sm-none">Logout</span>
+            </i>
+          </a>
+      </ul>
+    <% } %>
   </div>
 </nav>
 

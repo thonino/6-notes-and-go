@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Error</title>
-</head>
-<body>
-    <h1>Error</h1>
-    <p>Une erreur est survenue. Veuillez réessayer plus tard.</p>
-</body>
+<html>
+  <head>
+    <%- include('./partials/bootstrap') %>
+      <title> Error Page</title>
+  </head>
+  <body>
+    <%- include('./partials/nav') %>
+    <div class="container text-center">
+      <h1 class="text-danger">Error</h1>
+      <p class="fst-italic text-secondary"> 
+        Error page, please try later !
+      </p>
+    </div>
+    <script src="/script.js"></script>
+  </body>
 </html>

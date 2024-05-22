@@ -81,7 +81,6 @@ app.use(makeAvailable);
 
 //---------------------------------ROOTS---------------------------------//
 
-
 // SESSION SELECTED THEME
 app.post('/selectTheme', (req, res) => {
   const selectedTheme = req.body.theme;
@@ -100,8 +99,6 @@ app.post('/selectTheme', (req, res) => {
 
   res.redirect(`/notes`); 
 });
-
-
 
 // INDEX
 app.get("/", async (req, res) => {
@@ -227,7 +224,6 @@ const themeData = new Theme({
 
 
 // NOTES
-// Définition de la fonction pour le traitement des notes
 async function renderNotes(req, res, filter) {
   try {
     let notes = res.locals.notes;
@@ -258,9 +254,6 @@ app.post("/notes", async (req, res) => {
   const filter = req.body.categoryFilter;
   await renderNotes(req, res, filter);
 });
-
-
-
 
 // ADD NOTE AND CATEGORY
 app.post("/addnote", async function (req, res) {
@@ -465,7 +458,7 @@ app.post("/addquiz", async function (req, res) {
       let front = req.body["front" + i].toLowerCase(); 
       let frontParts = req.body["front" + i].split("/");
       let answer = req.body["answer" + i].toLowerCase();
-      if (answer === "") { answer = "no text"; }
+      if (answer === "") { answer = "no answer"; }
       if (front === answer || frontParts.some(part => part.toLowerCase() === answer)) {
         data.push([
           req.body["back" + i],
@@ -500,16 +493,16 @@ app.post("/addquiz", async function (req, res) {
 // Score
 app.get("/score", async (req, res) => {
   try {
-    const latestQuiz = await Quiz.findOne({ userId: res.locals.user }).sort({ _id: -1 }).limit(1);
+    const latestQuiz = await Quiz.findOne({ userId: res.locals.user }).sort({ _id: -1 }).limit(2);
     const score = latestQuiz.score;
     let prize = "";
     let color = "";
     if (score > 4) {
-      prize = "Amazing !";
+      prize = "Amazing !!!";
       color = "text-success";
-    } else if (score >= 3) {
-      prize = "Good !";
-      color = "text-3";
+    } else if (score > 3 ) {
+      prize = "Good !!";
+      color = "text-2";
     } else {
       prize = "Can do better !";
       color = "text-danger";
@@ -528,7 +521,10 @@ app.get("/score", async (req, res) => {
 });
 
 
-
+// Gestion des erreurs
+app.get("/error", (req, res) => {
+  res.render("error", { message: "An error occurred" });
+});
 
 
 const PORT = 5000;
