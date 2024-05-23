@@ -30,8 +30,12 @@ function confirmDeleteUser() {
 }
 function confirmDeleteNote(noteId) {
   if (confirm("Are you sure you want to delete this Note?")) {
-    console.log("Deleting note with ID:", noteId);
     document.getElementById(`deleteNote${noteId}`).submit();
+  }
+}
+function confirmDeleteTheme() {
+  if (confirm("Are you sure you want to delete this Theme ?")) {
+    document.getElementById(`deleteTheme`).submit();
   }
 }
 

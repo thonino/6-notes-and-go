@@ -9,7 +9,7 @@
     <div class="mt-2 text-center d-flex justify-content-center">
       <!-- New Note -->
       <% if (user && themes && selectedTheme) { %>
-        <div class="containter  d-flex flex-column">
+        <div class="containter d-flex flex-column text-capitalize">
           <% if (selectedTheme) { %>
               <h1 class="text-2 fw-bold" style="margin-top:11px">
                 <i class="bi bi-book-fill  "></i>
@@ -30,6 +30,14 @@
                 </a>
               </span>
             <% }%>
+          </div>
+          <div class="cible hidden">
+            <form  id="deleteTheme" action="/deletetheme?_method=DELETE"
+              method="POST">
+              <button type="button" class="btn btn-danger btn-sm" onclick="confirmDeleteTheme()">
+                  Delete Theme
+              </button>
+            </form>
           </div>
           <% if(categories && categories.length > 0){ %>
             <form id="categoryFilterForm" action="/notes" method="POST">

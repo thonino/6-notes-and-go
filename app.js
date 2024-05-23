@@ -351,7 +351,6 @@ app.put("/editnote/:id", async (req, res) => {
         userId,
       });
     }
-
     res.redirect("/notes");
   } catch (err) {
     console.log(err);
@@ -360,15 +359,49 @@ app.put("/editnote/:id", async (req, res) => {
 });
 
 // DELETE NOTE
-app.delete("/note/delete/:id", (req, res) => {
-  Note.findByIdAndDelete(req.params.id)
-    .then(() => {
-      res.redirect("/notes");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+app.delete("/note/delete/:id", async (req, res) => {
+  try {
+    const noteData = await Note.findById(req.params.id);
+    if (!noteData) {
+      return res.status(404).json({ message: "Note not found" });
+    }
+    const userId = noteData.userId;  ;
+    const themeName = noteData.themeName;
+    const categoryName= noteData.categoryName;
+    let notes = res.locals.notes;
+    notes = notes.filter(note => note.categoryName === noteData.categoryName);
+
+    // Supprimer catégorie si c'est le dernier
+    if(notes.length === 1){
+      await Category.findOneAndDelete({ userId, themeName, categoryName });
+    }
+
+    // Supprimer la note
+    await Note.findByIdAndDelete(req.params.id);
+
+    res.redirect("/notes");
+  } catch (err) {
+    console.error(err);
+    res.render("error", { message: "Delete error" });
+  }
 });
+
+// DELETE THEME
+app.delete("/deletetheme", async (req, res) => {
+  try {
+    const userId = res.locals.user;
+    const themeName = res.locals.selectedTheme;
+    await Note.deleteMany({ userId, themeName }); // Delete all notes 
+    await Category.deleteMany({ userId, themeName }); // Delete all categories
+    await Theme.deleteOne({ userId, themeName }); // Delete theme
+    delete req.session.selectedTheme; // Leave the session
+    res.redirect("/");
+  } catch (err) {
+    console.error(err);
+    res.render("error", { message: "Delete error" });
+  }
+});
+
 
 // SESSION SELECTED CATEGORY
 app.post('/selectCategory', (req, res) => {
@@ -482,7 +515,7 @@ app.post("/addquiz", async function (req, res) {
       data: data,
     });
     await quizData.save();
-    res.redirect("/score");
+    res.redirect("/stats");
   }
   catch (err) {
     console.log(err);
@@ -490,24 +523,28 @@ app.post("/addquiz", async function (req, res) {
   }
 });
 
-// Score
-app.get("/score", async (req, res) => {
+// stats
+app.get("/stats", async (req, res) => {
   try {
     const latestQuiz = await Quiz.findOne({ userId: res.locals.user }).sort({ _id: -1 }).limit(2);
-    const score = latestQuiz.score;
+    const quizzes = await Quiz.find({ userId: res.locals.user });
+    
     let prize = "";
     let color = "";
-    if (score > 4) {
-      prize = "Amazing !!!";
-      color = "text-success";
-    } else if (score > 3 ) {
-      prize = "Good !!";
-      color = "text-2";
-    } else {
-      prize = "Can do better !";
-      color = "text-danger";
+    if(latestQuiz){
+      const score = latestQuiz.score;
+      if (score && score > 4) {
+        prize = "Amazing !!!";
+        color = "text-success";
+      } else if (score > 3 ) {
+        prize = "Good !!";
+        color = "text-2";
+      } else {
+        prize = "Can do better !";
+        color = "text-danger";
+      }
     }
-    res.render("score", {
+    res.render("stats", {
       user: res.locals.user,
       notes: res.locals.notes,
       latestQuiz: latestQuiz,

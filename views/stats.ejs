@@ -2,7 +2,7 @@
 <html>
   <head>
     <%- include('./partials/bootstrap') %>
-      <title>Score</title>
+      <title>My Statistics</title>
   </head>
   <body>
     <%- include('./partials/nav') %>
@@ -13,7 +13,12 @@
         <i class="bi bi-box-arrow-in-right btn btn-success"> Login </i>
       </a>
       <% } else { %>
-          <% if (latestQuiz) { %>
+          <% if (!latestQuiz) { %>
+            <div class="alert alert-warning" role="alert">
+              No quiz data found.
+            </div>
+            
+          <% } else { %>
             <div class="card mb-3 rounded-0">
               <div class="card-header bg-2 text-white rounded-0">
                   Last Quiz
@@ -47,7 +52,7 @@
               <div class="card-footer">
                 <div class="row">
                   <div class="col fw-bold">
-                    Score: 
+                    Scores: 
                     <span class="text-2 text-capitalize">
                       <%= latestQuiz.score %> / 6  <!-- EDIT FOR 10 NOTES --> 
                     </span>
@@ -66,10 +71,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-          <% } else { %>
-            <div class="alert alert-warning" role="alert">
-                No quiz data found.
             </div>
           <% } %>
         <% } %>
