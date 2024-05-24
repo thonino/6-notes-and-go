@@ -20,8 +20,6 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-
-
 // Parser for JSON
 app.use(express.json());
 

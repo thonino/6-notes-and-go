@@ -2,22 +2,23 @@
 <html>
   <head>
     <%- include('./partials/bootstrap') %>
-      <title>My Exercises Home page</title>
+    <title>6 Notes & Go</title>
   </head>
   <body>
     <%- include('./partials/nav') %>
-    <div class="container text-center mt-3">
+    <div class="container d-flex flex-column align-items-center mt-3">
+      <img src="/img/logo.png" width="250px" height="250px" class="ms-2">
       <% if (!user) { %>
         <h1>Please log in to your account !</h1>
       <% } else { %>
-        <h1>Welcome <span class="text-success"><%= user.name %></span> !</h1>
+        <h1>Welcome <span class="text-2 text-capitalize"><%= user.name %></span> !</h1>
       <% } %>
-      <% if (notes && notes.length> 9) { %>
-        <span class="btn btn-sm bg-3 fst-italic ">
-          <a class="text-white fw-bold  text-decoration-none " href="/quizgame">
-            Start Quiz !!
-          </a>
-        </span>
+        <% if (notes && notes.length> 9) { %>
+          <span class="btn btn-sm bg-2 fst-italic ">
+            <a class="text-white fw-bold  text-decoration-none" href="/quizgame">
+              Start Quiz !!
+            </a>
+          </span>
       <% }%>
     </div>
     <script src="/script.js"></script>

@@ -1,14 +1,15 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-  <a class="navbar-brand ms-2 " href="/" style="margin-top:-4px">
-    Logo
-  </a>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0 ">
+    <a class="navbar-brand m-0  p-0" href="/" >
+      <img src="/img/logo.png" width="35px" height="35px" class="ms-2">
+    </a> 
+    <p class="text-white mt-3 ms-1">6-NOTES-&-GO</p>
   <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse  ms-2 me-2" id="navbarNav">
+  <div id="navbarNav" class="collapse navbar-collapse ms-2 me-2" >
     <% if (!user) { %>
-      <ul class="navbar-nav gap-2 ms-auto ">
+      <ul class="navbar-nav gap-2 ms-auto">
           <li class="nav-item">
             <a class=" text-success" href="/register">
               <i class="bi bi-box-arrow-in-right btn btn-success btn-sm"> Sign-up</i>
@@ -22,19 +23,18 @@
       </ul>
     <% } else { %>
       <ul class="navbar-nav">
-        <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#themeModal">
+        <button class="btn btn-sm p-0" data-bs-toggle="modal" data-bs-target="#themeModal">
           <i class="bi bi-plus-lg btn bg-2 text-white btn-sm "> 
             <span class="col-md d-md-inline d-inline d-sm-none">Add</span>
           </i>
         </button>
         <li class="nav-item">
           <% if (themes.length> 0) { %>
-            <form id="themeForm" action="/selectTheme" method="POST">
+            <form id="themeForm" action="/selectTheme" method="POST" class="ms-sm-2 mt-2 mt-sm-0">
               <select 
                 id="themeSelect" 
                 name="theme" 
                 class="form-select form-select-sm bg-dark text-2 text-capitalize"
-                style="margin-top:4px"
               >
                 <option hidden>Theme</option>
                 <% themes.forEach(theme=> { %>
@@ -68,17 +68,17 @@
       <ul class="navbar-nav gap-2 mt-2 mt-sm-0 ms-auto">
         <a  href="/stats" class="">
           <i class="bi bi-file-earmark-check btn bg-3 btn-sm">
-            <span class="col-md d-md-inline d-inline d-sm-none">Stats</span>
+            <span class="col-md d-lg-inline d-inline d-sm-none">Stats</span>
           </i>
         </a>
           <a href="/account" class="text-decoration-none">
             <i class="bi bi-person-circle btn bg-5 btn-sm "> 
-              <span class="col-md d-md-inline d-inline d-sm-none">Account</span>
+              <span class="col-md d-lg-inline d-inline d-sm-none">Account</span>
             </i>   
           </a>
-          <a href="/logout" class="text-decoration-none">
+          <a href="/logout" class="text-decoration-none mb-2 mb-sm-0">
             <i class="bi bi-box-arrow-left btn btn-danger btn-sm"> 
-              <span class="col-md d-md-inline d-inline d-sm-none">Logout</span>
+              <span class="col-md d-lg-inline d-inline d-sm-none">Logout</span>
             </i>
           </a>
       </ul>
