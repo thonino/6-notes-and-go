@@ -1,5 +1,5 @@
 {
-  "name": "myexercises-back",
+  "name": "6-notes-and-go",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -17,7 +17,8 @@
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "method-override": "^3.0.0",
-    "mongoose": "^8.3.2"
+    "mongoose": "^8.3.2",
+    "nodemailer": "^6.9.13"
   },
   "devDependencies": {
     "dotenv": "^16.4.5",

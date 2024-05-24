@@ -5,8 +5,22 @@ const session = require('express-session');
 const path = require("path");
 const app = express();
 
-// Bcrypt
+// Bcrypt et crypto
 const bcrypt = require('bcrypt');
+const crypto = require('crypto');
+
+const nodemailer = require('nodemailer');
+
+// Configurez le transporteur SMTP réutilisable pour l'envoi d'e-mails
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER, 
+    pass: process.env.EMAIL_PASS
+  }
+});
+
+
 
 // Parser for JSON
 app.use(express.json());
@@ -132,24 +146,34 @@ app.get("/account", (req, res) => {
 });
 
 // PUT ACCOUNT
-app.put("/account/:id", (req, res) => {
-  let email = req.body.email;
-  let password = req.body.password;
-  if (req.body.email) { email = req.body.email; }
-  if (req.body.password) {
-    password = bcrypt.hashSync(req.body.password, 10);
+app.put("/account/:id", async (req, res) => {
+  const { newEmail, newPassword, checkPassword } = req.body;
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (!bcrypt.compareSync(checkPassword, user.password)) {
+      return res.status(400).send("Invalid password");
+    }
+
+    if (newEmail) {
+      const emailExists = await User.findOne({ email: newEmail });
+      if (emailExists) {
+        return res.status(400).send("Email already in use");
+      }
+      user.email = newEmail;
+    }
+
+    if (newPassword) {
+      user.password = bcrypt.hashSync(newPassword, 10);
+    }
+
+    await user.save();
+    req.session.destroy();
+    res.redirect('/alert?message=Successfully updated account');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Failed to update account");
   }
-  const editData = { email, password };
-  User.findByIdAndUpdate(req.params.id, editData)
-    .then(() => {
-      res.redirect(`/logout`);
-    })
-    .catch((err) => {
-      console.log(err);
-      res
-        .status(500)
-        .send("Echec de la mise à jour du compte.");
-    });
 });
 
 // DELETE ACCOUNT
@@ -189,9 +213,10 @@ res.render("LoginForm", { user: res.locals.user });});
 // POST LOGIN
 app.post('/login', (req, res) => {
 User.findOne({ email: req.body.email }).then(user => {
-  if (!user) {res.send('email invalide');}
+  if (!user) {res.send('Invalid email');}
   if (!bcrypt.compareSync(req.body.password, user.password)) {
-    res.send('Mot de passe invalide');}
+    res.send('Invalid password');
+  }
   req.session.user = user;
   res.redirect('/');
 })
@@ -204,6 +229,69 @@ app.get('/logout', (req, res) => {
     if (err) {console.log(err);} 
     else {res.redirect('/login');}
   });
+});
+
+
+// Forgot password
+app.get('/passwordforgot', (req, res) => {
+  res.render('passwordForgot');
+});
+app.post('/passwordforgot', async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).send("Email address not found"); // email
+    }
+    const token = crypto.randomBytes(20).toString('hex');
+    user.token = token;
+    user.tokenExpires = Date.now() + 3600000; // 1 hour
+    await user.save();
+
+    const mailOptions = {
+      from: 'sixnotesandgo@gmail.com',
+      to: email,
+      subject: 'Reset password',
+      text: `Reset your password at this address: http://localhost:5000/reset/${token}`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error(error);
+        return res.status(500).send("error sending email");
+      }
+      res.redirect(`/alert?message=Please check your email box: ${ email }`);
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Reset request error");
+  }
+});
+
+// Reset password
+app.get('/reset/:token', (req, res) => {
+  const token = req.params.token;
+  res.render('passwordReset', { token });
+});
+app.post('/passwordreset', async (req, res) => {
+  const { token, password } = req.body;
+  try {
+    const user = await User.findOne({
+      token: token,
+      tokenExpires: { $gt: Date.now() }
+    });
+    if (!user) {
+      return res.status(400).send("Invalid or expired token");
+    }
+    user.password = bcrypt.hashSync(password, 10);
+    user.token = undefined;
+    user.tokenExpires = undefined;
+    await user.save();
+    res.redirect(`/alert?message=Successfully resetting password`);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Reset password error");
+  }
 });
 
 // POST ADD THEME
@@ -557,12 +645,16 @@ app.get("/stats", async (req, res) => {
   }
 });
 
-
-// Gestion des erreurs
+// Error
 app.get("/error", (req, res) => {
   res.render("error", { message: "An error occurred" });
 });
 
+// Alert
+app.get("/alert", (req, res) => {
+  const message =  req.query.message;
+  res.render("alert", { message });
+});
 
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
