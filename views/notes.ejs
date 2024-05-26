@@ -6,6 +6,7 @@
 </head>
   <body >
   <%- include('./partials/nav') %>
+  <%- include('./partials/tips') %>
     <div class="mt-2 text-center d-flex justify-content-center">
       <!-- New Note -->
       <% if (user && themes && selectedTheme) { %>
@@ -23,21 +24,14 @@
             <div class="text-center d-inline ">
               <button id="toggle" class="btn btn-sm btn-secondary"><i class="bi bi-gear-fill"></i></button>
             </div>
-            <% if (notes && notes.length > 5) { %>
-              <span class="btn btn-sm bg-3 fst-italic ">
-                <a class="text-white   text-decoration-none " href="/quiz">
-                  Quiz !
-                </a>
-              </span>
-            <% }%>
-          </div>
-          <div class="cible hidden">
-            <form  id="deleteTheme" action="/deletetheme?_method=DELETE"
-              method="POST">
-              <button type="button" class="btn btn-danger btn-sm" onclick="confirmDeleteTheme()">
-                  Delete Theme
-              </button>
-            </form>
+            <div class="cible hidden">
+              <form  id="deleteTheme" action="/deletetheme?_method=DELETE"
+                method="POST">
+                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDeleteTheme()">
+                    Delete Theme
+                </button>
+              </form>
+            </div>
           </div>
           <% if(categories && categories.length > 0){ %>
             <form id="categoryFilterForm" action="/notes" method="POST">

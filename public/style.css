@@ -2,11 +2,16 @@
   text-transform: uppercase;
 }
 
+.bg-0{background-color: #333839;}
 .bg-1{background-color: #22577a;}
-.bg-2{background-color: #38a3a5;} .bg-2:hover{background-color: #57cc99;}
-.bg-3{background-color: #57cc99;} .bg-3:hover{background-color: #38a3a5;}
-.bg-4{background-color: #80ed99;} .bg-4:hover{background-color: #38a3a5;}
-.bg-5{background-color: #c7f9cc;} .bg-5:hover{background-color: #38a3a5;}
+.bg-2{background-color: #38a3a5;} 
+  .bg-2:hover{background-color: #57cc99;;color: white;}
+.bg-3{background-color: #57cc99;} 
+  .bg-3:hover{background-color: #38a3a5;color: white;}
+.bg-4{background-color: #80ed99;} 
+  .bg-4:hover{background-color: #38a3a5;;color: white;}
+.bg-5{background-color: #c7f9cc;} 
+  .bg-5:hover{background-color: #38a3a5;;color: white;}
 .bg-6{background-color: #d8f8db;}
 .bg-7{background-color: #c4e4e6;}
 .bg-8{background-color: #dadada;}

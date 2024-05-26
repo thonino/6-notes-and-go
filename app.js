@@ -74,7 +74,7 @@ const makeAvailable = async (req, res, next) => {
       themes = await Theme.find({userId: user._id});
       notes = await Note.find({ userId: user._id, themeName: selectedTheme });
       categories = await Category.find({ userId: user._id, themeName: selectedTheme });
-      quiz = await Quiz.find({ userId: user._id });
+      quiz = await Quiz.find({ userId: user._id, themeName: selectedTheme });
     } 
     res.locals.user = user;
     res.locals.themes = themes;
@@ -121,7 +121,9 @@ app.get("/", async (req, res) => {
       notes: res.locals.notes,
       caterogies: res.locals.caterogies,
       selectedTheme: res.locals.selectedTheme,
+      quizzes: res.locals.quiz,
     });
+    
   } 
   catch (err) {
     console.error("Error rendering index:", err);
@@ -308,37 +310,46 @@ const themeData = new Theme({
     });
 });
 
-
-// NOTES
-async function renderNotes(req, res, filter) {
+// Route GET "/notes"
+app.get("/notes", async (req, res) => {
   try {
     let notes = res.locals.notes;
-    if (filter) {
+    const filter = req.body.categoryFilter;
+    const quizzes = res.locals.quiz;
+    if (filter){
       notes = notes.filter(note => note.categoryName === filter);
     }
     res.render("notes", {
-      user: res.locals.user,
-      themes: res.locals.themes,
-      notes,
       categories: res.locals.categories,
       selectedTheme: res.locals.selectedTheme,
+      themes: res.locals.themes,
+      notes, filter, quizzes,
     });
   } catch (err) {
     console.error("Error rendering notes:", err);
-    res.render("error", { message: "Error rendering Notes.ejs" });
+    res.render("error", { message: "Error rendering notes" });
   }
-}
-
-// Route GET "/notes"
-app.get("/notes", async (req, res) => {
-  const filter = req.body.categoryFilter;
-  await renderNotes(req, res, filter);
 });
 
 // Route POST "/notes"
 app.post("/notes", async (req, res) => {
-  const filter = req.body.categoryFilter;
-  await renderNotes(req, res, filter);
+  try {
+    let notes = res.locals.notes;
+    const filter = req.body.categoryFilter;
+    const quizzes = res.locals.quiz;
+    if (filter){
+      notes = notes.filter(note => note.categoryName === filter);
+    }
+    res.render("notes", {
+      categories: res.locals.categories,
+      selectedTheme: res.locals.selectedTheme,
+      themes: res.locals.themes,
+      notes, filter, quizzes,
+    });
+  } catch (err) {
+    console.error("Error rendering notes:", err);
+    res.render("error", { message: "Error rendering notes" });
+  }
 });
 
 // ADD NOTE AND CATEGORY
@@ -539,7 +550,7 @@ app.get("/quiz/:category", async (req, res) => {
     } else {
       notes = res.locals.notes.filter(note => note.categoryName === selectedCategory);
     }
-    const randomNotes = getRandomNotes(notes, 6); // EDIT FOR 10 NOTES
+    const randomNotes = getRandomNotes(notes, 6); // 
 
     function getRandomNotes(notes, count) {
       const randomNotes = [];
@@ -553,7 +564,6 @@ app.get("/quiz/:category", async (req, res) => {
       }
       return randomNotes;
     }
-    
     res.render("quizGame", {
       user: res.locals.user,
       themes: res.locals.themes,
@@ -573,15 +583,15 @@ app.post("/addquiz", async function (req, res) {
   try {
     let score = 0;
     let data = [];
-    for (let i = 0; i < 6; i++) { // EDIT FOR 10 NOTES
-      let front = req.body["front" + i].toLowerCase(); 
+    for (let i = 0; i < 6; i++) { 
+      let front = req.body["front" + i].toLowerCase().replace(/ /g, ''); 
       let frontParts = req.body["front" + i].split("/");
-      let answer = req.body["answer" + i].toLowerCase();
+      let answer = req.body["answer" + i].toLowerCase().replace(/ /g, '');
       if (answer === "") { answer = "no answer"; }
       if (front === answer || frontParts.some(part => part.toLowerCase() === answer)) {
         data.push([
           req.body["back" + i],
-          answer,
+          req.body["front" + i],
         ]);
         score++;
       } else {
@@ -612,9 +622,10 @@ app.post("/addquiz", async function (req, res) {
 // stats
 app.get("/stats", async (req, res) => {
   try {
-    const latestQuiz = await Quiz.findOne({ userId: res.locals.user }).sort({ _id: -1 }).limit(2);
-    const quizzes = await Quiz.find({ userId: res.locals.user });
-    
+    const latestQuiz = await Quiz.findOne({ 
+      userId: res.locals.user,
+      themeName: res.locals.selectedTheme,
+    }).sort({ _id: -1 }).limit(2);
     let prize = "";
     let color = "";
     if(latestQuiz){
@@ -634,6 +645,7 @@ app.get("/stats", async (req, res) => {
       user: res.locals.user,
       notes: res.locals.notes,
       latestQuiz: latestQuiz,
+      quizzes: res.locals.quiz,
       prize,
       color,
     });
