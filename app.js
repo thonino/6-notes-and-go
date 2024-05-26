@@ -69,19 +69,19 @@ const makeAvailable = async (req, res, next) => {
   try {
     const user = req.session.user;
     const selectedTheme = req.session.selectedTheme;
-    let themes, notes, categories, quiz;
+    let themes, notes, categories, quizzes;
     if (user) {
       themes = await Theme.find({userId: user._id});
       notes = await Note.find({ userId: user._id, themeName: selectedTheme });
       categories = await Category.find({ userId: user._id, themeName: selectedTheme });
-      quiz = await Quiz.find({ userId: user._id, themeName: selectedTheme });
+      quizzes = await Quiz.find({ userId: user._id, themeName: selectedTheme });
     } 
     res.locals.user = user;
     res.locals.themes = themes;
     res.locals.notes = notes;
     res.locals.categories = categories;
     res.locals.selectedTheme = selectedTheme;
-    res.locals.quiz = quiz;
+    res.locals.quiz = quizzes;
     next();
   } catch (err) {
     console.error("Error fetching themes and user:", err);
@@ -622,38 +622,54 @@ app.post("/addquiz", async function (req, res) {
 // stats
 app.get("/stats", async (req, res) => {
   try {
-    const latestQuiz = await Quiz.findOne({ 
-      userId: res.locals.user,
-      themeName: res.locals.selectedTheme,
-    }).sort({ _id: -1 }).limit(2);
+    const userId = res.locals.user;
+    const themeName = res.locals.selectedTheme;
+    const tenQuizzes = await Quiz.find(
+      { userId, themeName }).sort({ _id: -1 }).limit(10);
+    const tenQuizzesAverages = [] ; // soon 
+
+
+    let skip = parseInt(req.query.skip) || 0;
+    if (req.query.next && skip < tenQuizzes.length - 1){ skip += 1 } 
+    else if (req.query.prev && skip > 0) { skip -= 1 }
+
+    const showQuiz = tenQuizzes[skip] || null;
     let prize = "";
     let color = "";
-    if(latestQuiz){
-      const score = latestQuiz.score;
-      if (score && score > 4) {
-        prize = "Amazing !!!";
-        color = "text-success";
-      } else if (score > 3 ) {
+    if (showQuiz) {
+      const score = showQuiz.score;
+      if (score > 5 ) {
+        prize = "Perfect !!!";
+        color = "text-3";
+      } else if (score > 3) {
         prize = "Good !!";
+        color = "text-success";
+      } else if (score === 3) {
+        prize = "Nice job !!";
         color = "text-2";
       } else {
         prize = "Can do better !";
         color = "text-danger";
       }
     }
+    const allQuizzes = await Quiz.find({ userId });
     res.render("stats", {
       user: res.locals.user,
       notes: res.locals.notes,
-      latestQuiz: latestQuiz,
-      quizzes: res.locals.quiz,
+      showQuiz,
       prize,
       color,
+      tenQuizzes,
+      skip,
+      totalQuizzes: tenQuizzes.length,
+      quizzes: allQuizzes,
     });
   } catch (err) {
     console.error("Error rendering quiz:", err);
     res.render("error", { message: "Error rendering Quiz.ejs" });
   }
 });
+
 
 // Error
 app.get("/error", (req, res) => {

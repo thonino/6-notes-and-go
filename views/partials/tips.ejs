@@ -8,34 +8,34 @@
           <span class="text-secondary">( above ) </span> 
         </p>
       <% } else  { %>
-        <% if (themes && themes.length> 0) { %>
+        <% if (themes && themes.length > 0) { %>
           <% if (selectedTheme) { %>
-            <% if (notes && notes.length >= 1 &&  notes.length < 6) { %>
+            <% if (notes && notes.length >= 1 && notes.length < 6) { %>
               <p class=" text-white fst-italic"> <!-- stape 5 -->
                 After
                 <span class="text-2">6 notes</span> 
                 added, you could take a quiz !
               </p> 
-              <% } else if (notes.length < 1 ) { %>
-                <p class=" text-white fst-italic"> <!-- stape 4 -->
-                  Next, add a note with
-                  <span class="text-2">"+Add Note"</span> button !
-                  <span class="text-secondary">( below )</span> 
-                </p> 
-            <% } else if (notes.length > 5 ) { %>
-              <% if (quizzes){   %> 
+            <% } else if (notes.length < 1) { %>
+              <p class=" text-white fst-italic"> <!-- stape 4 -->
+                Next, add a note with
+                <span class="text-2">"+Add Note"</span> button !
+                <span class="text-secondary">( below )</span> 
+              </p> 
+            <% } else if (notes.length > 5) { %>
+              <% if (quizzes && quizzes.length > 0) { %> 
                 <% if (quizzes.length === 1) { %>
                   <p class=" text-white fst-italic"> <!-- stape 7 -->
                     Congrats for your 1st quiz ! 
                     <span class="text-2"> Quiz </span>  ! 
                     <span class="text-secondary">( above )</span> 
                   </p>
-                <% } else if (quizzes.length > 1){ %>
-                  <p class=" text-white fst-italic"> <!-- stape 8 -->
-                    You can see your stats at
-                    <span class="text-3"> Stats </span> button ! 
-                    <span class="text-secondary">( above )</span> 
-                  </p> 
+                <% } else if (quizzes.length > 1) { %>
+                  <p class="text-white fst-italic"> <!-- stape 8 -->
+                    Try another quiz with 
+                    <span class="text-2"> Quiz </span> button! 
+                    <span class="text-secondary">(above)</span> 
+                  </p>
                 <% } else { %>
                   <p class=" text-white fst-italic"> <!-- stape 6 -->
                     Great ! Try a quiz ! click on the 
@@ -45,12 +45,12 @@
                 <% } %>
               <% } %>
             <% } %>
-            <% } else { %>
-              <p class=" text-white fst-italic"> <!-- stape 3 -->
-                Select the theme at
-                <span class="text-2">Theme</span>'s menu !
-                <span class="text-secondary">( above )</span> 
-              </p> 
+          <% } else { %>
+            <p class=" text-white fst-italic"> <!-- stape 3 -->
+              Select the theme at
+              <span class="text-2">Theme</span>'s menu !
+              <span class="text-secondary">( above )</span> 
+            </p> 
           <% } %>
         <% } else { %>
           <p class=" text-white fst-italic"> <!-- stape 2 -->
@@ -63,3 +63,4 @@
     </span>
   </div>
 </nav>
+

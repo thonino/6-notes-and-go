@@ -4,6 +4,7 @@
 
 .bg-0{background-color: #333839;}
 .bg-1{background-color: #22577a;}
+.bg-1:hover{background-color: #dc3545;color: white;}
 .bg-2{background-color: #38a3a5;} 
   .bg-2:hover{background-color: #57cc99;;color: white;}
 .bg-3{background-color: #57cc99;} 
@@ -16,7 +17,7 @@
 .bg-7{background-color: #c4e4e6;}
 .bg-8{background-color: #dadada;}
 .text-1{color: #22577a;}
-.text-2{color: #38a3a5;}
+.text-2{color: #38a3a5;}.text-2-disable{color: #3d8485;}
 .text-3{color: #57cc99;}
 .text-4{color: #80ed99;}
 .text-5{color: #c7f9cc;}
