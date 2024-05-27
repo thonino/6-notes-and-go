@@ -69,26 +69,30 @@ const makeAvailable = async (req, res, next) => {
   try {
     const user = req.session.user;
     const selectedTheme = req.session.selectedTheme;
-    let themes, notes, categories, quizzes;
+    let themes, notes, categories, quizzes, tenQuizzes;
     if (user) {
-      themes = await Theme.find({userId: user._id});
+      themes = await Theme.find({ userId: user._id });
       notes = await Note.find({ userId: user._id, themeName: selectedTheme });
       categories = await Category.find({ userId: user._id, themeName: selectedTheme });
       quizzes = await Quiz.find({ userId: user._id, themeName: selectedTheme });
-    } 
+      tenQuizzes = await Quiz.find({ userId: user._id, themeName: selectedTheme }).sort({ _id: -1 }).limit(10);
+    }
     res.locals.user = user;
     res.locals.themes = themes;
     res.locals.notes = notes;
     res.locals.categories = categories;
     res.locals.selectedTheme = selectedTheme;
-    res.locals.quiz = quizzes;
+    res.locals.quizzes = quizzes;
+    res.locals.tenQuizzes = tenQuizzes;
     next();
   } catch (err) {
-    console.error("Error fetching themes and user:", err);
-    res.render("error", { message: "Error fetching themes and user" });
+    console.error("Erreur lors de la récupération des thèmes et de l'utilisateur :", err);
+    res.render("error", { message: "Erreur lors de la récupération des thèmes et de l'utilisateur" });
   }
 };
+
 app.use(makeAvailable);
+
 
 
 //---------------------------------ROOTS---------------------------------//
@@ -628,7 +632,6 @@ app.get("/stats", async (req, res) => {
       { userId, themeName }).sort({ _id: -1 }).limit(10);
     const tenQuizzesAverages = [] ; // soon 
 
-
     let skip = parseInt(req.query.skip) || 0;
     if (req.query.next && skip < tenQuizzes.length - 1){ skip += 1 } 
     else if (req.query.prev && skip > 0) { skip -= 1 }
@@ -652,7 +655,6 @@ app.get("/stats", async (req, res) => {
         color = "text-danger";
       }
     }
-    const allQuizzes = await Quiz.find({ userId });
     res.render("stats", {
       user: res.locals.user,
       notes: res.locals.notes,
@@ -662,7 +664,6 @@ app.get("/stats", async (req, res) => {
       tenQuizzes,
       skip,
       totalQuizzes: tenQuizzes.length,
-      quizzes: allQuizzes,
     });
   } catch (err) {
     console.error("Error rendering quiz:", err);
