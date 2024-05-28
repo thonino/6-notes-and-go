@@ -69,6 +69,7 @@ const makeAvailable = async (req, res, next) => {
   try {
     const user = req.session.user;
     const selectedTheme = req.session.selectedTheme;
+    const tipsStatus = req.session.tipsStatus; 
     let themes, notes, categories, quizzes, tenQuizzes;
     if (user) {
       themes = await Theme.find({ userId: user._id });
@@ -84,6 +85,7 @@ const makeAvailable = async (req, res, next) => {
     res.locals.selectedTheme = selectedTheme;
     res.locals.quizzes = quizzes;
     res.locals.tenQuizzes = tenQuizzes;
+    res.locals.tipsStatus = tipsStatus;
     next();
   } catch (err) {
     console.error("Erreur lors de la récupération des thèmes et de l'utilisateur :", err);
@@ -94,26 +96,30 @@ const makeAvailable = async (req, res, next) => {
 app.use(makeAvailable);
 
 
-
 //---------------------------------ROOTS---------------------------------//
 
-// SESSION SELECTED THEME
+// Session selected theme
 app.post('/selectTheme', (req, res) => {
   const selectedTheme = req.body.theme;
-  
-  // Vérifier si req.session.themes est défini
   if (req.session.themes && req.session.themes.length > 0) {
-    // Réinitialiser les autres thèmes sélectionnés
+    // Reset the other theme selected
     req.session.themes = req.session.themes.map(theme => ({
-      ...theme,
-      selected: theme.name === selectedTheme
+      ...theme, selected: theme.name === selectedTheme
     }));
   }
-
-  // Enregistrer le nouveau thème sélectionné dans la session
-  req.session.selectedTheme = selectedTheme;
-
+  req.session.selectedTheme = selectedTheme; // New theme selected
   res.redirect(`/notes`); 
+});
+
+app.post('/tipsStatus', (req, res) => {
+  let tipsStatus = req.body.tipsStatus;
+  if (!tipsStatus || tipsStatus === "d-none") {
+    tipsStatus = "";
+  } else {
+    tipsStatus = "d-none";
+  }
+  req.session.tipsStatus = tipsStatus;
+  res.redirect('/');
 });
 
 // INDEX
@@ -126,6 +132,7 @@ app.get("/", async (req, res) => {
       caterogies: res.locals.caterogies,
       selectedTheme: res.locals.selectedTheme,
       quizzes: res.locals.quiz,
+      tipsStatus: res.locals.tipsStatus,
     });
     
   } 
@@ -628,8 +635,7 @@ app.get("/stats", async (req, res) => {
   try {
     const userId = res.locals.user;
     const themeName = res.locals.selectedTheme;
-    const tenQuizzes = await Quiz.find(
-      { userId, themeName }).sort({ _id: -1 }).limit(10);
+    const tenQuizzes = res.locals.tenQuizzes;
     const tenQuizzesAverages = [] ; // soon 
 
     let skip = parseInt(req.query.skip) || 0;
@@ -657,12 +663,8 @@ app.get("/stats", async (req, res) => {
     }
     res.render("stats", {
       user: res.locals.user,
-      notes: res.locals.notes,
-      showQuiz,
-      prize,
-      color,
-      tenQuizzes,
-      skip,
+      notes: res.locals.notes, 
+      showQuiz, prize, color, tenQuizzes, skip, 
       totalQuizzes: tenQuizzes.length,
     });
   } catch (err) {

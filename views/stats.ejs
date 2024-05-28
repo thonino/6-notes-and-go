@@ -16,10 +16,9 @@
     <% } else { %>
       <% if (tenQuizzes && tenQuizzes.length > 0  ) { %>
         <p class="fs-4 fst-italic text-2 fw-bold  mb-3">
-          Your 10 last quizzes 
+          10 last quizzes 
         </p>
         <div class="card mb-3 rounded-0">
-          
           <div class="card-header fs-4 bg-2 text-white rounded-0">
             Quiz 
             <% if (skip > 0) { %> 
@@ -53,7 +52,7 @@
                   <div class="col-md-4 mb-3">
                     <div class="card rounded-0">
                       <div 
-                        class="card-header text-white rounded-0 text-capitalize <%= data[2] ? 'bg-1' : 'bg-2' %>"
+                        class="card-header text-white rounded-0 text-capitalize <%= data[2] ? 'bg-err' : 'bg-2' %>"
                       >
                         <%= data[0] %>
                       </div>
