@@ -12,10 +12,11 @@
       <% if (user && themes && selectedTheme) { %>
         <div class="containter d-flex flex-column text-capitalize">
           <% if (selectedTheme) { %>
-              <h1 class="text-2 fw-bold" style="margin-top:11px">
-                <i class="bi bi-book-fill  "></i>
-                <%= selectedTheme %>
-            </h1>
+            <i class="bi bi-book-fill text-2 fs-1"></i>
+              <p class="text-2 fw-bold mb-2 fs-4">
+                
+                <%= selectedTheme %> :
+            </p>
           <% }%>
           <div class="d-flex justify-content-center gap-2 mb-2">
             <button class="nav-link " data-bs-toggle="modal" data-bs-target="#noteModal">
