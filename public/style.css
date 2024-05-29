@@ -1,7 +1,7 @@
 .capitalize-once::first-letter {
   text-transform: uppercase;
 }
-.bg-0{background-color: #333839;}
+.bg-darkgrey{background-color: #333839;}
 .bg-1{background-color: #22577a;}
 .bg-1:hover{background-color: #6c757d;color: white;}
 .bg-2{background-color: #38a3a5;} 

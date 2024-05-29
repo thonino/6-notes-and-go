@@ -69,7 +69,7 @@ const makeAvailable = async (req, res, next) => {
   try {
     const user = req.session.user;
     const selectedTheme = req.session.selectedTheme;
-    const tipsStatus = req.session.tipsStatus; 
+    const tips = req.session.tips; 
     let themes, notes, categories, quizzes, tenQuizzes;
     if (user) {
       themes = await Theme.find({ userId: user._id });
@@ -82,10 +82,10 @@ const makeAvailable = async (req, res, next) => {
     res.locals.themes = themes;
     res.locals.notes = notes;
     res.locals.categories = categories;
-    res.locals.selectedTheme = selectedTheme;
     res.locals.quizzes = quizzes;
     res.locals.tenQuizzes = tenQuizzes;
-    res.locals.tipsStatus = tipsStatus;
+    res.locals.selectedTheme = selectedTheme;
+    res.locals.tips = tips;
     next();
   } catch (err) {
     console.error("Erreur lors de la récupération des thèmes et de l'utilisateur :", err);
@@ -94,7 +94,6 @@ const makeAvailable = async (req, res, next) => {
 };
 
 app.use(makeAvailable);
-
 
 //---------------------------------ROOTS---------------------------------//
 
@@ -110,16 +109,13 @@ app.post('/selectTheme', (req, res) => {
   req.session.selectedTheme = selectedTheme; // New theme selected
   res.redirect(`/notes`); 
 });
-
-app.post('/tipsStatus', (req, res) => {
-  let tipsStatus = req.body.tipsStatus;
-  if (!tipsStatus || tipsStatus === "d-none") {
-    tipsStatus = "";
-  } else {
-    tipsStatus = "d-none";
-  }
-  req.session.tipsStatus = tipsStatus;
-  res.redirect('/');
+app.post('/tips', (req, res) => {
+  let tips = req.body.status;
+  if (!tips || tips !== "d-none") { tips = ""; } 
+  else { tips = "d-none"; }
+  req.session.tips = tips;
+  const referer = req.get('Referer');
+  res.redirect(referer);
 });
 
 // INDEX
@@ -132,7 +128,7 @@ app.get("/", async (req, res) => {
       caterogies: res.locals.caterogies,
       selectedTheme: res.locals.selectedTheme,
       quizzes: res.locals.quiz,
-      tipsStatus: res.locals.tipsStatus,
+      tips: res.locals.tips,
     });
     
   } 
