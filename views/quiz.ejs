@@ -8,14 +8,15 @@
 
 <body>
   <%- include('./partials/nav') %>
+  <%- include('./partials/tips') %>
     <div class="container text-center">
       <% if (!user) { %>
-        <h1>Please log in to your account!</h1>
+        <h1>Please log in to your account !</h1>
         <a class="" href="/login">
           <i class="bi bi-box-arrow-in-right btn btn-success"> Login </i>
         </a>
         <% } else { %>
-          <h1>Start your quiz!</h1>
+          <h1>Start your quiz !</h1>
           <% if (categories) { %>
             <div class="text-center d-flex justify-content-center">
               <form action="/selectCategory" method="POST" class="text-center">

@@ -15,9 +15,14 @@
       </a>
     <% } else { %>
       <% if (tenQuizzes && tenQuizzes.length > 0  ) { %>
-        <p class="fs-4 fst-italic text-2 fw-bold  mb-3">
-          10 last quizzes 
-        </p>
+        <div class="d-flex flex-column align-items-center">
+          <p class="fs-2 fst-italic text-2 fw-bold m-0 ">
+            10 last quizzes 
+          </p>
+          <p class="card col-3 fs-5 bg-7  text-2 fw-bold  pb-1 ">
+            Average : <%= average %> / 6
+          </p>
+        </div>
         <div class="card mb-3 rounded-0">
           <div class="card-header fs-4 bg-2 text-white rounded-0">
             Quiz 

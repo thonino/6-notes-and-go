@@ -629,10 +629,12 @@ app.post("/addquiz", async function (req, res) {
 // stats
 app.get("/stats", async (req, res) => {
   try {
-    const userId = res.locals.user;
-    const themeName = res.locals.selectedTheme;
     const tenQuizzes = res.locals.tenQuizzes;
-    const tenQuizzesAverages = [] ; // soon 
+    let tenLastScores = [];
+    tenQuizzes.forEach(item => {tenLastScores.push(item.score);});
+    let sum = tenLastScores.reduce(
+      (accumulator, currentValue) => accumulator + currentValue, 0);
+    let average = tenLastScores.length > 0 ? sum / tenLastScores.length : 0;
 
     let skip = parseInt(req.query.skip) || 0;
     if (req.query.next && skip < tenQuizzes.length - 1){ skip += 1 } 
@@ -661,7 +663,7 @@ app.get("/stats", async (req, res) => {
       user: res.locals.user,
       notes: res.locals.notes, 
       showQuiz, prize, color, tenQuizzes, skip, 
-      totalQuizzes: tenQuizzes.length,
+      totalQuizzes: tenQuizzes.length, average,
     });
   } catch (err) {
     console.error("Error rendering quiz:", err);
