@@ -557,7 +557,7 @@ app.get("/quiz/:category", async (req, res) => {
     } else {
       notes = res.locals.notes.filter(note => note.categoryName === selectedCategory);
     }
-    const randomNotes = getRandomNotes(notes, 6); // 
+    const randomNotes = getRandomNotes(notes, 6); 
 
     function getRandomNotes(notes, count) {
       const randomNotes = [];
