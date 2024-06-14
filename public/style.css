@@ -28,3 +28,6 @@
 .hidden {
   display: none
 }
+
+.cursor-default { cursor: default; }
+
