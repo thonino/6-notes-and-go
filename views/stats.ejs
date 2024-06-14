@@ -7,22 +7,24 @@
 <body>
   <%- include('./partials/nav') %>
   <%- include('./partials/tips') %>
-  <div class="container text-center mt-3">
+  <%- include('./partials/action') %>
+  <div class="mx-2 text-center d-flex flex-column align-items-center">
     <% if (!user) { %>
       <h1>Please log in to your account !</h1>
       <a class="" href="/login">
-        <i class="bi bi-box-arrow-in-right btn btn-success"> Login </i>
+        <i class="bi bi-box-arrow-in-right btn btn-success">Login</i>
       </a>
     <% } else { %>
       <% if (tenQuizzes && tenQuizzes.length > 0  ) { %>
-        <div class="d-flex flex-column align-items-center">
-          <p class="fs-2 fst-italic text-2 fw-bold m-0 ">
-            10 last quizzes 
-          </p>
-          <p class="card col-3 fs-5 bg-7  text-2 fw-bold  pb-1 ">
-            Average : <%= average %> / 6
-          </p>
-        </div>
+        <span class="card fs-4 fst-italic text-secondary fw-bold m-0 bg-7 p-2 mb-2">
+          10 last quizzes
+          <span class="fs-54 fw-light">
+            Average : 
+            <span class="fw-light text-2 ">
+              <%= average %> / 6
+            </span>
+          </span>
+        </span>
         <div class="card mb-3 rounded-0">
           <div class="card-header fs-4 bg-2 text-white rounded-0">
             Quiz 
@@ -47,7 +49,7 @@
               <i class="bi bi-chevron-right text-2-disable"></i>
             <% } %>
           </div>
-          <div class="card-body">
+          <div class="card pt-0 px-4 rounded-0">
             <div class="row text-capitalize">
               <p class="mb-3 fs-4 fst-italic fw-bold <%= color %>">
                 <%= prize %>
@@ -77,23 +79,23 @@
               <% } %>
             </div>
           </div>
-          <div class="card-footer">
+          <div class="card-footer bg-7 rounded-0">
             <% if (showQuiz) { %>
               <div class="d-flex flex-column flex-sm-row">
                 <div class="col fw-bold">
-                  Scores: 
+                  Scores : 
                   <span class="text-2 text-capitalize">
                     <%= showQuiz.score %> / 6  
                   </span>
                 </div>
                 <div class="col fw-bold">
-                  Theme: 
+                  Theme : 
                   <span class="text-2 text-capitalize">
                     <%= showQuiz.themeName %>
                   </span>
                 </div>
                 <div class="col fw-bold">
-                  Category: 
+                  Category : 
                   <span class="text-2 text-capitalize text-low">
                     <%= showQuiz.categoryName %>
                   </span>

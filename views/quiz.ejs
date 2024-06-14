@@ -9,6 +9,7 @@
 <body>
   <%- include('./partials/nav') %>
   <%- include('./partials/tips') %>
+  <%- include('./partials/action') %>
     <div class="container text-center">
       <% if (!user) { %>
         <h1>Please log in to your account !</h1>
@@ -16,7 +17,7 @@
           <i class="bi bi-box-arrow-in-right btn btn-success"> Login </i>
         </a>
         <% } else { %>
-          <h1>Start your quiz !</h1>
+          <h1 class="fs-2 fst-italic text-2 fw-bold mb-2">Start your quiz !</h1>
           <% if (categories) { %>
             <div class="text-center d-flex justify-content-center">
               <form action="/selectCategory" method="POST" class="text-center">
