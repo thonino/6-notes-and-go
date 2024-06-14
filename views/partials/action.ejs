@@ -1,0 +1,86 @@
+<% if (user) { %>
+  <nav class="bg-white">
+    <ul class="navbar-nav">
+      <div class="d-flex justify-content-center align-items-center" >
+        <div class="col-3 pt-2 d-flex justify-content-center  gap-2">
+          
+          <% if (selectedTheme) { %>
+            <div class="bg-1 rounded-2 text-center">
+              <a  href="/notes" class="btn text-white  mt-0 d-flex flex-column">
+                <i class="bi bi-book-fill btn btn-lg text-light"></i>
+                Notes 
+              </a>
+            </div>
+          <% } %>
+          <div class="bg-2 rounded-2 text-center">
+            <button 
+              class="btn text-white  mt-0 d-flex flex-column" 
+              data-bs-toggle="modal" 
+              data-bs-target="#themeModal"
+            >
+              <i class="bi bi-plus-lg btn text-white btn-lg"> </i>
+                Lesson
+            </button>
+          </div>
+          <% if (user && themes && selectedTheme) { %>
+            <div class="bg-2 rounded-2 text-center">
+              <button 
+                class="btn text-white  mt-0 d-flex flex-column" 
+                data-bs-toggle="modal" 
+                data-bs-target="#noteModal"
+                >
+                <i class="bi bi-plus-lg btn text-white btn-lg"></i>
+                Note
+              </button>
+            </div>
+          <% } %>
+            <% if (notes && notes.length> 5) { %>
+              <div class="bg-3 rounded-2 text-center">
+                <a  href="/quiz" class="btn text-white  mt-0 d-flex flex-column">
+                  <i class="bi bi-controller btn btn-lg text-light"></i>
+                  Quiz
+                </a>
+              </div>
+            <% }%>
+          
+          <div class="bg-4 rounded-2 text-center">
+            <a  href="/stats" class="btn text-dark  mt-0 d-flex flex-column">
+              <i class="bi bi-file-earmark-check btn btn-lg "></i>
+              Stats
+            </a>
+        </div>
+      </div>
+    </ul>
+  </nav>
+  <% if (selectedTheme) { %>
+    <h1 class="text-secondary text-center fs-3 my-2">
+        <span class="text-2 text-center fs-3" >Lesson :</span> 
+        <%= selectedTheme %> 
+    </h1>
+  <% } %>
+<% } %>  
+
+<!-- Theme Modal -->
+<div class="modal fade" id="themeModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">New Theme</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="" action="/addtheme" method="POST">
+          <div class="mb-3">
+            <label for="Theme name" class="form-label">Theme Name</label>
+            <input type="text" class="form-control" name="themeName" placeholder="Enter your theme name">
+            <% if (user && user._id) { %>
+              <input type="hidden" name="userId" value="<%= user._id %>">
+              <% } %>
+          </div>
+          <button type="submit" class="btn bg-2 text-white">Add Theme</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

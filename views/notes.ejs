@@ -7,23 +7,31 @@
   <body >
   <%- include('./partials/nav') %>
   <%- include('./partials/tips') %>
+  <%- include('./partials/action') %>
     <div class="mt-2 text-center d-flex justify-content-center">
       <!-- New Note -->
       <% if (user && themes && selectedTheme) { %>
         <div class="containter d-flex flex-column text-capitalize">
-          <% if (selectedTheme) { %>
-            <i class="bi bi-book-fill text-2 fs-1"></i>
-              <p class="text-2 fw-bold mb-2 fs-4">
-                
-                <%= selectedTheme %> :
-            </p>
-          <% }%>
-          <div class="d-flex justify-content-center gap-2 mb-2">
-            <button class="nav-link " data-bs-toggle="modal" data-bs-target="#noteModal">
-              <i class="bi bi-plus-lg btn btn-sm bg-2 text-white"> Add Note</i>
-            </button>
-            <div class="text-center d-inline ">
-              <button id="toggle" class="btn btn-sm btn-secondary"><i class="bi bi-gear-fill"></i></button>
+          <div class="d-flex justify-content-center gap-2 mt-2 ">
+            <% if(categories && categories.length > 0){ %>
+              <form id="categoryFilterForm" action="/notes" method="POST">
+                <select 
+                  id="categoryFilter"
+                  name="categoryFilter" 
+                  class="form-select text-2 text-capitalize"
+                >
+                  <option hidden>Category</option>
+                  <option value="">All</option>
+                  <% categories.forEach(category=> { %>
+                    <option value="<%= category.categoryName %>">
+                      <%= category.categoryName %>
+                    </option>
+                    <% }) %>
+                </select>
+              </form>
+              <% } %>
+            <div class="text-center d-inline">
+              <button id="toggle" class="btn  btn-secondary"><i class="bi bi-gear-fill"></i></button>
             </div>
             <div class="cible hidden">
               <form  id="deleteTheme" action="/deletetheme?_method=DELETE"
@@ -34,23 +42,7 @@
               </form>
             </div>
           </div>
-          <% if(categories && categories.length > 0){ %>
-            <form id="categoryFilterForm" action="/notes" method="POST">
-              <select 
-                id="categoryFilter"
-                name="categoryFilter" 
-                class="form-select text-2 text-capitalize mt-2"
-              >
-                <option hidden>By Category</option>
-                <option value="">All</option>
-                <% categories.forEach(category=> { %>
-                  <option value="<%= category.categoryName %>">
-                    <%= category.categoryName %>
-                  </option>
-                  <% }) %>
-              </select>
-            </form>
-            <% } %>
+          
         </div>
     </div>
 

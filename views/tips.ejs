@@ -1,0 +1,84 @@
+<nav class="bg-darkgrey <%= tips %>">
+  <div class="d-flex justify-content-center align-items-center " >
+      <!-- Block 1 (Center) -->
+    <div class="d-flex mx-auto text-light fst-italic gap-2 mt-2 ">
+      <span class="text-warning mt-1">Tips :</span>
+      <span class="mt-1">
+      <% if (!user) { %>
+        <p> <!-- stape 1 -->
+          Sign up or log in to use the app !!
+          <span class="text-warning">( above )</span>
+        </p>
+      <% } else { %>
+        <% if (themes && themes.length > 0) { %>
+          <% if (selectedTheme) { %>
+            <% if (notes && notes.length >= 1 && notes.length < 6) { %>
+              <p> <!-- stape 5 -->
+                After
+                <span class="text-5">"6 notes"</span>
+                added, you could take a quiz !
+              </p>
+            <% } else if (notes.length < 1) { %>
+              <p> <!-- stape 4 -->
+                Next, add a note with
+                <span class="text-5">"+Add Note"</span> button!
+                <span class="text-warning">( below )</span>
+              </p>
+            <% } else if (notes.length > 5) { %>
+              <% if (tenQuizzes.length === 0) { %>
+                <p> <!-- stape 6 -->
+                  Try a quiz ! Click on the
+                  <span class="text-5">Quiz</span> button!
+                  <span class="text-warning">( above )</span>
+                </p>
+              <% } else if (tenQuizzes.length === 1) { %>
+                <p> <!-- stape 7 -->
+                  Congrats for your 1st quiz!
+                  <span class="text-5">Quiz</span>!
+                  <span class="text-warning">( above )</span>
+                </p>
+              <% } else if (tenQuizzes.length > 1) { %>
+                <p> <!-- stape 8 -->
+                  Try another quiz with
+                  <span class="text-5">Quiz</span> button!
+                  <span class="text-warning">( above )</span>
+                </p>
+              <% } %>
+            <% } %>
+          <% } else { %>
+            <p> <!-- stape 3 -->
+              Select the theme at
+              <span class="text-5">Theme's</span> menu!
+              <span class="text-warning">( above )</span>
+            </p>
+          <% } %>
+        <% } else { %>
+          <p> <!-- stape 2 -->
+            At first, add a theme with
+            <span class="text-5">"+Add"</span> button!
+            <span class="text-warning">( above )</span>
+          </p>
+        <% } %>
+      <% } %>
+    </span>
+    </div>
+
+    <!-- Block 2 (Right) -->
+      <% if (!tips || tips !== "d-none") { %>
+        <i 
+          class="bi bi-info-lg text-warning fs-4" 
+          style="margin-top: -5px;">
+        </i>
+        <form action="/tips" method="POST" class="text-white">
+          <input name="status" value="d-none" type="hidden"/>
+          <button 
+            type="submit" 
+            class="btn text-warning p-0 me-2"
+            style="margin-top: -7px;"
+          >
+            <i class="bi bi-x-circle-fill"></i>
+          </button>
+        </form>
+      <% } %>
+  </div>
+</nav>

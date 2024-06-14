@@ -1,8 +1,24 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0 py-2">
     <a class="navbar-brand m-0  p-0" href="/" >
       <img src="/img/logo.png" width="35px" height="35px" class="ms-2">
     </a> 
-    <p class="text-white mt-3 ms-1">6notes&go</p>
+    <% if (themes && themes.length> 0) { %>
+      <form id="themeForm" action="/selectTheme" method="POST" class="ms-sm-2 ">
+        <select 
+          id="themeSelect" 
+          name="theme" 
+          class="form-select form-select-sm bg-dark text-2 text-capitalize"
+        >
+          <option hidden>Classroom</option>
+          <% themes.forEach(theme=> { %>
+          <option value="<%= theme.themeName %>" >
+            <%= theme.themeName %> 
+          </option>
+          <% }) %>
+        </select>
+      </form>
+    <% } %>
+
   <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -30,63 +46,15 @@
           <% } %>  
       </ul>
     <% } else { %>
-      <ul class="navbar-nav">
-        <button class="btn btn-sm p-0" data-bs-toggle="modal" data-bs-target="#themeModal">
-          <i class="bi bi-plus-lg btn bg-2 text-white btn-sm "> 
-            <span class="col-md d-md-inline d-inline d-sm-none">Add</span>
-          </i>
-        </button>
-        <li class="nav-item">
-          <% if (themes.length> 0) { %>
-            <form id="themeForm" action="/selectTheme" method="POST" class="ms-sm-2 mt-2 mt-sm-0">
-              <select 
-                id="themeSelect" 
-                name="theme" 
-                class="form-select form-select-sm bg-dark text-2 text-capitalize"
-              >
-                <option hidden>Theme</option>
-                <% themes.forEach(theme=> { %>
-                <option value="<%= theme.themeName %>" >
-                  <%= theme.themeName %> 
-                </option>
-                <% }) %>
-              </select>
-            </form>
-          <% } %>
-        </li>
-      </ul>
-      <ul class="navbar-nav mt-2 mt-sm-0 ms-sm-2 gap-2 ">
-        <% if (selectedTheme) { %>
-          <a  href="/notes">
-            <i class="bi bi-book-fill btn bg-2 btn-sm  text-light">
-              <span class="col-md d-md-inline d-inline d-sm-none text-capitalize">
-                <%= selectedTheme %> 
-              </span>
-            </i>
-          </a>
-          <% if (notes && notes.length> 5) { %>
-            <a  href="/quiz" class="text-decoration-none">
-              <i class="bi bi-controller btn bg-3 btn-sm">
-                <span class="col-md d-md-inline d-inline d-sm-none">Quiz</span>
-              </i>
-            </a>
-          <% }%>
-        <% } %>
-      </ul>
       <ul class="navbar-nav gap-2 mt-2 mt-sm-0 ms-auto">
-        <a  href="/stats" class="">
-          <i class="bi bi-file-earmark-check btn bg-4 btn-sm">
-            <span class="col-md d-lg-inline d-inline d-sm-none">Stats</span>
-          </i>
-        </a>
         <a href="/account" class="text-decoration-none">
           <i class="bi bi-person-circle btn bg-5 btn-sm "> 
-            <span class="col-md d-lg-inline d-inline d-sm-none">Account</span>
+            Account
           </i>   
         </a>
         <a href="/logout" class="text-decoration-none">
           <i class="bi bi-box-arrow-left btn btn-danger btn-sm"> 
-            <span class="col-md d-lg-inline d-inline d-sm-none ">Logout</span>
+            Logout
           </i>
         </a>
         <% if (tips && tips === "d-none") { %>
@@ -102,26 +70,3 @@
   </div>
 </nav>
 
-<!-- Theme Modal -->
-<div class="modal fade" id="themeModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">New Theme</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form class="" action="/addtheme" method="POST">
-          <div class="mb-3">
-            <label for="Theme name" class="form-label">Theme Name</label>
-            <input type="text" class="form-control" name="themeName" placeholder="Enter your theme name">
-            <% if (user && user._id) { %>
-              <input type="hidden" name="userId" value="<%= user._id %>">
-              <% } %>
-          </div>
-          <button type="submit" class="btn bg-2 text-white">Add Theme</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
