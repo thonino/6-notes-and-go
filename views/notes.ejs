@@ -12,6 +12,14 @@
       <!-- New Note -->
       <% if (user && themes && selectedTheme) { %>
         <div class="containter d-flex flex-column text-capitalize">
+          <div class="cible hidden">
+            <form  id="deleteTheme" action="/deletetheme?_method=DELETE"
+              method="POST">
+              <button type="button" class="btn btn-danger" onclick="confirmDeleteTheme()">
+                  Delete The Lesson
+              </button>
+            </form>
+          </div>
           <div class="d-flex justify-content-center gap-2 mt-2 ">
             <% if(categories && categories.length > 0){ %>
               <form id="categoryFilterForm" action="/notes" method="POST">
@@ -33,14 +41,6 @@
                 <button id="toggle" class="btn  btn-secondary"><i class="bi bi-gear-fill"></i></button>
               </div>
               <% } %>
-            <div class="cible hidden">
-              <form  id="deleteTheme" action="/deletetheme?_method=DELETE"
-                method="POST">
-                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDeleteTheme()">
-                    Delete Theme
-                </button>
-              </form>
-            </div>
           </div>
           
         </div>
