@@ -108,55 +108,6 @@
         </div>
         <% }) %>
     </div>
-
-      <!-- Modal New Note-->
-      <div class="modal fade" id="noteModal" tabindex="-1">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">New Note</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <form action="/addnote" method="POST">
-                <div class="mb-3">
-                  <label for="front" class="form-label">Front</label>
-                  <input type="text" class="form-control" name="front" placeholder="write a word to learn...">
-                </div>
-                <div class="mb-3">
-                  <label for="back" class="form-label">Back</label>
-                  <input type="text" class="form-control" name="back" placeholder="write its answer...">
-                </div>
-                <div class="mb-3">
-                  <label for="example" class="form-label">example</label>
-                  <input type="text" class="form-control" name="example" placeholder="write an example...">
-                </div>
-                <% if (categories) { %>
-                  <select name="selectedCategory" class="form-select text-capitalize bg-success text-white mt-2"
-                    onchange="hideContainer(this)">
-                    <option value="uncategorized" hidden>uncategorized</option>
-                    <option value="newCat">new category</option>
-                    <% categories.forEach(category=> { %>
-                      <option value="<%= category.categoryName %>">
-                        <%= category.categoryName %>
-                      </option>
-                      <% }) %>
-                  </select>
-                  <% } %>
-                    <div id="categoryContainer" style="display: none;">
-                      <label for="newCategory" class="form-label ms-1 mt-1 fw-bold text-success">
-                        Create a new category
-                      </label>
-                      <input type="text" class="form-control" name="newCategory" placeholder="write the category name...">
-                    </div>
-                    <input type="hidden" name="themeName" value="<%= selectedTheme %>">
-                    <input type="hidden" name="userId" value="<%= user._id %>">
-                    <button type="submit" class="btn bg-2 text-white mt-2">Add Note</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
       <!-- Modal Edit Note-->
       <% notes.forEach((note, index)=> { %>
         <div class="modal fade" id="editModal<%= index %>" tabindex="-1">

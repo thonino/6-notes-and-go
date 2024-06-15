@@ -2,12 +2,12 @@
   <div class="d-flex justify-content-center align-items-center " >
       <!-- Block 1 (Center) -->
     <div class="d-flex mx-auto text-light fst-italic gap-2 mt-2 ">
-      <span class="text-warning mt-1">Tips :</span>
+      <span class="text-3 mt-1">Tips :</span>
       <span class="mt-1">
       <% if (!user) { %>
         <p> <!-- stape 1 -->
           Sign up or log in to use the app !!
-          <span class="text-warning">( above )</span>
+          <span class="text-3">( above )</span>
         </p>
       <% } else { %>
         <% if (themes && themes.length > 0) { %>
@@ -22,26 +22,26 @@
               <p> <!-- stape 4 -->
                 Next, add a note with
                 <span class="text-5">"+Add Note"</span> button!
-                <span class="text-warning">( below )</span>
+                <span class="text-3">( below )</span>
               </p>
             <% } else if (notes.length > 5) { %>
               <% if (tenQuizzes.length === 0) { %>
                 <p> <!-- stape 6 -->
                   Try a quiz ! Click on the
                   <span class="text-5">Quiz</span> button!
-                  <span class="text-warning">( above )</span>
+                  <span class="text-3">( above )</span>
                 </p>
               <% } else if (tenQuizzes.length === 1) { %>
                 <p> <!-- stape 7 -->
                   Congrats for your 1st quiz!
                   <span class="text-5">Quiz</span>!
-                  <span class="text-warning">( above )</span>
+                  <span class="text-3">( above )</span>
                 </p>
               <% } else if (tenQuizzes.length > 1) { %>
                 <p> <!-- stape 8 -->
                   Try another quiz with
                   <span class="text-5">Quiz</span> button!
-                  <span class="text-warning">( above )</span>
+                  <span class="text-3">( above )</span>
                 </p>
               <% } %>
             <% } %>
@@ -49,14 +49,14 @@
             <p> <!-- stape 3 -->
               Select the theme at
               <span class="text-5">Theme's</span> menu!
-              <span class="text-warning">( above )</span>
+              <span class="text-3">( above )</span>
             </p>
           <% } %>
         <% } else { %>
           <p> <!-- stape 2 -->
             At first, add a theme with
             <span class="text-5">"+Add"</span> button!
-            <span class="text-warning">( above )</span>
+            <span class="text-3">( above )</span>
           </p>
         <% } %>
       <% } %>
