@@ -1,9 +1,10 @@
 <% if (user) { %>
-  <nav class="bg-white">
+  <nav class="bg-white ">
+    <p class="text-center fs-2 m-0 fw-light"> Action Menu : </p>
     <ul class="navbar-nav">
       <div class="d-flex justify-content-center align-items-center" >
         <div class="col-3 pt-2 d-flex justify-content-center gap-2 ">
-          <% if (selectedTheme) { %>
+          <% if (selectedTheme && notes.length > 0) { %>
             <div class="bg-1 rounded-2">
               <a  href="/notes" class="btn btn-lg text-white d-flex flex-column">
                 <i class="bi bi-book-fill text-light"></i>
@@ -113,7 +114,7 @@
                   <input type="hidden" name="userId" value="<%= user._id %>">
                   <% } %>
               </div>
-              <button type="submit" class="btn bg-3">Add Lesson</button>
+              <button type="submit" class="btn bg-3">Add</button>
             </form>
           </div>
         </div>
@@ -170,7 +171,7 @@
               <input type="hidden" name="themeName" value="<%= selectedTheme %>">
             <% } %>
             <input type="hidden" name="userId" value="<%= user._id %>">
-            <button type="submit" class="btn bg-3 mt-2">Add Note</button>
+            <button type="submit" class="btn bg-3 mt-2">Add</button>
           </form>
         </div>
       </div>
