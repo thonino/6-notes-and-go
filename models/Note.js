@@ -5,7 +5,7 @@ const noteSchema = new mongoose.Schema({
   back: { type: "String" },
   categoryName: { type: "String" },
   example: { type: "String" },
-  themeName: { type: "String" },
+  lessonName: { type: "String" },
   userId: { type: "String" },
 });
 module.exports = mongoose.model("Note", noteSchema);

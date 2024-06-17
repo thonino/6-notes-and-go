@@ -1,44 +1,42 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <%- include('./partials/bootstrap') %>
     <title>Quiz</title>
 </head>
-
-<body>
-  <%- include('./partials/nav') %>
-  <%- include('./partials/tips') %>
-  <%- include('./partials/action') %>
-    <div class="container text-center">
-      <% if (!user) { %>
-        <h1>Please log in to your account !</h1>
-        <a class="" href="/login">
-          <i class="bi bi-box-arrow-in-right btn btn-success"> Login </i>
-        </a>
-        <% } else { %>
-          <h1 class="fs-2 fst-italic text-2 fw-bold mb-2">Start your quiz !</h1>
-          <% if (categories) { %>
-            <div class="text-center d-flex justify-content-center">
-              <form action="/selectCategory" method="POST" class="text-center">
-                <select name="categoryName" class="form-select text-2 text-capitalize mt-2">
-                  <option value="all" hidden>Category</option>
-                  <option value="all">All</option>
-                  <% categories.forEach(category=> { %>
-                    <option value="<%= category %>">
-                      <%= category %>
-                    </option>
-                    <% }) %>
-                </select>
-                <button type="submit" class="btn bg-3 m-2">Start!</button>
-              </form>
-            </div>
+  <body>
+    <%- include('./partials/nav') %>
+    <%- include('./partials/tips') %>
+    <%- include('./partials/action') %>
+      <div class="container text-center">
+        <% if (!user) { %>
+          <h1>Please log in to your account !</h1>
+          <a class="" href="/login">
+            <i class="bi bi-box-arrow-in-right btn btn-success"> Login </i>
+          </a>
+          <% } else { %>
+            <h1 class="fs-2 fst-italic text-2 fw-bold mb-2">Start your quiz !</h1>
+            <% if (categories) { %>
+              <div class="text-center d-flex justify-content-center">
+                <form action="/selectCategory" method="POST" class="text-center">
+                  <select name="categoryName" class="form-select text-2 text-capitalize mt-2">
+                    <option value="all" hidden>Category</option>
+                    <option value="all">All</option>
+                    <% categories.forEach(category=> { %>
+                      <option value="<%= category %>">
+                        <%= category %>
+                      </option>
+                      <% }) %>
+                  </select>
+                  <button type="submit" class="btn bg-3 m-2">Start!</button>
+                </form>
+              </div>
             <% } else { %>
-              <p>No categories available for the selected theme.</p>
-              <% } %>
-                <% } %>
-    </div>
-    <script src="/script.js"></script>
-</body>
-
+              <p>No categories available for the selected lesson.</p>
+            <% } %>
+        <% } %>
+      </div>
+      <%- include('./partials/footer') %>
+      <script src="/script.js"></script>
+  </body>
 </html>

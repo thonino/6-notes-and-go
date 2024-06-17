@@ -2,17 +2,17 @@
     <a class="navbar-brand m-0  p-0" href="/" >
       <img src="/img/logo.png" width="35px" height="35px" class="ms-2">
     </a> 
-    <% if (themes && themes.length> 0) { %>
-      <form id="themeForm" action="/selectTheme" method="POST" class="ms-sm-2 ">
+    <% if (lessons && lessons.length> 0) { %>
+      <form id="lessonForm" action="/selectLesson" method="POST" class="ms-sm-2 ">
         <select 
-          id="themeSelect" 
-          name="theme" 
+          id="lessonSelect" 
+          name="lesson" 
           class="form-select form-select-sm bg-dark text-2 text-capitalize"
         >
           <option hidden>Lessons</option>
-          <% themes.forEach(theme=> { %>
-          <option value="<%= theme.themeName %>" >
-            <%= theme.themeName %> 
+          <% lessons.forEach(lesson=> { %>
+          <option value="<%= lesson.lessonName %>" >
+            <%= lesson.lessonName %> 
           </option>
           <% }) %>
         </select>
@@ -39,7 +39,7 @@
           <% if (tips && tips === "d-none") { %>
             <form action="/tips" method="post" class="d-flex ">
               <input type="hidden" name="status" value=""/>
-              <button type="submit" class="btn btn-sm bg-warning text-dark">
+              <button type="submit" class="btn btn-sm bg-4 text-dark">
                 <i class="bi bi-info-lg"></i>
               </button>
             </form>
@@ -60,7 +60,7 @@
         <% if (tips && tips === "d-none") { %>
           <form action="/tips" method="post" class="d-flex ">
             <input type="hidden" name="status" value=""/>
-            <button type="submit" class="btn btn-sm bg-warning text-dark">
+            <button type="submit" class="btn btn-sm bg-3 text-dark">
               <i class="bi bi-info-lg"></i>
             </button>
           </form>

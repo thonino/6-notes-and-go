@@ -10,12 +10,12 @@
   <%- include('./partials/action') %>
     <div class="mt-2 text-center d-flex justify-content-center">
       <!-- New Note -->
-      <% if (user && themes && selectedTheme) { %>
+      <% if (user && lessons && selectedLesson) { %>
         <div class="containter d-flex flex-column text-capitalize">
           <div class="cible hidden">
-            <form  id="deleteTheme" action="/deletetheme?_method=DELETE"
+            <form  id="deleteLesson" action="/deletelesson?_method=DELETE"
               method="POST">
-              <button type="button" class="btn btn-danger" onclick="confirmDeleteTheme()">
+              <button type="button" class="btn btn-danger" onclick="confirmDeleteLesson()">
                   Delete The Lesson
               </button>
             </form>
@@ -150,7 +150,7 @@
                     <input type="text" class="form-control" name="newCategory"
                       placeholder="Write the category name...">
                   </div>
-                  <input type="hidden" name="themeName" value="<%= selectedTheme %>">
+                  <input type="hidden" name="lessonName" value="<%= selectedLesson %>">
                   <input type="hidden" name="userId" value="<%= user._id %>">
                   <button type="submit" class="btn bg-2 mt-2">Save</button>
                 </form>
@@ -169,6 +169,7 @@
         });
       });
     </script>
+    <%- include('./partials/footer') %>
     <script src="/script.js"></script>
   </body>
 </html>

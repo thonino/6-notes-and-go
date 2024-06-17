@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 const quizSchema = new mongoose.Schema({
   userId: { type: "String" },
-  themeName: { type: "string" },
+  lessonName: { type: "string" },
   categoryName: { type: "String" },
   score: { type: "Number" },
   data: { type: "Array" },

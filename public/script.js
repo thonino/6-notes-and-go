@@ -33,9 +33,9 @@ function confirmDeleteNote(noteId) {
     document.getElementById(`deleteNote${noteId}`).submit();
   }
 }
-function confirmDeleteTheme() {
-  if (confirm("Are you sure you want to delete this Theme ?")) {
-    document.getElementById(`deleteTheme`).submit();
+function confirmDeleteLesson() {
+  if (confirm("Are you sure you want to delete this Lesson ?")) {
+    document.getElementById(`deleteLesson`).submit();
   }
 }
 
@@ -59,10 +59,10 @@ function hideContainer2(selected) {
 }
 
 // SUBMIT SELECTED
-const themeSelect = document.getElementById('themeSelect');
-  if (themeSelect) {
-    themeSelect.addEventListener('change', function () {
-      document.getElementById('themeForm').submit();
+const lessonSelect = document.getElementById('lessonSelect');
+  if (lessonSelect) {
+    lessonSelect.addEventListener('change', function () {
+      document.getElementById('lessonForm').submit();
     });
   }
   

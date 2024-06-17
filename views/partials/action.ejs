@@ -3,36 +3,36 @@
     <p class="text-center fs-2 m-0 fw-light"> Action Menu : </p>
     <ul class="navbar-nav">
       <div class="d-flex justify-content-center align-items-center" >
-        <div class="col-3 pt-2 d-flex justify-content-center gap-2 ">
-          <% if (selectedTheme && notes.length > 0) { %>
+        <div class="pt-2 d-flex justify-content-center gap-2 ">
+          <% if (selectedLesson && notes.length > 0) { %>
             <div class="bg-1 rounded-2">
-              <a  href="/notes" class="btn btn-lg text-white d-flex flex-column">
+              <a  href="/notes" class="btn btn-lg text-white d-flex flex-column fs-6">
                 <i class="bi bi-book-fill text-light"></i>
                 Learn 
               </a>
             </div>
           <% } else { %>
-            <div class="bg-8 rounded-2">
-              <span  class="btn btn-lg text-white d-flex flex-column cursor-default">
+            <div class=" bg-8 rounded-2">
+              <span  class="btn btn-lg text-white d-flex flex-column cursor-default fs-6">
                 <i class="bi bi-book-fill text-light "></i>
                 Learn 
               </span>
             </div>
           <% } %>
-          <div class="bg-2 rounded-2">
+          <div class="bg-2 rounded-2 fs-6">
             <button 
-              class="btn btn-lg text-white d-flex flex-column" 
+              class="btn btn-lg text-white d-flex flex-column fs-6" 
               data-bs-toggle="modal" 
-              data-bs-target="#themeModal"
+              data-bs-target="#lessonModal"
             >
               <i class="bi bi-plus-lg text-white"></i>
               Lesson
             </button>
           </div>
-          <% if (user && themes && selectedTheme) { %>
+          <% if (user && lessons && selectedLesson) { %>
             <div class="bg-2 rounded-2">
               <button 
-                class="btn btn-lg text-white d-flex flex-column" 
+                class="btn btn-lg text-white d-flex flex-column fs-6" 
                 data-bs-toggle="modal" 
                 data-bs-target="#noteModal"
                 >
@@ -41,23 +41,23 @@
               </button>
             </div>
             <% } else { %>
-              <div class="bg-8 rounded-2 ">
-                <span class="btn btn-lg text-white d-flex flex-column cursor-default">
+              <div class="bg-8 rounded-2">
+                <span class="btn btn-lg text-white d-flex flex-column cursor-default fs-6">
                   <i class="bi bi-pencil-fill text-white"></i>
                   Note
                 </span>
               </div>
             <% } %>
-            <% if (notes && notes.length> 5) { %>
+            <% if (notesFull && notesFull.length> 5) { %>
               <div class="bg-3 rounded-2">
-                <a  href="/quiz" class="btn btn-lg text-white d-flex flex-column">
+                <a  href="/quiz" class="btn btn-lg text-white d-flex flex-column fs-6">
                   <i class="bi bi-controller text-light"></i>
                   Quiz
                 </a>
               </div>
               <% } else { %>
-                <div class="bg-8 rounded-2 ">
-                  <span class="btn btn-lg text-white d-flex flex-column cursor-default">
+                <div class="bg-8 rounded-2">
+                  <span class="btn btn-lg text-white d-flex flex-column cursor-default fs-6">
                     <i class="bi bi-controller text-light"></i>
                     Quiz
                   </span>
@@ -65,14 +65,14 @@
               <% } %>
           <% if (tenQuizzes && tenQuizzes.length > 0 ) { %>
             <div class="bg-4 rounded-2">
-              <a  href="/stats" class="btn btn-lg text-dark d-flex flex-column">
+              <a  href="/stats" class="btn btn-lg text-dark d-flex flex-column fs-6">
                 <i class="bi bi-file-earmark-check"></i>
                 Stats
               </a>
             </div>
           <% } else { %>
             <div class="bg-8 rounded-2 ">
-              <span class="btn btn-lg text-light d-flex flex-column cursor-default">
+              <span class="btn btn-lg text-light d-flex flex-column cursor-default fs-6">
                 <i class="bi bi-file-earmark-check"></i>
                 Stats
               </span>
@@ -81,17 +81,17 @@
       </div>
     </ul>
   </nav>
-  <% if (selectedTheme) { %>
+  <% if (selectedLesson) { %>
     <h1 class="text-secondary text-center fs-3 my-2">
         <span class="fs-2 fst-italic text-2 fw-bold mb-2" >Lesson :</span> 
-        <%= selectedTheme %> 
+        <%= selectedLesson %> 
     </h1>
   <% } %>
 <% } %>  
 
 <% if (user ) { %>
-  <!-- Theme Modal -->
-    <div class="modal fade" id="themeModal" tabindex="-1">
+  <!-- Lesson Modal -->
+    <div class="modal fade" id="lessonModal" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content p-0 m-0">
           <i class="bi bi-book text-center fs-1"></i>
@@ -106,10 +106,10 @@
             </button>
           </div>
           <div class="modal-body">
-            <form class="" action="/addtheme" method="POST">
+            <form class="" action="/addlesson" method="POST">
               <div class="mb-3">
-                <label for="Theme name" class="form-label">Lesson Name</label>
-                <input type="text" class="form-control" name="themeName" placeholder="Enter your theme name">
+                <label for="Lessonname" class="form-label">Lesson Name</label>
+                <input type="text" class="form-control" name="lessonName" placeholder="Enter your Lesson name">
                 <% if (user._id) { %>
                   <input type="hidden" name="userId" value="<%= user._id %>">
                   <% } %>
@@ -167,8 +167,8 @@
               </label>
               <input type="text" class="form-control" name="newCategory" placeholder="write the category name...">
             </div>
-            <% if (selectedTheme) { %>
-              <input type="hidden" name="themeName" value="<%= selectedTheme %>">
+            <% if (selectedLesson) { %>
+              <input type="hidden" name="lessonName" value="<%= selectedLesson %>">
             <% } %>
             <input type="hidden" name="userId" value="<%= user._id %>">
             <button type="submit" class="btn bg-3 mt-2">Add</button>

@@ -1,8 +1,8 @@
-<nav class="bg-darkgrey <%= tips %>">
+<nav class="bg-secondary <%= tips %>">
   <div class="d-flex justify-content-center align-items-center " >
       <!-- Block 1 (Center) -->
-    <div class="d-flex mx-auto text-light fst-italic gap-2 mt-2 ">
-      <span class="text-3 mt-1">Tips :</span>
+    <div class="d-flex mx-auto text-white fst-italic gap-2 mt-2 ">
+      <span class="text-4 mt-1">Tips :</span>
       <span class="mt-1">
       <% if (!user) { %>
         <p> <!-- stape 1 -->
@@ -10,12 +10,12 @@
           <span class="text-3">( above )</span>
         </p>
       <% } else { %>
-        <% if (themes && themes.length > 0) { %>
-          <% if (selectedTheme) { %>
+        <% if (lessons && lessons.length > 0) { %>
+          <% if (selectedLesson) { %>
             <% if (notes && notes.length >= 1 && notes.length < 6) { %>
               <p> <!-- stape 5 -->
                 After
-                <span class="text-5">"6 notes"</span>
+                <span class="text-3">"6 notes"</span>
                 added, you could take a quiz !
               </p>
             <% } else if (notes.length < 1) { %>
@@ -27,7 +27,7 @@
               <% if (tenQuizzes.length === 0) { %>
                 <p> <!-- stape 6 -->
                   You can try a 
-                  <span class="text-5">Quiz</span> in the action menu
+                  <span class="text-3">Quiz</span> in the action menu
                   <span class="text-3">( below )</span>
                 </p>
               <% } else if (tenQuizzes.length === 1) { %>
@@ -60,14 +60,14 @@
     <!-- Block 2 (Right) -->
       <% if (!tips || tips !== "d-none") { %>
         <i 
-          class="bi bi-info-lg text-3 fs-4" 
+          class="bi bi-info-lg text-4 fs-4" 
           style="margin-top: -5px;">
         </i>
         <form action="/tips" method="POST" class="text-white">
           <input name="status" value="d-none" type="hidden"/>
           <button 
             type="submit" 
-            class="btn text-3 p-0 me-2"
+            class="btn text-4 p-0 me-2"
             style="margin-top: -7px;"
           >
             <i class="bi bi-x-circle-fill"></i>
