@@ -1,9 +1,9 @@
 <% if (user) { %>
-  <nav class="bg-white ">
-    <p class="text-center fs-2 m-0 fw-light"> Action Menu : </p>
+  <nav class="bg-darkgrey pb-4">
+    <p class="text-center fs-2 m-0 fw-light text-light"> Action Menu : </p>
     <ul class="navbar-nav">
       <div class="d-flex justify-content-center align-items-center" >
-        <div class="pt-2 d-flex justify-content-center gap-2 ">
+        <div class="pt-2 d-flex justify-content-center gap-3 ">
           <% if (selectedLesson && notes.length > 0) { %>
             <div class="bg-1 rounded-2">
               <a  href="/notes" class="btn btn-lg text-white d-flex flex-column fs-6">
@@ -12,9 +12,9 @@
               </a>
             </div>
           <% } else { %>
-            <div class=" bg-8 rounded-2">
-              <span  class="btn btn-lg text-white d-flex flex-column cursor-default fs-6">
-                <i class="bi bi-book-fill text-light "></i>
+            <div class="bg-darkgreyless rounded-2">
+              <span  class="btn btn-lg text-secondary d-flex flex-column cursor-default fs-6">
+                <i class="bi bi-book-fill"></i>
                 Learn 
               </span>
             </div>
@@ -36,29 +36,29 @@
                 data-bs-toggle="modal" 
                 data-bs-target="#noteModal"
                 >
-                <i class="bi bi-pencil-fill text-white"></i>
+                <i class="bi bi-pencil-fill"></i>
                 Note
               </button>
             </div>
             <% } else { %>
-              <div class="bg-8 rounded-2">
-                <span class="btn btn-lg text-white d-flex flex-column cursor-default fs-6">
-                  <i class="bi bi-pencil-fill text-white"></i>
+              <div class="bg-darkgreyless rounded-2">
+                <span class="btn btn-lg text-secondary d-flex flex-column cursor-default fs-6">
+                  <i class="bi bi-pencil-fill"></i>
                   Note
                 </span>
               </div>
             <% } %>
             <% if (notesFull && notesFull.length> 5) { %>
               <div class="bg-3 rounded-2">
-                <a  href="/quiz" class="btn btn-lg text-white d-flex flex-column fs-6">
-                  <i class="bi bi-controller text-light"></i>
+                <a  href="/quiz" class="btn btn-lg  d-flex flex-column fs-6">
+                  <i class="bi bi-controller "></i>
                   Quiz
                 </a>
               </div>
               <% } else { %>
-                <div class="bg-8 rounded-2">
-                  <span class="btn btn-lg text-white d-flex flex-column cursor-default fs-6">
-                    <i class="bi bi-controller text-light"></i>
+                <div class="bg-darkgreyless rounded-2">
+                  <span class="btn btn-lg text-secondary d-flex flex-column cursor-default fs-6">
+                    <i class="bi bi-controller"></i>
                     Quiz
                   </span>
                 </div>
@@ -71,8 +71,8 @@
               </a>
             </div>
           <% } else { %>
-            <div class="bg-8 rounded-2 ">
-              <span class="btn btn-lg text-light d-flex flex-column cursor-default fs-6">
+            <div class="bg-darkgreyless rounded-2">
+              <span class="btn btn-lg text-secondary d-flex flex-column cursor-default fs-6">
                 <i class="bi bi-file-earmark-check"></i>
                 Stats
               </span>
@@ -82,9 +82,11 @@
     </ul>
   </nav>
   <% if (selectedLesson) { %>
-    <h1 class="text-secondary text-center fs-3 my-2">
-        <span class="fs-2 fst-italic text-2 fw-bold mb-2" >Lesson :</span> 
+    <h1 class="fs-2 text-2 fw-bold text-center mb-2 m-0 my-2">
+      Lesson :
+      <span class="fs-4 text-dark fw-light fst-italic ">
         <%= selectedLesson %> 
+      </span> 
     </h1>
   <% } %>
 <% } %>  

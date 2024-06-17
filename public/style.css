@@ -2,6 +2,7 @@
   text-transform: uppercase;
 }
 .bg-darkgrey{background-color: #333839;}
+.bg-darkgreyless{background-color: #535b5d;}
 .bg-1{background-color: #22577a;}
 .bg-1:hover{background-color: #6c757d;color: white;}
 .bg-2{background-color: #38a3a5;} 
@@ -30,4 +31,3 @@
 }
 
 .cursor-default { cursor: default; }
-
