@@ -22,10 +22,22 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+// Toggle InputDelete
+document.addEventListener("DOMContentLoaded", function () {
+  var showInputDelete = document.getElementById("showInputDelete");
+  var inputDelete = document.getElementById("inputDelete");
+  if (showInputDelete) {
+    showInputDelete.addEventListener("click", function () {
+      inputDelete.classList.toggle("d-none");
+      inputDelete.classList.toggle("d-flex");
+    });
+  }
+});
+
 // DELETE CONFIRMATION
 function confirmDeleteUser() {
   if (confirm("Are you sure you want delete your account ?")) {
-    document.getElementById("deleteUser").submit();
+    document.getElementById("inputDelete").submit();
   }
 }
 function confirmDeleteNote(noteId) {

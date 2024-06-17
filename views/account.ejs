@@ -103,10 +103,10 @@
         </div>
       </div>
       <!-- Delete Account -->
-      <form
+      <!-- <form
         id="deleteUser"
         class="mb-3"
-        action="/account/delete/<%= user._id %>?_method=DELETE"
+        action="/account/delete/<%= // user._id %>?_method=DELETE"
         method="POST"
       >
         <h3 class="mb-0">
@@ -119,10 +119,45 @@
             <i class="bi bi-trash-fill"></i>
           </button>
         </h3>
-      </form>
+      </form> -->
+      <div class="">
+        <div class="">
+          <p class="fs-3">
+            Delete Account
+            <button id="showInputDelete" class="btn bg-3 btn-sm">
+              <i class="bi bi-trash-fill "></i>
+            </button>
+          </p>
+          <form
+            id="inputDelete"
+            class="d-none flex-column"
+            action="/account/delete/<%= user._id %>?_method=DELETE"
+            method="POST"
+          >
+            <label for="checkPassword" class="fst-italic mb-1 text-2">
+              Password:
+            </label>
+            <input
+              type="password"
+              class="form-control"
+              name="checkPassword"
+              placeholder="Write old password"
+            />
+            <div class="mt-2 mb-3 text-center">
+              <button
+                type="button"
+                class="btn btn-danger btn-sm"
+                onclick="confirmDeleteUser()"
+              >
+              Delete
+              <i class="bi bi-trash-fill"></i>
+            </button>
+            </div>
+          </form>
+        </div>
+      </div>
     <% } %>
   </div>
-  <%- include('./partials/footer') %>
   <script src="/script.js"></script>
 </body>
 </html>

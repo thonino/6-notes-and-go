@@ -159,11 +159,9 @@ app.put("/account/:id", async (req, res) => {
   const { newEmail, newPassword, checkPassword } = req.body;
   try {
     const user = await User.findById(req.params.id);
-
     if (!bcrypt.compareSync(checkPassword, user.password)) {
       return res.status(400).send("Invalid password");
     }
-
     if (newEmail) {
       const emailExists = await User.findOne({ email: newEmail });
       if (emailExists) {
@@ -171,11 +169,9 @@ app.put("/account/:id", async (req, res) => {
       }
       user.email = newEmail;
     }
-
     if (newPassword) {
       user.password = bcrypt.hashSync(newPassword, 10);
     }
-
     await user.save();
     req.session.destroy();
     res.redirect('/alert?message=Successfully updated account');
@@ -186,15 +182,24 @@ app.put("/account/:id", async (req, res) => {
 });
 
 // DELETE ACCOUNT
-app.delete("/account/delete/:id", (req, res) => {
-  User.findByIdAndDelete(req.params.id)
-    .then(() => {
-      res.redirect("/logout");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+app.delete("/account/delete/:id", async (req, res) => {
+  try {
+    const checkPassword = req.body.checkPassword;
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+    if (!bcrypt.compareSync(checkPassword, user.password)) {
+      return res.status(400).send("Invalid password");
+    }
+    await User.findByIdAndDelete(req.params.id);
+    res.redirect("/logout");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Failed to delete account");
+  }
 });
+
 
 // GET REGISTER
 app.get('/register', (req, res) => {
