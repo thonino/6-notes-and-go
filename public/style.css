@@ -30,9 +30,8 @@
 .text-6{color: #d8f8db;;}
 .text-7{color: #dadada;}
 
-.hidden {
-  display: none
-}
+.hidden { display: none; }
+.show { display: block; }
 
 .cursor-default { cursor: default; }
 
@@ -69,4 +68,9 @@
   font-style: normal;
 }
 
-.card{ background: none;}
+.board{ background: none;}
+
+.underline{
+  text-decoration: underline;
+  font-style: italic;
+}

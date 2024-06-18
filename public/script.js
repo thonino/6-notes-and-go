@@ -60,6 +60,8 @@ function hideContainer(selected) {
     categoryContainer.style.display = "none";
   }
 }
+
+
 // HIDE CREATE CATEGORY 2
 function hideContainer2(selected) {
   var categoryContainer = document.getElementById("categoryContainer2");
