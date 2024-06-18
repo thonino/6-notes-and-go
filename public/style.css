@@ -16,8 +16,12 @@
 .bg-6{background-color: #d8f8db;}
 .bg-7{background-color: #c4e4e6;}
 .bg-8{background-color: #dadada;}
+.bg-9{background-color: #d9d9d9;}
 .bg-err{background-color: #dc3545;}
   .bg-err:hover{background-color: #6c757d;color: white;}
+
+.text-darkgrey{color: #333839;}
+.text-darkgreyless{color: #535b5d;}
 .text-1{color: #22577a;}
 .text-2{color: #38a3a5;}.text-2-disable{color: #3d8485;}
 .text-3{color: #57cc99;}
@@ -31,3 +35,38 @@
 }
 
 .cursor-default { cursor: default; }
+
+.mt-70{ margin-top: 70px;}
+
+.wrapper {
+  background-color: #f3f3f3;
+  padding: 3rem;
+}
+.image-container {
+  margin: 10px;
+}
+.image-small {
+  width: 25%;
+  height: auto;
+}
+.description {
+  max-width: 400px;
+  margin-left: 2rem;
+}
+.description h2 {
+  font-size: 24px;
+  color: #00b3b3;
+}
+.description p {
+  font-size: 16px;
+  color: #333;}
+
+
+.ft-victoria {font-family: "Playwrite AU VIC", cursive;}
+.ft-roboto {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.card{ background: none;}

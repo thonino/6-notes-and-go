@@ -8,18 +8,51 @@
     <%- include('./partials/nav') %>
     <%- include('./partials/tips') %>
     <%- include('./partials/action') %>
-    <div class="row-6 d-flex flex-column align-items-center p-0 m-3">
-
-      <div class="w-100 wrapper">
-        <img src="/img/hero-sm.png" class="img-fluid d-sm-inline d-none rounded-3" style="width: 100vw;">
-        <img src="/img/hero-xsm.png" class="img-fluid d-sm-none rounded-3" style="width: 100vw;">
-      </div> 
-      
-      <img src="/img/logo.png" width="150px" height="150px" class="">
-      <p class="fs-2 text-2">Do you want to learn words by heart ?</p>
-      <p class="fs-4">
-        This application is perfect for you !
-      </p>
+    <div class="row-6 d-flex flex-column align-items-center">
+      <div class="vw-100 wrapper bg-9 pb-3 m-0 p-0">
+        <h1 class="text-center ft-victoria text-darkgreyless pt-3">6 Notes & Go</h1>
+        <p class="fs-4 text-center text-secondary fw-bold pb-1 m-0">
+          Free application !
+          <span class="fs-5 fw-light text-center text-body-secondary fst-italic m-0">
+            To learn words by heart
+          </span>
+        </p>
+        <div class="d-flex flex-wrap justify-content-center">
+          <div class="container m-0 p-0" style="width:472px;"><!-- breakpoint => lg -->
+            <div class="card border-0 text-center">
+              <img src="/img/board.png" class="card-img" alt="board img">
+              <div class="card-img-overlay d-flex flex-column align-items-center ">
+                <p class="card-title ft-victoria fs-1 text-2" style="margin-top: 90px;">About</p>
+                <p class="card-text fs-4 ft-victoria text-darkgreyless px-4" style="height: 180px;">
+                  It's an app for anyone who wants to learn words or definitions by heart. 
+                  Very easy to use and completely free.
+                </p>
+                <div class="ft-roboto fs-2 ">
+                  <button class="btn btn-sm fs-4 text-darkgreyless ">
+                    About
+                  </button>
+                  <button class="btn btn-sm fs-4 text-darkgreyless ">
+                    Simply
+                  </button>
+                  <button class="btn btn-sm fs-4 text-darkgreyless ">
+                    Try
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center align-items-center" style="width:520px;"><!-- breakpoint => lg -->
+            <div class="d-flex justify-content-center ">
+              <img src="/img/design1.png" class="img-fluid">
+            </div>
+            <div class="d-flex flex-wrap justify-content-center me-1"style="width:450px;"><!-- breakpoint => lg -->
+              <img src="/img/face1.png" class="img-fluid w-50 h-50">
+              <img src="/img/face2.png" class="img-fluid w-50 h-50">
+              <img src="/img/example.png" class="img-fluid w-50 h-50">
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <%- include('./partials/footer') %>
     <script src="/script.js"></script>
