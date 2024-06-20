@@ -35,7 +35,7 @@
 
 .cursor-default { cursor: default; }
 
-.mt-70{ margin-top: 70px;}
+.mt-70{ margin-top: 88px;}
 
 .wrapper {
   background-color: #f3f3f3;
@@ -58,7 +58,8 @@
 }
 .description p {
   font-size: 16px;
-  color: #333;}
+  color: #333;
+}
 
 
 .ft-victoria {font-family: "Playwrite AU VIC", cursive;}
@@ -74,3 +75,13 @@
   text-decoration: underline;
   font-style: italic;
 }
+
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Ombre de texte */
+}
+
+.mt-100{ margin-top: 100px;}
+
+.carousel{ max-width: 800px;}
+
+

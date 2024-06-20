@@ -192,6 +192,7 @@ app.delete("/account/delete/:id", async (req, res) => {
     if (!bcrypt.compareSync(checkPassword, user.password)) {
       return res.status(400).send("Invalid password");
     }
+
     await User.findByIdAndDelete(req.params.id);
     res.redirect("/logout");
   } catch (error) {
