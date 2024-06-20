@@ -84,4 +84,7 @@
 
 .carousel{ max-width: 800px;}
 
-
+.offcanvas-body {
+  overflow-y: auto; /* Permettre le défilement vertical */
+  max-height: 80vh; /* Hauteur maximale pour le défilement */
+}
