@@ -17,7 +17,10 @@
     <% } else { %>
       <h1 class="text-center ft-victoria text-darkgreyless pt-2"> My stats ! </h1>
       <% if (tenQuizzes && tenQuizzes.length > 0  ) { %>
-        <div class="card ft-roboto text-secondary fst-italic m-0 bg-7 p-2 mb-3 mt-3">
+        <div 
+          class="card ft-roboto text-secondary fst-italic m-0 bg-7 p-2 mb-3 mt-3"
+          onmouseenter="handleMouseEnter(event)"
+        >
           <p class="fs-4 fw-bold m-0 p-0 showleft">
             10 last quizzes
           </p>
@@ -31,7 +34,7 @@
         <div class="card mb-3 rounded-0">
           <div 
           class="card-header d-flex justify-content-center align-items-center bg-2 rounded-0 m-0 p-0">
-            <p class="text-white fs-4 m-0 p-0 showleft">Quiz</p>
+            <p class="text-white fs-4 m-0 p-0 showleft" onmouseenter="handleMouseEnter(event)">Quiz</p>
             <div class="showright">
               <% if (skip > 0) { %> 
                 <a 
@@ -57,13 +60,16 @@
           </div>
           <div class="card pt-0 px-4 rounded-0">
             <div class="row text-capitalize">
-              <p class="fs-2 fst-italic fw-bold my-2 showright <%= color %>">
+              <p 
+                class="fs-2 fst-italic fw-bold my-2 showright <%= color %>"
+                onmouseenter="handleMouseEnter(event)"
+              >
                 <%= prize %>
               </p>
               <% if (showQuiz && showQuiz.data) { %>
                 <% showQuiz.data.forEach(data => { %>
                   <div class="col-md-4 mb-3">
-                    <div class="card rounded-0 showtopslow">
+                    <div class="card rounded-0 showtopspeed" onmouseenter="handleMouseEnter(event)">
                       <div 
                         class="card-header text-white rounded-0 text-capitalize <%= data[2] ? 'bg-err' : 'bg-2' %>"
                       >
@@ -88,19 +94,19 @@
           <div class="card-footer bg-7 rounded-0">
             <% if (showQuiz) { %>
               <div class="d-flex flex-column flex-sm-row">
-                <div class="col fw-bold showleft">
+                <div class="col fw-bold showleft" onmouseenter="handleMouseEnter(event)">
                   Scores : 
                   <span class="text-2 text-capitalize">
                     <%= showQuiz.score %> / 6  
                   </span>
                 </div>
-                <div class="col fw-bold showleft">
+                <div class="col fw-bold showleft" onmouseenter="handleMouseEnter(event)">
                   lesson : 
                   <span class="text-2 text-capitalize">
                     <%= showQuiz.lessonName %>
                   </span>
                 </div>
-                <div class="col fw-bold showleft">
+                <div class="col fw-bold showleft" onmouseenter="handleMouseEnter(event)">
                   Category : 
                   <span class="text-2 text-capitalize text-low">
                     <%= showQuiz.categoryName %>
@@ -117,22 +123,22 @@
         </div>
       <% } %>
       <% if (tenQuizzes && tenQuizzes.length > 0) { %>
-        <table class="table table-bordered">
-          <thead class="bg-2 text-white">
-            <tr>
+        <table class="table table-bordered bg-9">
+          <thead  class="">
+            <tr  class=""></tr>>
               <th scope="col">#</th>
               <th scope="col">Lesson</th>
               <th scope="col">Category</th>
               <th scope="col">Score</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody >
             <% tenQuizzes.forEach((quiz, index) => { %>
-              <tr class="showleftslow">
-                <th scope="row"><%= index + 1 %></th>
-                <td><%= quiz.lessonName %></td>
-                <td><%= quiz.categoryName %></td>
-                <td><%= quiz.score %></td>
+              <tr>
+                <th scope="row" class="showtopspeed"><%= index + 1 %></th>
+                <td class="showtopspeed"><%= quiz.lessonName %></td>
+                <td class="showtopspeed"><%= quiz.categoryName %></td>
+                <td class="showtopspeed"><%= quiz.score %></td>
               </tr>
             <% }); %>
           </tbody>

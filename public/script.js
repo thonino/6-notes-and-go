@@ -61,7 +61,6 @@ function hideContainer(selected) {
   }
 }
 
-
 // HIDE CREATE categoryContainer
 function hideContainer2(selected) {
   var categoryContainer = document.getElementById("categoryContainer2");
@@ -87,14 +86,6 @@ if (categoryFilter) {
     document.getElementById('categoryFilterForm').submit();
   });
 }
-
-// Initialiser ScrollReveal stapes 2
-ScrollReveal().reveal('.leftstape', { 
-  distance: '50px',
-  origin: 'left',
-  easing: 'ease-in-out',
-  interval: 200
-});
 
 // Initialiser ScrollReveal Right
 ScrollReveal().reveal('.showright250', { 
@@ -153,6 +144,23 @@ ScrollReveal().reveal('.showtop', {
   origin: 'top',
   easing: 'ease-in-out',
   interval: 100
+});
+
+// Initialiser ScrollReveal top
+ScrollReveal().reveal('.showtopspeed', { 
+  distance: '250px',
+  duration: 500,
+  origin: 'top',
+  easing: 'ease-in-out',
+  interval: 50
+});
+// Initialiser ScrollReveal top
+ScrollReveal().reveal('.showleftspeed', { 
+  distance: '250px',
+  duration: 500,
+  origin: 'left',
+  easing: 'ease-in-out',
+  interval: 50
 });
 
 // Initialiser ScrollReveal top
