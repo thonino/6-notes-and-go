@@ -96,6 +96,8 @@ const makeAvailable = async (req, res, next) => {
 
 app.use(makeAvailable);
 
+
+
 //---------------------------------ROOTS---------------------------------//
 
 // Session selected lesson

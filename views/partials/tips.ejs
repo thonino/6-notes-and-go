@@ -2,52 +2,52 @@
   <div class="d-flex justify-content-center align-items-center " >
       <!-- Block 1 (Center) -->
     <div class="d-flex mx-auto text-white fst-italic gap-2 mt-2 ">
-      <span class="text-4 mt-1">Tips :</span>
+      <span class="text-4 mt-1 showright2k">Tips :</span>
       <span class="mt-1">
       <% if (!user) { %>
-        <p> <!-- stape 1 -->
+        <p class="showright2k"> <!-- stape 1 -->
           To use the app, <span class="text-5">sign up</span> or <span class="text-5">log</span> !
         </p>
       <% } else { %>
         <% if (lessons && lessons.length > 0) { %>
           <% if (selectedLesson) { %>
             <% if (notes && notes.length >= 1 && notes.length < 6) { %>
-              <p> <!-- stape 5 -->
+              <p class="showright2k"> <!-- stape 5 -->
                 After
                 <span class="text-3">"6 notes"</span>
                 added, you could take a quiz !
               </p>
             <% } else if (notes.length < 1) { %>
-              <p> <!-- stape 4 -->
+              <p class="showright2k"> <!-- stape 4 -->
                 In the action menu, write a new note
                 <span class="text-3">( below )</span>
               </p>
             <% } else if (notes.length > 5) { %>
               <% if (tenQuizzes.length === 0) { %>
-                <p> <!-- stape 6 -->
+                <p class="showright2k"> <!-- stape 6 -->
                   You can try a 
                   <span class="text-3">Quiz</span> in the action menu
                   <span class="text-3">( below )</span>
                 </p>
               <% } else if (tenQuizzes.length === 1) { %>
-                <p> <!-- stape 7 -->
+                <p class="showright2k"> <!-- stape 7 -->
                   Great ! Congratulations for your first quiz !
                 </p>
               <% } else if (tenQuizzes.length > 1) { %>
-                <p> <!-- stape 8 -->
+                <p class="showright2k"> <!-- stape 8 -->
                   In the action menu, find the stats button
                   <span class="text-3">( below )</span>
                 </p>
               <% } %>
             <% } %>
           <% } else { %>
-            <p> <!-- stape 3 -->
+            <p class="showright2k"> <!-- stape 3 -->
               In the top bar, select the lesson 
               <span class="text-3">( above )</span>
             </p>
           <% } %>
         <% } else { %>
-          <p> <!-- stape 2 -->
+          <p class="showright2k"> <!-- stape 2 -->
             In the action menu, add a new lesson
             <span class="text-3">( below )</span>
           </p>
@@ -62,7 +62,7 @@
           <input name="status" value="d-none" type="hidden"/>
           <button 
             type="submit" 
-            class="btn text-4 p-0 me-2"
+            class="btn text-4 p-0 me-2 showright"
             style="margin-top: -7px;"
           >
             <i class="bi bi-x-circle-fill"></i>

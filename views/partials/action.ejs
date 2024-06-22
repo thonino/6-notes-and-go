@@ -1,11 +1,11 @@
 <% if (user) { %>
   <nav class="bg-darkgrey">
-    <p class="text-center fs-2 m-0 fw-light text-light"> Action Menu : </p>
+    <p class="text-center ft-victoria fs-2 m-0 fw-light text-light showleft3k"> Action Menu : </p>
     <ul class="navbar-nav">
       <div class="d-flex justify-content-center align-items-center" >
         <div class="pt-2 d-flex justify-content-center gap-3 ">
           <% if (selectedLesson && notes.length > 0) { %>
-            <div class="bg-1 rounded-2">
+            <div class="bg-1 rounded-2 showleft2">
               <a  href="/notes" class="btn btn-lg text-white d-flex flex-column fs-6">
                 <i class="bi bi-book-fill text-light"></i>
                 Learn 
@@ -19,7 +19,7 @@
               </span>
             </div>
           <% } %>
-          <div class="bg-2 rounded-2 fs-6">
+          <div class="bg-2 rounded-2 fs-6 showleft">
             <button 
               class="btn btn-lg text-white d-flex flex-column fs-6" 
               data-bs-toggle="modal" 
@@ -30,7 +30,7 @@
             </button>
           </div>
           <% if (user && lessons && selectedLesson) { %>
-            <div class="bg-2 rounded-2">
+            <div class="bg-2 rounded-2 showtop">
               <button 
                 class="btn btn-lg text-white d-flex flex-column fs-6" 
                 data-bs-toggle="modal" 
@@ -49,7 +49,7 @@
               </div>
             <% } %>
             <% if (notesFull && notesFull.length> 5) { %>
-              <div class="bg-3 rounded-2">
+              <div class="bg-3 rounded-2 showright">
                 <a  href="/quiz" class="btn btn-lg  d-flex flex-column fs-6">
                   <i class="bi bi-controller "></i>
                   Quiz
@@ -64,7 +64,7 @@
                 </div>
               <% } %>
           <% if (tenQuizzes && tenQuizzes.length > 0 ) { %>
-            <div class="bg-4 rounded-2">
+            <div class="bg-4 rounded-2 showright2">
               <a  href="/stats" class="btn btn-lg text-dark d-flex flex-column fs-6">
                 <i class="bi bi-file-earmark-check"></i>
                 Stats
@@ -81,17 +81,16 @@
       </div>
     </ul>
     <% if (selectedLesson) { %>
-      <h1 class="bg-darkgreyless fs-2 text-2 fw-bold text-center mt-3 pb-2 m-0">
-        Current Lesson :
-        <span class="fs-4 text-light fw-light fst-italic ">
-          <%= selectedLesson %> 
-        </span> 
-      </h1>
+        <p class="fs-3 text-2 ft-roboto fw-bold text-center mt-3 pb-1 m-0 showright2">
+          Current Lesson : 
+          <span class="fs-4 text-light  fst-italic ">
+            <%= selectedLesson %> 
+          </span> 
+        </p>
     <% } else { %>
       <div class="pb-3"></div>
   <% }} %>  
   </nav>
-
 <% if (user ) { %>
   <!-- Lesson Modal -->
     <div class="modal fade" id="lessonModal" tabindex="-1">

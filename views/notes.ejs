@@ -20,13 +20,13 @@
               </button>
             </form>
           </div>
-          <div class="d-flex justify-content-center gap-2 mt-2 ">
+          <div class="d-flex justify-content-center gap-2 mt-2">
             <% if(categories && categories.length > 0){ %>
               <form id="categoryFilterForm" action="/notes" method="POST">
                 <select 
                   id="categoryFilter"
                   name="categoryFilter" 
-                  class="form-select text-2 text-capitalize"
+                  class="form-select text-2 text-capitalize showleft"
                 >
                   <option hidden>Category</option>
                   <option value="">All</option>
@@ -38,7 +38,7 @@
                 </select>
               </form>
               <% } %>
-              <div class="text-center d-inline">
+              <div class="text-center d-inline showright">
                 <button id="toggle" class="btn  btn-secondary"><i class="bi bi-gear-fill"></i></button>
               </div>
           </div>
@@ -46,20 +46,20 @@
         </div>
     </div>
     <!-- List Note -->
-    <div class="mt-3 ">
+    <div class="mt-3">
       <% notes.reverse().forEach((note, index)=> { %>
-        <div class="mb-3 mx-2 ">
+        <div class="mb-3 mx-2">
           <div class="row g-2">
-            <div class="col-4">
-              <div class="card bg-7 rounded-0">
+            <div class="col-4 ">
+              <div class="card bg-7 rounded-0 showleft2">
                 <h5 class="card-title bg-2 text-white p-3 mb-0">Face 1</h5>
                 <p class="card-text p-3 mb-0 capitalize-once">
                   <%= note.front %>
                 </p>
               </div>
             </div>
-            <div class="col-4">
-              <div class="card bg-6 rounded-0">
+            <div class="col-4 ">
+              <div class="card bg-6 rounded-0 show2">
                 <h5 class="card-title bg-3 text-white p-3 mb-0">Face 2</h5>
                 <p class="card-text p-3 mb-0 capitalize-once">
                   <%= note.back %>
@@ -67,8 +67,8 @@
               </div>
             </div>
             <% if (note.example) { %>
-            <div class="col-4">
-              <div class="card bg-8 rounded-0">
+            <div class="col-4 ">
+              <div class="card bg-8 rounded-0 showright">
                 <h5 class="card-title bg-secondary text-white p-3 mb-0 text-capitalize">
                   <%= note.categoryName %> 
                 </h5>
@@ -78,8 +78,8 @@
               </div>
             </div>
             <% } else { %>
-            <div class="col-4">
-              <div class="card bg-7 rounded-0">
+            <div class="col-4 ">
+              <div class="card bg-7 rounded-0 showright2">
                 <h5 class="card-title bg-1 text-white p-3 mb-0 text-capitalize">
                   Category
                 </h5>

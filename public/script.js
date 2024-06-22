@@ -62,7 +62,7 @@ function hideContainer(selected) {
 }
 
 
-// HIDE CREATE CATEGORY 2
+// HIDE CREATE categoryContainer
 function hideContainer2(selected) {
   var categoryContainer = document.getElementById("categoryContainer2");
   if (selected.value === "newCat") {
@@ -72,7 +72,7 @@ function hideContainer2(selected) {
   }
 }
 
-// SUBMIT SELECTED
+// SUBMIT lessonSelect
 const lessonSelect = document.getElementById('lessonSelect');
   if (lessonSelect) {
     lessonSelect.addEventListener('change', function () {
@@ -80,10 +80,104 @@ const lessonSelect = document.getElementById('lessonSelect');
     });
   }
   
-// SUBMIT SELECTED
+// SUBMIT categoryFilter
 const categoryFilter = document.getElementById('categoryFilter');
 if (categoryFilter) {
   categoryFilter.addEventListener('change', function () {
     document.getElementById('categoryFilterForm').submit();
   });
 }
+
+// Initialiser ScrollReveal Right
+ScrollReveal().reveal('.showright2k', { 
+  distance: '250px',
+  duration: 2000,
+  origin: 'right',
+  easing: 'ease-in-out',
+});
+
+// Initialiser ScrollRevealleft
+ScrollReveal().reveal('.showleft3k', { 
+  distance: '500px',
+  duration: 1000,
+  origin: 'left',
+  easing: 'ease-in-out',
+});
+
+// Initialiser ScrollRevealleft
+ScrollReveal().reveal('.showleftspeed', { 
+  distance: '100px',
+  duration: 500,
+  origin: 'left',
+});
+
+// Initialiser ScrollRevealleft
+ScrollReveal().reveal('.showrightspeed', { 
+  distance: '100px',
+  duration: 500,
+  origin: 'right',
+});
+
+// Initialiser ScrollReveal Right 2
+ScrollReveal().reveal('.showright2', { 
+  distance: '50px',
+  duration: 1200,
+  origin: 'right',
+  easing: 'ease-in-out',
+});
+
+// Initialiser ScrollReveal Right 2
+ScrollReveal().reveal('.show2', { 
+  duration: 1500,
+  easing: 'ease-in-out',
+});
+
+// Initialiser ScrollRevealleft 2
+ScrollReveal().reveal('.showleft2', { 
+  distance: '50px',
+  duration: 1200,
+  origin: 'left',
+  easing: 'ease-in-out',
+});
+
+// Initialiser ScrollReveal top
+ScrollReveal().reveal('.showtop2', { 
+  distance: '50px',
+  duration: 1500,
+  origin: 'top',
+  easing: 'ease-in-out',
+});
+
+// Initialiser ScrollReveal Right
+ScrollReveal().reveal('.showright', { 
+  distance: '100px',
+  duration: 500,
+  origin: 'right',
+  easing: 'ease-in-out',
+
+});
+
+// Initialiser ScrollRevealleft
+ScrollReveal().reveal('.showleft', { 
+  distance: '100px',
+  duration: 1000,
+  origin: 'left',
+  easing: 'ease-in-out',
+
+});
+
+// Initialiser ScrollReveal bottom
+ScrollReveal().reveal('.showbottom', { 
+  distance: '100px',
+  duration: 1000,
+  origin: 'bottom',
+  easing: 'ease-in-out',
+});
+
+// Initialiser ScrollReveal top
+ScrollReveal().reveal('.showtop', { 
+  distance: '100px',
+  duration: 1000,
+  origin: 'top',
+  easing: 'ease-in-out',
+});

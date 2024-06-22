@@ -1,13 +1,13 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0 py-2">
   <a class="navbar-brand m-0 p-0" href="/" >
-    <img src="/img/logo.png" width="35px" height="35px" class="ms-2">
+    <img src="/img/logo.png" width="35px" height="35px" class="ms-2 showleftspeed">
   </a> 
   <% if (lessons && lessons.length> 0) { %>
     <form id="lessonForm" action="/selectLesson" method="POST" class="ms-sm-2 ">
       <select 
         id="lessonSelect" 
         name="lesson" 
-        class="form-select form-select-sm bg-dark text-2 text-capitalize"
+        class="form-select form-select-sm bg-dark text-2 text-capitalize showright"
       >
         <option hidden>Lessons</option>
         <% lessons.forEach(lesson=> { %>
@@ -27,11 +27,11 @@
     class="collapse navbar-collapse mx-2 mb-0" 
   >
     <% if (!user) { %>
-      <ul class="ms-auto d-flex justify-content-end p-0 m-0 mt-2 gap-2 mt-sm-0">
-        <a href="/register" class="text-decoration-none" >
+      <ul class="ms-auto d-flex justify-content-end p-0 m-0 mt-2 gap-2 mt-sm-0 ">
+        <a href="/register" class="text-decoration-none  showleft2" >
           <i class="bi bi-box-arrow-in-right btn bg-3 btn-sm"> Sign-up </i>
         </a>
-        <a  href="/login" class="text-decoration-none">
+        <a  href="/login" class="text-decoration-none showleft">
           <i class="bi bi-box-arrow-in-right btn bg-3 btn-sm"> Login </i>
         </a>
         <% if (tips && tips === "d-none") { %>
@@ -45,10 +45,10 @@
       </ul>
     <% } else { %>
       <ul class="ms-auto d-flex justify-content-end p-0 m-0 mt-2 gap-2 mt-sm-0">
-        <a href="/account" class="text-decoration-none">
+        <a href="/account" class="text-decoration-none showleft2">
           <i class="bi bi-person-circle btn btn-sm bg-3"> Account </i>   
         </a>
-        <a href="/logout" class="text-decoration-none">
+        <a href="/logout" class="text-decoration-none showleft">
           <i class="bi bi-box-arrow-left btn btn-sm bg-5"> Logout </i>
         </a>
         <% if (tips && tips === "d-none") { %>
