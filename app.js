@@ -104,8 +104,7 @@ app.use(makeAvailable);
 app.post('/selectLesson', (req, res) => {
   const selectedLesson = req.body.lesson;
   if (req.session.lessons && req.session.lessons.length > 0) {
-    // Reset the other lesson selected
-    req.session.lessons = req.session.lessons.map(lesson => ({
+    req.session.lessons = req.session.lessons.map(lesson => ({ // Reset the other lesson selected
       ...lesson, selected: lesson.name === selectedLesson
     }));
   }
@@ -203,7 +202,6 @@ app.delete("/account/delete/:id", async (req, res) => {
   }
 });
 
-
 // GET REGISTER
 app.get('/register', (req, res) => {
   res.render("RegisterForm", {user: res.locals.user});
@@ -264,14 +262,12 @@ app.post('/passwordforgot', async (req, res) => {
     user.token = token;
     user.tokenExpires = Date.now() + 3600000; // 1 hour
     await user.save();
-
     const mailOptions = {
       from: 'sixnotesandgo@gmail.com',
       to: email,
       subject: 'Reset password',
       text: `Reset your password at this address: http://localhost:5000/reset/${token}`
     };
-
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.error(error);
@@ -334,14 +330,27 @@ app.get("/notes", async (req, res) => {
     let notesFull = res.locals.notesFull;
     const filter = req.body.categoryFilter;
     const quizzes = res.locals.quiz;
-    if (filter){
+    if (filter) {
       notes = notes.filter(note => note.categoryName === filter);
     }
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+    const paginatedNotes = notes.slice(startIndex, endIndex);
+    const totalPages = Math.ceil(notes.length / limit);
+
     res.render("notes", {
       categories: res.locals.categories,
       selectedLesson: res.locals.selectedLesson,
       lessons: res.locals.lessons,
-      notesFull,notes, filter, quizzes,
+      notesFull,
+      notes: paginatedNotes,
+      filter,
+      quizzes,
+      currentPage: page,
+      totalPages,
+      limit
     });
   } catch (err) {
     console.error("Error rendering notes:", err);
@@ -383,22 +392,20 @@ app.post("/addnote", async function (req, res) {
   const lessonName = req.body.lessonName;
   const userId = req.body.userId;
   try {
-    // Recherche de la catégorie existante
-    let existingCategory = await Category.findOne({
+    let existingCategory = await Category.findOne({ // Recherche de la catégorie existante
       categoryName: newCategoryName,
       lessonName,
       userId,
     });
-    // Si aucune catégorie correspondante n'est trouvée 
-    if (!existingCategory && newCategoryName) {
+    if (!existingCategory && newCategoryName) { // Si nouvelle catégorie 
       existingCategory = await Category.create({
         categoryName: newCategoryName,
         lessonName,
         userId,
       });
     }
-    // Création de la note avec la catégorie déterminée
-    const noteData = new Note({
+    
+    const noteData = new Note({  // Création de la note avec la catégorie 
       front: req.body.front,
       back: req.body.back,
       example: req.body.example,
@@ -420,28 +427,19 @@ app.put("/editnote/:id", async (req, res) => {
   let back = req.body.back;
   let example = req.body.example;
   let newCategoryName = req.body.selectedCategory;
-
-  // Vérification si une nouvelle catégorie est sélectionnée
-  if (newCategoryName === "newCat") {
+  if (newCategoryName === "newCat") { // Vérification si une nouvelle catégorie est sélectionnée
     newCategoryName = req.body.newCategory;
   }
-
-  // Vérification de la validité de la catégorie
-  if (!newCategoryName || typeof newCategoryName !== "string") {
+  if (!newCategoryName || typeof newCategoryName !== "string") { // Vérification de la validité de la catégorie
     newCategoryName = "uncategorized";
   }
-
   const lessonName = req.body.lessonName;
   const userId = req.body.userId;
-
   try {
-    // Recherche de la note à mettre à jour
-    const noteToUpdate = await Note.findById(req.params.id);
+    const noteToUpdate = await Note.findById(req.params.id); // Recherche de la note à mettre à jour
     if (!noteToUpdate) {
       return res.status(404).send("Note not found");
     }
-
-    // Mettre à jour les données de la note
     noteToUpdate.front = front;
     noteToUpdate.back = back;
     noteToUpdate.example = example;
@@ -449,18 +447,14 @@ app.put("/editnote/:id", async (req, res) => {
     noteToUpdate.lessonName = lessonName;
     noteToUpdate.userId = userId;
 
-    // Sauvegarder les modifications de la note
-    await noteToUpdate.save();
+    await noteToUpdate.save(); // Sauvegarder les modifications de la note
 
-    // Recherche de la catégorie existante
-    let existingCategory = await Category.findOne({
+    let existingCategory = await Category.findOne({ // Recherche de la catégorie existante
       categoryName: newCategoryName,
       lessonName,
       userId,
     });
-
-    // S'il ne trouve pas de catégorie, créer new catégorie
-    if (!existingCategory && newCategoryName) {
+    if (!existingCategory && newCategoryName) {  // S'il ne trouve pas de catégorie, créer new catégorie
       existingCategory = await Category.create({
         categoryName: newCategoryName,
         lessonName,
@@ -486,14 +480,11 @@ app.delete("/note/delete/:id", async (req, res) => {
     const categoryName= noteData.categoryName;
     let notes = res.locals.notes;
     notes = notes.filter(note => note.categoryName === noteData.categoryName);
-
-    // Supprimer catégorie si c'est le dernier
-    if(notes.length === 1){
+    if(notes.length === 1){  // Supprimer catégorie si c'est le dernier
       await Category.findOneAndDelete({ userId, lessonName, categoryName });
     }
-
-    // Supprimer la note
-    await Note.findByIdAndDelete(req.params.id);
+    
+    await Note.findByIdAndDelete(req.params.id);  // Supprimer la note
 
     res.redirect("/notes");
   } catch (err) {
@@ -518,7 +509,6 @@ app.delete("/deletelesson", async (req, res) => {
   }
 });
 
-
 // SESSION SELECTED CATEGORY
 app.post('/selectCategory', (req, res) => {
   const selectedCategory = req.body.categoryName;
@@ -530,7 +520,6 @@ app.get("/quiz", async (req, res) => {
   try {
     const selectedLesson = res.locals.selectedLesson;
     const allNotes = res.locals.notes.filter(note => note.lessonName === selectedLesson);
-    // Compter le nombre d'occurrences de chaque catégorie dans le thème sélectionné
     const categoryCounts = [];
     allNotes.forEach(note => {
       const index = categoryCounts.findIndex(
@@ -542,8 +531,8 @@ app.get("/quiz", async (req, res) => {
         categoryCounts.push({ categoryName: note.categoryName, count: 1 });
       }
     });
-    // Filtrer les catégories qui ont au moins 6 occurrences
-    const categoriesFilter = categoryCounts.filter(
+    
+    const categoriesFilter = categoryCounts.filter( // Filter catégories 
       item => item.count >= 6).map(item => item.categoryName
       );
     res.render("quiz", {

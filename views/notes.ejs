@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <%- include('./partials/bootstrap') %>
+  <%- include('./partials/links') %>
   <title>Notes</title>
 </head>
-  <body class="bg-8">
+<body class="bg-8">
   <%- include('./partials/nav') %>
   <%- include('./partials/tips') %>
   <%- include('./partials/action') %>
@@ -12,99 +12,72 @@
       <h1 class="text-center ft-victoria text-darkgreyless pt-2">List notes !</h1>
       <!-- New Note -->
       <% if (user && lessons && selectedLesson) { %>
-        <div class="containter d-flex flex-column text-capitalize">
+        <div class="container d-flex flex-column text-capitalize">
           <div class="cible hidden">
-            <form  id="deleteLesson" action="/deletelesson?_method=DELETE"
-              method="POST">
-              <button type="button" class="btn btn-danger" onclick="confirmDeleteLesson()">
-                  Delete The Lesson
-              </button>
+            <form id="deleteLesson" action="/deletelesson?_method=DELETE" method="POST">
+              <button type="button" class="btn btn-danger" onclick="confirmDeleteLesson()">Delete The Lesson</button>
             </form>
           </div>
           <div class="d-flex justify-content-center gap-2 mt-2">
             <% if(categories && categories.length > 0){ %>
-              <form id="categoryFilterForm" action="/notes" method="POST">
-                <select 
-                  id="categoryFilter"
-                  name="categoryFilter" 
-                  class="form-select text-2 text-capitalize showleft"
-                >
+              <form id="categoryFilterForm" action="/notes" method="GET">
+                <select id="categoryFilter" name="categoryFilter" class="form-select text-2 text-capitalize showleft" onchange="this.form.submit()">
                   <option hidden>Category</option>
                   <option value="">All</option>
-                  <% categories.forEach(category=> { %>
-                    <option value="<%= category.categoryName %>">
-                      <%= category.categoryName %>
-                    </option>
-                    <% }) %>
+                  <% categories.forEach(category => { %>
+                    <option value="<%= category.categoryName %>"><%= category.categoryName %></option>
+                  <% }) %>
                 </select>
               </form>
-              <% } %>
-              <div class="text-center d-inline showright">
-                <button 
-                  id="toggle" 
-                  class="btn  btn-secondary"
-                  onmouseenter="handleMouseEnter(event)"
-                >
-                  <i class="bi bi-gear-fill"></i>
-                </button>
-              </div>
+            <% } %>
+            <div class="text-center d-inline showright">
+              <button id="toggle" class="btn btn-secondary" onmouseenter="handleMouseEnter(event)">
+                <i class="bi bi-gear-fill"></i>
+              </button>
+            </div>
           </div>
-          
         </div>
+      <% } %>
     </div>
     <!-- List Note -->
     <div class="mt-3">
-      <% notes.reverse().forEach((note, index)=> { %>
+      <% notes.forEach((note, index) => { %>
         <div class="mb-3 mx-2 showleftslow" onmouseenter="handleMouseEnter(event)">
           <div class="row g-2">
-            <div class="col-4 ">
+            <div class="col-4">
               <div class="card bg-7 rounded-0">
                 <h5 class="card-title bg-2 text-white p-3 mb-0">Face 1</h5>
-                <p class="card-text p-3 mb-0 capitalize-once">
-                  <%= note.front %>
-                </p>
+                <p class="card-text p-3 mb-0 capitalize-once"><%= note.front %></p>
               </div>
             </div>
-            <div class="col-4 ">
+            <div class="col-4">
               <div class="card bg-6 rounded-0">
                 <h5 class="card-title bg-3 text-white p-3 mb-0">Face 2</h5>
-                <p class="card-text p-3 mb-0 capitalize-once">
-                  <%= note.back %>
-                </p>
+                <p class="card-text p-3 mb-0 capitalize-once"><%= note.back %></p>
               </div>
             </div>
             <% if (note.example) { %>
-            <div class="col-4 ">
+            <div class="col-4">
               <div class="card bg-8 rounded-0">
-                <h5 class="card-title bg-secondary text-white p-3 mb-0 text-capitalize">
-                  <%= note.categoryName %> 
-                </h5>
-                <p class="card-text p-3 mb-0 capitalize-once">
-                  Example : <%= note.example %>
-                </p>
+                <h5 class="card-title bg-secondary text-white p-3 mb-0 text-capitalize"><%= note.categoryName %></h5>
+                <p class="card-text p-3 mb-0 capitalize-once">Example : <%= note.example %></p>
               </div>
             </div>
             <% } else { %>
-            <div class="col-4 ">
+            <div class="col-4">
               <div class="card bg-7 rounded-0">
-                <h5 class="card-title bg-1 text-white p-3 mb-0 text-capitalize">
-                  Category
-                </h5>
-                <p class="card-text p-3 mb-0 capitalize-once">
-                  <%= note.categoryName %> 
-                </p>
+                <h5 class="card-title bg-1 text-white p-3 mb-0 text-capitalize">Category</h5>
+                <p class="card-text p-3 mb-0 capitalize-once"><%= note.categoryName %></p>
               </div>
             </div>
-            <%  } %>
+            <% } %>
           </div>
           <div class="cible hidden">
             <div class="d-flex justify-content-center mt-3 gap-2">
-              <button type="submit" id="showEdit<%= index %>" class="btn bg-2 btn-sm" data-bs-toggle="modal"
-                data-bs-target="#editModal<%= index %>">
+              <button type="submit" id="showEdit<%= index %>" class="btn bg-2 btn-sm" data-bs-toggle="modal" data-bs-target="#editModal<%= index %>">
                 <i class="bi bi-pencil-fill"></i> Edit
               </button>
-              <form class="ml-2" id="deleteNote<%= note._id %>" action="/note/delete/<%= note._id %>?_method=DELETE"
-                method="POST">
+              <form class="ml-2" id="deleteNote<%= note._id %>" action="/note/delete/<%= note._id %>?_method=DELETE" method="POST">
                 <button type="button" class="btn btn-danger btn-sm" onclick="confirmDeleteNote('<%= note._id %>')">
                   <i class="bi bi-trash-fill"></i> Delete
                 </button>
@@ -112,70 +85,72 @@
             </div>
           </div>
         </div>
-        <% }) %>
+      <% }) %>
     </div>
-      <!-- Modal Edit Note-->
-      <% notes.forEach((note, index)=> { %>
-        <div class="modal fade" id="editModal<%= index %>" tabindex="-1">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Edit Note</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <form action="/editnote/<%= note._id %>?_method=PUT" method="POST">
-                  <div class="mb-3">
-                    <label for="front" class="form-label">Front</label>
-                    <input type="text" class="form-control" name="front" value="<%= note.front %>">
-                  </div>
-                  <div class="mb-3">
-                    <label for="back" class="form-label">Back</label>
-                    <input type="text" class="form-control" name="back" value="<%= note.back %>">
-                  </div>
-                  <div class="mb-3">
-                    <label for="example" class="form-label">Example</label>
-                    <input type="text" class="form-control" name="example" value="<%= note.example %>">
-                  </div>
-                  <select name="selectedCategory" class="form-select text-capitalize bg-secondary text-white mt-2"
-                    onchange="hideContainer2(this)">
-                    <option hidden value="<%= note.categoryName %>">
-                      <%= note.categoryName %>
-                    </option>
-                    <option value="newCat">New Category</option>
-                    <% categories.forEach(category=> { %>
-                      <option value="<%= category.categoryName %>">
-                        <%= category.categoryName %>
-                      </option>
-                      <% }) %>
-                  </select>
-                  <div id="categoryContainer2" style="display: none;">
-                    <label for="newCategory" class="form-label ms-1 mt-1 fw-bold text-success">
-                      Create a new category
-                    </label>
-                    <input type="text" class="form-control" name="newCategory"
-                      placeholder="Write the category name...">
-                  </div>
-                  <input type="hidden" name="lessonName" value="<%= selectedLesson %>">
-                  <input type="hidden" name="userId" value="<%= user._id %>">
-                  <button type="submit" class="btn bg-2 mt-2">Save</button>
-                </form>
-              </div>
+<!-- Pagination -->
+<nav aria-label="Page" >
+  <ul class="pagination d-flex flex-wrap justify-content-center px-5">
+    <% for(let i = 1; i <= totalPages; i++) { %>
+      <li class="page-item  <%= currentPage === i ? 'active' : '' %>">
+        <a class="page-link showleft rounded-0" href="/notes?page=<%= i %>&limit=<%= limit %>"><%= i %></a>
+      </li>
+    <% } %>
+  </ul>
+</nav>
+
+    <!-- Modal Edit Note-->
+    <% notes.forEach((note, index) => { %>
+      <div class="modal fade" id="editModal<%= index %>" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Edit Note</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="/editnote/<%= note._id %>?_method=PUT" method="POST">
+                <div class="mb-3">
+                  <label for="front" class="form-label">Front</label>
+                  <input type="text" class="form-control" name="front" value="<%= note.front %>">
+                </div>
+                <div class="mb-3">
+                  <label for="back" class="form-label">Back</label>
+                  <input type="text" class="form-control" name="back" value="<%= note.back %>">
+                </div>
+                <div class="mb-3">
+                  <label for="example" class="form-label">Example</label>
+                  <input type="text" class="form-control" name="example" value="<%= note.example %>">
+                </div>
+                <select name="selectedCategory" class="form-select text-capitalize bg-secondary text-white mt-2" onchange="hideContainer2(this)">
+                  <option hidden value="<%= note.categoryName %>"><%= note.categoryName %></option>
+                  <option value="newCat">New Category</option>
+                  <% categories.forEach(category => { %>
+                    <option value="<%= category.categoryName %>"><%= category.categoryName %></option>
+                  <% }) %>
+                </select>
+                <div id="categoryContainer2" style="display: none;">
+                  <label for="newCategory" class="form-label ms-1 mt-1 fw-bold text-success">Create a new category</label>
+                  <input type="text" class="form-control" name="newCategory" placeholder="Write the category name...">
+                </div>
+                <input type="hidden" name="lessonName" value="<%= selectedLesson %>">
+                <input type="hidden" name="userId" value="<%= user._id %>">
+                <button type="submit" class="btn bg-2 mt-2">Save</button>
+              </form>
             </div>
           </div>
         </div>
-        <% }) %>
-      <% } %>
-      <%- include('./partials/footer') %>
-    <script>
+      </div>
+    <% }) %>
+  <%- include('./partials/footer') %>
+  <script>
     // syntaxe toggle 
-      document.querySelector("#toggle").addEventListener("click", () => {
-        var settings = document.querySelectorAll(".cible");
-        settings.forEach((setting) => {
-          setting.classList.toggle("hidden");
-        });
+    document.querySelector("#toggle").addEventListener("click", () => {
+      var settings = document.querySelectorAll(".cible");
+      settings.forEach((setting) => {
+        setting.classList.toggle("hidden");
       });
-    </script>
-    <script src="/script.js"></script>
-  </body>
+    });
+  </script>
+  <script src="/script.js"></script>
+</body>
 </html>
