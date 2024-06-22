@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0 py-2">
   <a class="navbar-brand m-0 p-0" href="/" >
-    <img src="/img/logo.png" width="35px" height="35px" class="ms-2 showleftspeed">
+    <img src="/img/logo.png" width="35px" height="35px" class="ms-2 showleft">
   </a> 
   <% if (lessons && lessons.length> 0) { %>
     <form id="lessonForm" action="/selectLesson" method="POST" class="ms-sm-2 ">
@@ -28,10 +28,10 @@
   >
     <% if (!user) { %>
       <ul class="ms-auto d-flex justify-content-end p-0 m-0 mt-2 gap-2 mt-sm-0 ">
-        <a href="/register" class="text-decoration-none  showleft2" >
+        <a href="/register" class="text-decoration-none  showright" >
           <i class="bi bi-box-arrow-in-right btn bg-3 btn-sm"> Sign-up </i>
         </a>
-        <a  href="/login" class="text-decoration-none showleft">
+        <a  href="/login" class="text-decoration-none showright">
           <i class="bi bi-box-arrow-in-right btn bg-3 btn-sm"> Login </i>
         </a>
         <% if (tips && tips === "d-none") { %>
@@ -45,14 +45,14 @@
       </ul>
     <% } else { %>
       <ul class="ms-auto d-flex justify-content-end p-0 m-0 mt-2 gap-2 mt-sm-0">
-        <a href="/account" class="text-decoration-none showleft2">
+        <a href="/account" class="text-decoration-none showright">
           <i class="bi bi-person-circle btn btn-sm bg-3"> Account </i>   
         </a>
-        <a href="/logout" class="text-decoration-none showleft">
+        <a href="/logout" class="text-decoration-none showright">
           <i class="bi bi-box-arrow-left btn btn-sm bg-5"> Logout </i>
         </a>
         <% if (tips && tips === "d-none") { %>
-          <form action="/tips" method="post">
+          <form action="/tips" method="post" class="">
             <input type="hidden" name="status" value=""/>
             <button type="submit" class="btn btn-sm bg-4 text-dark">
               Tips

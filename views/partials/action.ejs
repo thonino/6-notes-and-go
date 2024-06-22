@@ -1,25 +1,25 @@
 <% if (user) { %>
   <nav class="bg-darkgrey">
-    <p class="text-center ft-victoria fs-2 m-0 fw-light text-light showleft3k"> Action Menu : </p>
+    <p class="text-center ft-victoria fs-2 m-0 fw-light text-light"> Action Menu : </p>
     <ul class="navbar-nav">
       <div class="d-flex justify-content-center align-items-center" >
-        <div class="pt-2 d-flex justify-content-center gap-3 ">
+        <div class="pt-2 d-flex justify-content-center gap-3">
           <% if (selectedLesson && notes.length > 0) { %>
-            <div class="bg-1 rounded-2 showleft2">
+            <div class="bg-1 rounded-2 leftstape">
               <a  href="/notes" class="btn btn-lg text-white d-flex flex-column fs-6">
                 <i class="bi bi-book-fill text-light"></i>
                 Learn 
               </a>
             </div>
           <% } else { %>
-            <div class="bg-darkgreyless rounded-2">
+            <div class="bg-darkgreyless rounded-2 leftstape">
               <span  class="btn btn-lg text-secondary d-flex flex-column cursor-default fs-6">
                 <i class="bi bi-book-fill"></i>
                 Learn 
               </span>
             </div>
           <% } %>
-          <div class="bg-2 rounded-2 fs-6 showleft">
+          <div class="bg-2 rounded-2 fs-6 leftstape">
             <button 
               class="btn btn-lg text-white d-flex flex-column fs-6" 
               data-bs-toggle="modal" 
@@ -30,7 +30,7 @@
             </button>
           </div>
           <% if (user && lessons && selectedLesson) { %>
-            <div class="bg-2 rounded-2 showtop">
+            <div class="bg-2 rounded-2 leftstape">
               <button 
                 class="btn btn-lg text-white d-flex flex-column fs-6" 
                 data-bs-toggle="modal" 
@@ -41,7 +41,7 @@
               </button>
             </div>
             <% } else { %>
-              <div class="bg-darkgreyless rounded-2">
+              <div class="bg-darkgreyless rounded-2 leftstape">
                 <span class="btn btn-lg text-secondary d-flex flex-column cursor-default fs-6">
                   <i class="bi bi-pencil-fill"></i>
                   Note
@@ -49,14 +49,14 @@
               </div>
             <% } %>
             <% if (notesFull && notesFull.length> 5) { %>
-              <div class="bg-3 rounded-2 showright">
+              <div class="bg-3 rounded-2 leftstape">
                 <a  href="/quiz" class="btn btn-lg  d-flex flex-column fs-6">
                   <i class="bi bi-controller "></i>
                   Quiz
                 </a>
               </div>
               <% } else { %>
-                <div class="bg-darkgreyless rounded-2">
+                <div class="bg-darkgreyless rounded-2 leftstape">
                   <span class="btn btn-lg text-secondary d-flex flex-column cursor-default fs-6">
                     <i class="bi bi-controller"></i>
                     Quiz
@@ -64,14 +64,14 @@
                 </div>
               <% } %>
           <% if (tenQuizzes && tenQuizzes.length > 0 ) { %>
-            <div class="bg-4 rounded-2 showright2">
+            <div class="bg-4 rounded-2 leftstape">
               <a  href="/stats" class="btn btn-lg text-dark d-flex flex-column fs-6">
                 <i class="bi bi-file-earmark-check"></i>
                 Stats
               </a>
             </div>
           <% } else { %>
-            <div class="bg-darkgreyless rounded-2">
+            <div class="bg-darkgreyless rounded-2 leftstape">
               <span class="btn btn-lg text-secondary d-flex flex-column cursor-default fs-6">
                 <i class="bi bi-file-earmark-check"></i>
                 Stats
@@ -81,7 +81,7 @@
       </div>
     </ul>
     <% if (selectedLesson) { %>
-        <p class="fs-3 text-2 ft-roboto fw-bold text-center mt-3 pb-1 m-0 showright2">
+        <p class="fs-3 text-2 ft-roboto fw-bold text-center mt-3 pb-1 m-0 showleft500">
           Current Lesson : 
           <span class="fs-4 text-light  fst-italic ">
             <%= selectedLesson %> 
@@ -99,9 +99,9 @@
           <i class="bi bi-book text-center fs-1"></i>
           <div class="modal-header fs-4 p-0 ms-3">
             <i class="bi bi-plus-lg"></i>
-            <p class="modal-title">New Lesson</p>
+            <p class="modal-title ft-victoria text-darkgreyless">New Lesson</p>
             <button 
-              class="btn-close me-2" 
+              class="btn-close me-2 showright" 
               type="button" 
               data-bs-dismiss="modal" 
               aria-label="Close">
@@ -116,7 +116,7 @@
                   <input type="hidden" name="userId" value="<%= user._id %>">
                   <% } %>
               </div>
-              <button type="submit" class="btn bg-3">Add</button>
+              <button type="submit" class="btn bg-4">Add</button>
             </form>
           </div>
         </div>

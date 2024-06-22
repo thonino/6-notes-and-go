@@ -15,11 +15,11 @@
             <i class="bi bi-box-arrow-in-right btn btn-success"> Login </i>
           </a>
           <% } else { %>
-            <h1 class="fs-2 fst-italic text-2 fw-bold mb-2">Start your quiz !</h1>
+            <h1 class="text-center ft-victoria text-darkgreyless pt-2">Start your quiz !</h1>
             <% if (categories) { %>
-              <div class="text-center d-flex justify-content-center">
+              <div class="text-center d-flex justify-content-center pt-3">
                 <form action="/selectCategory" method="POST" class="text-center">
-                  <select name="categoryName" class="form-select text-2 text-capitalize mt-2">
+                  <select name="categoryName" class="form-select text-2 text-capitalize mt-2 showleft">
                     <option value="all" hidden>Category</option>
                     <option value="all">All</option>
                     <% categories.forEach(category=> { %>
@@ -28,7 +28,7 @@
                       </option>
                       <% }) %>
                   </select>
-                  <button type="submit" class="btn bg-3 m-2">Start!</button>
+                  <button type="submit" class="btn bg-3 m-2 showbottom">Start!</button>
                 </form>
               </div>
             <% } else { %>

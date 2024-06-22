@@ -88,73 +88,43 @@ if (categoryFilter) {
   });
 }
 
+// Initialiser ScrollReveal stapes 2
+ScrollReveal().reveal('.leftstape', { 
+  distance: '50px',
+  origin: 'left',
+  easing: 'ease-in-out',
+  interval: 200
+});
+
 // Initialiser ScrollReveal Right
-ScrollReveal().reveal('.showright2k', { 
+ScrollReveal().reveal('.showright250', { 
   distance: '250px',
-  duration: 2000,
+  duration: 1000,
   origin: 'right',
   easing: 'ease-in-out',
 });
 
 // Initialiser ScrollRevealleft
-ScrollReveal().reveal('.showleft3k', { 
+ScrollReveal().reveal('.showleft500', { 
   distance: '500px',
   duration: 1000,
   origin: 'left',
   easing: 'ease-in-out',
 });
 
-// Initialiser ScrollRevealleft
-ScrollReveal().reveal('.showleftspeed', { 
-  distance: '100px',
-  duration: 500,
-  origin: 'left',
-});
-
-// Initialiser ScrollRevealleft
-ScrollReveal().reveal('.showrightspeed', { 
-  distance: '100px',
-  duration: 500,
-  origin: 'right',
-});
-
 // Initialiser ScrollReveal Right 2
-ScrollReveal().reveal('.showright2', { 
-  distance: '50px',
-  duration: 1200,
-  origin: 'right',
-  easing: 'ease-in-out',
-});
-
-// Initialiser ScrollReveal Right 2
-ScrollReveal().reveal('.show2', { 
+ScrollReveal().reveal('.show', { 
   duration: 1500,
-  easing: 'ease-in-out',
-});
-
-// Initialiser ScrollRevealleft 2
-ScrollReveal().reveal('.showleft2', { 
-  distance: '50px',
-  duration: 1200,
-  origin: 'left',
-  easing: 'ease-in-out',
-});
-
-// Initialiser ScrollReveal top
-ScrollReveal().reveal('.showtop2', { 
-  distance: '50px',
-  duration: 1500,
-  origin: 'top',
   easing: 'ease-in-out',
 });
 
 // Initialiser ScrollReveal Right
 ScrollReveal().reveal('.showright', { 
   distance: '100px',
-  duration: 500,
+  duration: 1000,
   origin: 'right',
   easing: 'ease-in-out',
-
+  interval: 100
 });
 
 // Initialiser ScrollRevealleft
@@ -163,6 +133,7 @@ ScrollReveal().reveal('.showleft', {
   duration: 1000,
   origin: 'left',
   easing: 'ease-in-out',
+  interval: 100
 
 });
 
@@ -172,6 +143,7 @@ ScrollReveal().reveal('.showbottom', {
   duration: 1000,
   origin: 'bottom',
   easing: 'ease-in-out',
+  interval: 100
 });
 
 // Initialiser ScrollReveal top
@@ -180,4 +152,23 @@ ScrollReveal().reveal('.showtop', {
   duration: 1000,
   origin: 'top',
   easing: 'ease-in-out',
+  interval: 100
+});
+
+// Initialiser ScrollReveal top
+ScrollReveal().reveal('.showtopslow', { 
+  distance: '250px',
+  duration: 1500,
+  origin: 'top',
+  easing: 'ease-in-out',
+  interval: 200
+});
+
+// Initialiser ScrollReveal top
+ScrollReveal().reveal('.showleftslow', { 
+  distance: '100px',
+  duration: 500,
+  origin: 'left',
+  easing: 'ease-in-out',
+  interval: 150
 });

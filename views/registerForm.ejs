@@ -8,22 +8,22 @@
     <%- include('./partials/nav') %>
     <%- include('./partials/tips') %>
       <div class="container col-6">
-        <h1 class="text-center">Sign-up</h1>
+        <h1 class="text-center ft-victoria text-darkgreyless pt-3">Sign-up</h1>
         <form method="POST" action="/register">
-          <div class="form-group">
-            <label for="name" class="fst-italic">Name</label>
+          <div class="form-group leftstape">
+            <label for="name" class="fst-italic leftstape">Name :</label>
             <input type="text" class="form-control" id="name" name="name" required>
           </div>
-          <div class="form-group">
-            <label for="email" class="fst-italic">Email</label>
+          <div class="form-group leftstape">
+            <label for="email" class="fst-italic leftstape">Email address :</label>
             <input type="email" class="form-control" id="email" name="email" required>
           </div>
-          <div class="form-group">
-            <label for="password" class="fst-italic">Password</label>
+          <div class="form-group leftstape">
+            <label for="password" class="fst-italic leftstape">Password :</label>
             <input type="password" class="form-control" id="password" name="password" required>
           </div>
           <input type="hidden" class="form-control" id="role" name="role" value="user">
-          <button type="submit" class="btn bg-3 mt-2">Create</button>
+          <button type="submit" class="btn bg-3 mt-2 showbottom">Create</button>
         </form>
       </div>
       <%- include('./partials/footer') %>
