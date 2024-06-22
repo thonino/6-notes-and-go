@@ -5,7 +5,7 @@
       <div class="d-flex justify-content-center align-items-center" >
         <div class="pt-2 d-flex justify-content-center gap-3">
           <% if (selectedLesson && notes.length > 0) { %>
-            <div class="bg-1 rounded-2 leftstape">
+            <div class="bg-1 rounded-2 leftstape" onmouseenter="handleMouseEnter(event)">
               <a  href="/notes" class="btn btn-lg text-white d-flex flex-column fs-6">
                 <i class="bi bi-book-fill text-light"></i>
                 Learn 
@@ -19,7 +19,7 @@
               </span>
             </div>
           <% } %>
-          <div class="bg-2 rounded-2 fs-6 leftstape">
+          <div class="bg-2 rounded-2 fs-6 leftstape" onmouseenter="handleMouseEnter(event)">
             <button 
               class="btn btn-lg text-white d-flex flex-column fs-6" 
               data-bs-toggle="modal" 
@@ -30,7 +30,7 @@
             </button>
           </div>
           <% if (user && lessons && selectedLesson) { %>
-            <div class="bg-2 rounded-2 leftstape">
+            <div class="bg-2 rounded-2 leftstape" onmouseenter="handleMouseEnter(event)">
               <button 
                 class="btn btn-lg text-white d-flex flex-column fs-6" 
                 data-bs-toggle="modal" 
@@ -49,7 +49,7 @@
               </div>
             <% } %>
             <% if (notesFull && notesFull.length> 5) { %>
-              <div class="bg-3 rounded-2 leftstape">
+              <div class="bg-3 rounded-2 leftstape" onmouseenter="handleMouseEnter(event)">
                 <a  href="/quiz" class="btn btn-lg  d-flex flex-column fs-6">
                   <i class="bi bi-controller "></i>
                   Quiz
@@ -64,7 +64,7 @@
                 </div>
               <% } %>
           <% if (tenQuizzes && tenQuizzes.length > 0 ) { %>
-            <div class="bg-4 rounded-2 leftstape">
+            <div class="bg-4 rounded-2 leftstape" onmouseenter="handleMouseEnter(event)">
               <a  href="/stats" class="btn btn-lg text-dark d-flex flex-column fs-6">
                 <i class="bi bi-file-earmark-check"></i>
                 Stats
@@ -81,7 +81,10 @@
       </div>
     </ul>
     <% if (selectedLesson) { %>
-        <p class="fs-3 text-2 ft-roboto fw-bold text-center mt-3 pb-1 m-0 showleft500">
+        <p 
+          class="fs-3 text-2 ft-roboto fw-bold text-center mt-3 pb-1 m-0 showleft500"
+          onmouseenter="handleMouseEnter(event)"
+        >
           Current Lesson : 
           <span class="fs-4 text-light  fst-italic ">
             <%= selectedLesson %> 

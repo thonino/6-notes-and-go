@@ -11,7 +11,10 @@
     <div class="row-6 d-flex flex-column align-items-center">
       <div class="vw-100 wrapper bg-9 pb-3 m-0 p-0">
         <h1 class="text-center ft-victoria text-darkgreyless pt-3">6 Notes & Go</h1>
-        <p class="fs-4 ft-roboto text-center fw-bold text-3 pb-1 m-0 showright">
+        <p 
+          class="fs-4 ft-roboto text-center fw-bold text-3 pb-1 m-0 showright" 
+          onmouseenter="handleMouseEnter(event)"
+        >
           Free application !
           <span class="fs-5 ft-victoria fw-light text-center text-secondary fst-italic m-0 showleft500">
             To learn words by heart
@@ -23,48 +26,73 @@
               <img src="/img/board.png" class="card-img" alt="image de tableau">
               <div class="card-img-overlay d-flex flex-column align-items-center">
                 <div id="about" class="content">
-                  <p class="card-title ft-victoria fs-2 text-2 text-center mt-100">
+                  <p 
+                    class="card-title ft-victoria fs-2 text-2 text-center mt-100"
+                    onmouseenter="handleMouseEnter(event)"
+                  >
                     About
                   </p>
                   <p 
                     class="card-text fs-5 ft-victoria text-darkgreyless text-center mt-4 px-4" 
                     style="height: 180px;"
+                    onmouseenter="handleMouseEnter(event)"
                   >
                       It's an app for anyone who wants to learn words or definitions by heart. 
                       Very easy to use and completely free.
                   </p>
                 </div>
                 <div id="simply" class="content hidden">
-                  <p class="card-title ft-victoria fs-2 text-2 text-center mt-100">
+                  <p 
+                    class="card-title ft-victoria fs-2 text-2 text-center mt-100"
+                    onmouseenter="handleMouseEnter(event)"
+                  >
                       Simply
                   </p>
                   <p 
                     class="card-text fs-5 ft-victoria text-darkgreyless text-center mt-4 px-4" 
                     style="height: 180px;"
+                    onmouseenter="handleMouseEnter(event)"
                   >
                       Create a lesson and add your notes. After 6 notes added you can already take a quiz. 
                       Let yourself be guided by the fantastic Tips feature.
                   </p>
                 </div>
                 <div id="try" class="content hidden">
-                  <p class="card-title ft-victoria fs-2 text-2 text-center mt-100">
+                  <p 
+                    class="card-title ft-victoria fs-2 text-2 text-center mt-100"
+                    onmouseenter="handleMouseEnter(event)"
+
+                  >
                     Try
                   </p>
                   <p 
                     class="card-text fs-5 ft-victoria text-darkgreyless mt-4 px-4" 
                     style="height: 180px;"
+                    onmouseenter="handleMouseEnter(event)"
                   >
                     <span class="text-center">Create a free account <br>Sign in <br>Let yourself be guided!</span>
                   </p>
                 </div>
                 <div class="ft-roboto fs-2 ">
-                  <button id="btn-about" class="btn btn-sm fs-4 text-2 fw-light underline">
+                  <button 
+                    id="btn-about" 
+                    class="btn btn-sm fs-4 text-2 fw-light underline"
+                    onmouseenter="handleMouseEnter(event)"
+                  >
                     About
                   </button>
-                  <button id="btn-simply" class="btn btn-sm fs-4 text-2 fw-light underline">
+                  <button 
+                    id="btn-simply" 
+                    class="btn btn-sm fs-4 text-2 fw-light underline"
+                    onmouseenter="handleMouseEnter(event)"
+                  >
                       Simply
                   </button>
-                  <button id="btn-try" class="btn btn-sm fs-4 text-2 fw-light underline">
+                  <button 
+                    id="btn-try" 
+                    class="btn btn-sm fs-4 text-2 fw-light underline"
+                    onmouseenter="handleMouseEnter(event)"
+                  >
                     Try
                   </button>
                 </div>
@@ -72,23 +100,37 @@
             </div>
           </div>
           <div class="d-flex justify-content-center flex-column showbottom"style="width:520px;">
-            <p class="fs-2 fw-bold ft-victoria text-center text-2 fst-italic m3">
+            <p 
+              class="fs-2 fw-bold ft-victoria text-center text-2 fst-italic m3" 
+              onmouseenter="handleMouseEnter(event)"
+            >
               Learn and test yourself
             </p>
-            <div class="d-flex justify-content-center align-items-center" >
+            <div class="d-flex justify-content-center align-items-center">
               <div class="d-flex justify-content-center ">
-                <img src="/img/design1.png" class="img-fluid">
+                <img src="/img/design1.png" class="img-fluid" onmouseenter="handleMouseEnter(event)">
               </div>
               <div class="d-flex flex-wrap justify-content-center me-1" style="width:450px;">
-                <img src="/img/face1.png" class="img-fluid w-50 h-50">
-                <img src="/img/face2.png" class="img-fluid w-50 h-50">
-                <img src="/img/example.png" class="img-fluid w-50 h-50">
+                <img 
+                  src="/img/face1.png" class="img-fluid w-50 h-50" 
+                  onmouseenter="handleMouseEnter(event)"
+                >
+                <img 
+                  src="/img/face2.png" class="img-fluid w-50 h-50" 
+                  onmouseenter="handleMouseEnter(event)"
+                >
+                <img 
+                  src="/img/example.png" class="img-fluid w-50 h-50" 
+                  onmouseenter="handleMouseEnter(event)"
+                >
               </div>
             </div>
           </div>
         </div>
       </div>
-      <p class="fs-2 text-center ft-victoria text-2 pt-3 showleft">Who needs the app ?</p>
+      <p class="fs-2 text-center ft-victoria text-2 pt-3 showleft" onmouseenter="handleMouseEnter(event)">
+        Who needs the app ?
+      </p>
       <%- include('./partials/carousel') %>
 
     </div>

@@ -1,8 +1,11 @@
 <nav class="bg-secondary <%= tips %>">
   <div class="d-flex justify-content-center align-items-center " >
       <!-- Block 1 (Center) -->
-    <div class="d-flex mx-auto text-white fst-italic gap-2 mt-2 ">
-      <span class="text-4 mt-1 ">Tips :</span>
+    <div
+      class="d-flex mx-auto text-white fst-italic gap-2 mt-2"
+      onmouseenter="handleMouseEnter(event)"
+    >
+      <span class="text-4 mt-1">Tips :</span>
       <span class="mt-1">
       <% if (!user) { %>
         <p class="showright250"> <!-- stape 1 -->
@@ -64,6 +67,7 @@
             type="submit" 
             class="btn text-4 p-0 me-2 showright"
             style="margin-top: -7px;"
+            onmouseenter="handleMouseEnter(event)"
           >
             <i class="bi bi-x-circle-fill"></i>
           </button>

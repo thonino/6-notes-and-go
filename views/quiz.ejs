@@ -19,7 +19,10 @@
             <% if (categories) { %>
               <div class="text-center d-flex justify-content-center pt-3">
                 <form action="/selectCategory" method="POST" class="text-center">
-                  <select name="categoryName" class="form-select text-2 text-capitalize mt-2 showleft">
+                  <select 
+                    name="categoryName" 
+                    class="form-select text-2 text-capitalize mt-2 showleft"
+                  >
                     <option value="all" hidden>Category</option>
                     <option value="all">All</option>
                     <% categories.forEach(category=> { %>
@@ -28,7 +31,11 @@
                       </option>
                       <% }) %>
                   </select>
-                  <button type="submit" class="btn bg-3 m-2 showbottom">Start!</button>
+                  <button 
+                    type="submit" 
+                    class="btn bg-3 m-2 showbottom"
+                    onmouseenter="handleMouseEnter(event)"
+                  >Start!</button>
                 </form>
               </div>
             <% } else { %>

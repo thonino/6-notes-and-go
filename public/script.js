@@ -172,3 +172,13 @@ ScrollReveal().reveal('.showleftslow', {
   easing: 'ease-in-out',
   interval: 150
 });
+
+const handleMouseEnter = (event) => {
+  const element = event.currentTarget;
+  if (!element.classList.contains('start-bounce')) {
+    element.classList.add('start-bounce');
+    element.addEventListener('animationend', () => {
+      element.classList.remove('start-bounce');
+    }, { once: true }); 
+  }
+};
