@@ -204,7 +204,7 @@ app.delete("/account/delete/:id", async (req, res) => {
 
 // GET REGISTER
 app.get('/register', (req, res) => {
-  res.render("RegisterForm", {user: res.locals.user});
+  res.render("registerForm", {user: res.locals.user});
 });
 
 // POST REGISTER
@@ -223,7 +223,8 @@ const userData = new User({
 
 // GET LOGIN
 app.get('/login', (req, res) => {
-res.render("LoginForm", { user: res.locals.user });});
+  res.render("loginForm", { user: res.locals.user });
+});
 
 // POST LOGIN
 app.post('/login', (req, res) => {
