@@ -59,6 +59,7 @@ const { log } = require("console");
 
 // EJS : 
 app.set('view engine', 'ejs');
+app.set('views', './views');
 
 // Public folder
 // app.use(express.static(path.join(__dirname, 'public')));
@@ -95,7 +96,6 @@ const makeAvailable = async (req, res, next) => {
 };
 
 app.use(makeAvailable);
-
 
 
 //---------------------------------ROOTS---------------------------------//
