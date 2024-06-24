@@ -85,7 +85,7 @@
           class="fs-3 text-2 ft-roboto fw-bold text-center mt-3 pb-1 m-0 showleft500"
         >
           Current Lesson : 
-          <span class="fs-4 text-light  fst-italic ">
+          <span class="fs-4 text-light fw-light fst-italic ">
             <%= selectedLesson %> 
           </span> 
         </p>
@@ -112,8 +112,8 @@
           <div class="modal-body">
             <form class="" action="/addlesson" method="POST">
               <div class="mb-3">
-                <label for="Lessonname" class="form-label">Lesson Name</label>
-                <input type="text" class="form-control" name="lessonName" placeholder="Enter your Lesson name">
+                <label for="Lessonname" class="form-label text-2 fst-italic fw-bold m-0 p-0 mb-1">Lesson Name</label>
+                <input type="text" class="form-control" name="lessonName" placeholder="write the lesson name..">
                 <% if (user._id) { %>
                   <input type="hidden" name="userId" value="<%= user._id %>">
                   <% } %>
@@ -142,16 +142,16 @@
         <div class="modal-body">
           <form action="/addnote" method="POST">
             <div class="mb-3">
-              <label for="front" class="form-label">Front</label>
-              <input type="text" class="form-control" name="front" placeholder="write a word to learn...">
+              <label for="back" class="form-label text-2 fst-italic fw-bold m-0 p-0 mb-1">Note</label>
+              <input type="text" class="form-control" name="back" placeholder="write a note to learn...">
             </div>
             <div class="mb-3">
-              <label for="back" class="form-label">Back</label>
-              <input type="text" class="form-control" name="back" placeholder="write its answer...">
+              <label for="front" class="form-label text-2 fst-italic fw-bold m-0 p-0 mb-1">Answer</label>
+              <input type="text" class="form-control" name="front" placeholder="write it's answer...">
             </div>
             <div class="mb-3">
-              <label for="example" class="form-label">Example</label>
-              <input type="text" class="form-control" name="example" placeholder="write an example...">
+              <label for="example" class="form-label text-2 fst-italic fw-bold m-0 p-0 mb-1">Example</label>
+              <input type="text" class="form-control" name="example" placeholder="give an example...">
             </div>
             <% if (categories) { %>
               <select name="selectedCategory" class="form-select text-capitalize bg-2 text-white mt-2"
