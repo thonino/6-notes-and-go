@@ -20,7 +20,7 @@
           </div>
           <div class="d-flex justify-content-center gap-2 mt-2">
             <% if(categories && categories.length > 0){ %>
-              <form id="categoryFilterForm" action="/notes" method="GET">
+              <form id="categoryFilterForm" action="/notes" method="POST">
                 <select id="categoryFilter" name="categoryFilter" class="form-select text-2 text-capitalize showleft" onchange="this.form.submit()">
                   <option hidden>Category</option>
                   <option value="">All</option>
@@ -99,15 +99,15 @@
       <% }) %>
     </div>
 <!-- Pagination -->
-<nav aria-label="Page" >
+<!-- <nav aria-label="Page" >
   <ul class="pagination d-flex flex-wrap justify-content-center px-5">
-    <% for(let i = 1; i <= totalPages; i++) { %>
-      <li class="page-item  <%= currentPage === i ? 'active' : '' %>">
-        <a class="page-link showleft rounded-0" href="/notes?page=<%= i %>&limit=<%= limit %>"><%= i %></a>
+    <% // for(let i = 1; i <= totalPages; i++) { %>
+      <li class="page-item  <%= // currentPage === i ? 'active' : '' %>">
+        <a class="page-link showleft rounded-0" href="/notes?page=<%= //i %>&limit=<%= // limit %>"><%= // i %></a>
       </li>
-    <% } %>
+    <% // } %>
   </ul>
-</nav>
+</nav> -->
 
     <!-- Modal Edit Note-->
     <% notes.forEach((note, index) => { %>

@@ -365,14 +365,27 @@ app.post("/notes", async (req, res) => {
     let notesFull = res.locals.notesFull;
     const filter = req.body.categoryFilter;
     const quizzes = res.locals.quiz;
-    if (filter){
+    if (filter) {
       notes = notes.filter(note => note.categoryName === filter);
     }
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+    const paginatedNotes = notes.slice(startIndex, endIndex);
+    const totalPages = Math.ceil(notes.length / limit);
+
     res.render("notes", {
       categories: res.locals.categories,
       selectedLesson: res.locals.selectedLesson,
       lessons: res.locals.lessons,
-      notesFull,notes, filter, quizzes,
+      notesFull,
+      notes: paginatedNotes,
+      filter,
+      quizzes,
+      currentPage: page,
+      totalPages,
+      limit
     });
   } catch (err) {
     console.error("Error rendering notes:", err);
