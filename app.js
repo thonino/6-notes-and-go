@@ -697,5 +697,12 @@ app.get("/alert", (req, res) => {
   res.render("alert", { message });
 });
 
+
+
+// for phone :  192.168.1.237:5000
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+// app.listen(PORT, '0.0.0.0', () => {
+//   console.log(`App listening at http://localhost:${PORT}`);
+// });
+

@@ -1,3 +1,22 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1 0 auto;
+}
+
+footer {
+  flex-shrink: 0;
+}
+
 .capitalize-once::first-letter {
   text-transform: uppercase;
 }
@@ -35,7 +54,7 @@
 
 .cursor-default { cursor: default; }
 
-.mt-70{ margin-top: 88px;}
+
 
 .wrapper {
   background-color: #f3f3f3;
@@ -61,7 +80,6 @@
   color: #333;
 }
 
-
 .ft-victoria {font-family: "Playwrite AU VIC", cursive;}
 .ft-roboto {
   font-family: "Roboto", sans-serif;
@@ -80,7 +98,8 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
 }
 
-.mt-100{ margin-top: 100px;}
+.mt-90{ margin-top: 90px;}
+.mt-70{ margin-top: 150px;}
 
 .carousel{ max-width: 800px;}
 

@@ -8,12 +8,11 @@
     <%- include('./partials/nav') %>
     <%- include('./partials/tips') %>
     <%- include('./partials/action') %>
-    <div class="row-6 d-flex flex-column align-items-center">
+    <div class="row-6 d-flex flex-column align-items-center mb-3">
       <div class="vw-100 wrapper bg-9 pb-3 m-0 p-0">
         <h1 class="text-center ft-victoria text-darkgreyless pt-3">6 Notes & Go</h1>
         <p 
           class="fs-4 ft-roboto text-center fw-bold text-3 pb-1 m-0 showright" 
-          
         >
           Free app !
           <span class="fs-5 ft-victoria fw-light text-center text-secondary fst-italic m-0 showleft500">
@@ -27,14 +26,14 @@
               <div class="card-img-overlay d-flex flex-column align-items-center">
                 <div id="about" class="content">
                   <p 
-                    class="card-title ft-victoria fs-2 text-2 text-center mt-100"
+                    class="card-title ft-victoria fs-2 text-2 text-center mt-90"
                     onmouseenter="handleMouseEnter(event)"
                   >
                     About
                   </p>
                   <p 
-                    class="card-text fs-5 ft-victoria text-darkgreyless text-center mt-4 px-4" 
-                    style="height: 180px;"
+                    class="card-text fs-5 ft-victoria text-darkgreyless text-center mt-2 px-3" 
+                    style="height: 130px;"
                     onmouseenter="handleMouseEnter(event)"
                   >
                       It's an app for anyone who wants to learn words or definitions by heart. 
@@ -43,31 +42,30 @@
                 </div>
                 <div id="simply" class="content hidden">
                   <p 
-                    class="card-title ft-victoria fs-2 text-2 text-center mt-100"
+                    class="card-title ft-victoria fs-2 text-2 text-center mt-90"
                     onmouseenter="handleMouseEnter(event)"
                   >
-                      Simply
+                    Simply
                   </p>
                   <p 
-                    class="card-text fs-5 ft-victoria text-darkgreyless text-center mt-4 px-4" 
-                    style="height: 180px;"
+                    class="card-text fs-5 ft-victoria text-darkgreyless text-center mt-2 px-3" 
+                    style="height: 130px;"
                     onmouseenter="handleMouseEnter(event)"
                   >
-                      Create a lesson and add your notes. After 6 notes added you can already take a quiz. 
+                      Create a lesson, add notes, after 6 notes added start yours quiz. 
                       Let yourself be guided by the fantastic Tips feature.
                   </p>
                 </div>
                 <div id="try" class="content hidden">
                   <p 
-                    class="card-title ft-victoria fs-2 text-2 text-center mt-100"
+                    class="card-title ft-victoria fs-2 text-2 text-center mt-90"
                     onmouseenter="handleMouseEnter(event)"
-
                   >
                     Try
                   </p>
                   <p 
-                    class="card-text fs-5 ft-victoria text-darkgreyless mt-4 px-4" 
-                    style="height: 180px;"
+                    class="card-text fs-5 ft-victoria text-darkgreyless mt-2 px-3" 
+                    style="height: 130px;"
                     onmouseenter="handleMouseEnter(event)"
                   >
                     <span class="text-center">Create a free account <br>Sign in <br>Let yourself be guided!</span>
@@ -101,16 +99,19 @@
           </div>
           <div class="d-flex justify-content-center flex-column showbottom"style="width:520px;">
             <p 
-              class="fs-2 fw-bold ft-victoria text-center text-2 fst-italic m3" 
+              class="fs-2 fw-bold ft-victoria text-center text-2 fst-italic " 
               onmouseenter="handleMouseEnter(event)"
             >
               Learn and test yourself
             </p>
             <div class="d-flex justify-content-center align-items-center">
               <div class="d-flex justify-content-center ">
-                <img src="/img/design1.png" class="img-fluid" onmouseenter="handleMouseEnter(event)">
+                <img src="/img/design1.png" 
+                  class="img-fluid " 
+                  onmouseenter="handleMouseEnter(event)"
+                >
               </div>
-              <div class="d-flex flex-wrap justify-content-center me-1" style="width:450px;">
+              <div class="d-flex flex-wrap justify-content-center me-1" style="width:400px;">
                 <img 
                   src="/img/face1.png" class="img-fluid w-50 h-50" 
                   onmouseenter="handleMouseEnter(event)"
@@ -132,7 +133,6 @@
         Who needs the app ?
       </p>
       <%- include('./partials/carousel') %>
-
     </div>
     <%- include('./partials/footer') %>
     <script>

@@ -31,12 +31,12 @@
     class="collapse navbar-collapse mx-2 mb-0" 
   >
     <% if (!user) { %>
-      <ul class="ms-auto d-flex justify-content-end p-0 m-0 mt-2 gap-2 mt-sm-0 ">
-        <a href="/register" class="text-decoration-none  showright" >
-          <i class="bi bi-box-arrow-in-right btn bg-3 btn-sm"> Sign-up </i>
+      <ul class="ms-auto d-flex justify-content-end gap-2 p-0 m-0 mt-2 mt-sm-0">
+        <a href="/register" class="btn bg-3 btn-sm text-decoration-none">
+          <i class="bi bi-box-arrow-in-right"> Sign-up </i>
         </a>
-        <a  href="/login" class="text-decoration-none showright">
-          <i class="bi bi-box-arrow-in-right btn bg-3 btn-sm"> Login </i>
+        <a  href="/login" class="btn bg-3 btn-sm text-decoration-none">
+          <i class="bi bi-box-arrow-in-right"> Login </i>
         </a>
         <% if (tips && tips === "d-none") { %>
           <form action="/tips" method="post">
@@ -49,11 +49,11 @@
       </ul>
     <% } else { %>
       <ul class="ms-auto d-flex justify-content-end p-0 m-0 mt-2 gap-2 mt-sm-0">
-        <a href="/account" class="text-decoration-none showright">
-          <i class="bi bi-person-circle btn btn-sm bg-3"> Account </i>   
+        <a href="/account" class="btn btn-sm bg-3 text-decoration-none">
+          <i class="bi bi-person-circle"> Account </i>   
         </a>
-        <a href="/logout" class="text-decoration-none showright">
-          <i class="bi bi-box-arrow-left btn btn-sm bg-5"> Logout </i>
+        <a href="/logout" class="btn btn-sm bg-5 text-decoration-none">
+          <i class="bi bi-box-arrow-left"> Logout </i>
         </a>
         <% if (tips && tips === "d-none") { %>
           <form action="/tips" method="post" class="">
