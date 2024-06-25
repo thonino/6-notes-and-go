@@ -9,7 +9,11 @@
       <div class="mt-1">
         <% if (!user) { %>
           <p class="showright250"> <!-- stape 1 -->
-            To use the app, <span class="text-5">sign up</span> or <span class="text-5">log</span> !
+            Please
+            <span class="text-5"> 
+              <a href="/login" class="text-5 text">Log-in</a>
+            </span> 
+            to use the app !
           </p>
         <% } else { %>
           <% if (lessons && lessons.length > 0) { %>

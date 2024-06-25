@@ -8,7 +8,7 @@
     <%- include('./partials/nav') %>
     <%- include('./partials/tips') %>
       <div class="container col-6">
-        <h1 class="text-center ft-victoria text-darkgreyless py-3">Sign-up</h1>
+        <h1 class="text-center ft-victoria text-darkgreyless py-3">Sign-up !</h1>
         <form method="POST" action="/register">
           <div class="form-group showleft">
             <label for="name" class="fst-italic fw-bold text-secondary mb-1 showleft">Name :</label>
@@ -23,7 +23,8 @@
             <input type="password" class="form-control" id="password" name="password" required>
           </div>
           <input type="hidden" class="form-control" id="role" name="role" value="user">
-          <button type="submit" class="btn bg-3 mt-2 showbottom">Create</button>
+          <button type="submit" class="btn bg-3 mt-2 showbottom">Create account !</button>
+          <a href="/login" class="btn bg-5 mt-2 showbottom"> Login !</a>
         </form>
       </div>
       <%- include('./partials/footer') %>
