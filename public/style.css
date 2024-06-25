@@ -7,6 +7,7 @@ html, body {
 body {
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 .main-content {
@@ -16,7 +17,6 @@ body {
 footer {
   flex-shrink: 0;
 }
-
 
 .capitalize-once::first-letter {
   text-transform: uppercase;
