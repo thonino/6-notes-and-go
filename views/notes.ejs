@@ -103,10 +103,10 @@
     </div>
 <!-- Pagination -->
 <nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
+  <ul class="pagination d-flex flex-wrap justify-content-center px-5">
     <% for(let i = 1; i <= totalPages; i++) { %>
       <li class="page-item <%= currentPage === i ? 'active' : '' %>">
-        <a class="page-link showleft  rounded-0" href="/notes?page=<%= i %>&limit=<%= limit %><%= filter ? '&categoryFilter=' + filter : '' %>"><%= i %></a>
+        <a class="page-link showleft rounded-0" href="/notes?page=<%= i %>&limit=<%= limit %><%= filter ? '&categoryFilter=' + filter : '' %>"><%= i %></a>
       </li>
     <% } %>
   </ul>
