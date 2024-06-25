@@ -20,7 +20,7 @@
           </div>
           <div class="d-flex justify-content-center gap-2 mt-2">
             <% if(categories && categories.length > 0){ %>
-              <form id="categoryFilterForm" action="/notes" method="POST">
+              <form id="categoryFilterForm" action="/notes" method="GET">
                 <select id="categoryFilter" name="categoryFilter" class="form-select text-2 text-capitalize showleft" onchange="this.form.submit()">
                   <option hidden>Category</option>
                   <option value="">All</option>
@@ -60,11 +60,15 @@
             <div class="col-4">
               <div class="card bg-8 rounded-0">
                 <h5 class="card-title bg-secondary text-white p-3 mb-0 text-capitalize">
-                  <span class="text-7 fst-italic fw-bold">Category : </span>
-                  <%= note.categoryName %>
+                  <span class="text-7 fst-italic fw-bold">Example </span>
+                  
                 </h5>
                 <p class="card-text p-3 mb-0 capitalize-once">
-                  <span class="text-secondary fst-italic fw-bold">Example : </span>
+                  <span class="text-darkgreyless fst-italic fw-bold">
+                    Categorie : 
+                    <span class="text-secondary"><%= note.categoryName %></span>
+                  </span>
+                  
                   <%= note.example %>
                 </p>
               </div>
@@ -99,13 +103,13 @@
       <% }) %>
     </div>
 <!-- Pagination -->
-<nav aria-label="Page" >
-  <ul class="pagination d-flex flex-wrap justify-content-center px-5">
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
     <% for(let i = 1; i <= totalPages; i++) { %>
-      <li class="page-item  <%=  currentPage === i ? 'active' : '' %>">
-        <a class="page-link showleft rounded-0" href="/notes?page=<%= i %>&limit=<%=  limit %>"><%= i %></a>
+      <li class="page-item <%= currentPage === i ? 'active' : '' %>">
+        <a class="page-link showleft  rounded-0" href="/notes?page=<%= i %>&limit=<%= limit %><%= filter ? '&categoryFilter=' + filter : '' %>"><%= i %></a>
       </li>
-    <%  } %>
+    <% } %>
   </ul>
 </nav>
 
@@ -114,22 +118,29 @@
       <div class="modal fade" id="editModal<%= index %>" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Edit Note</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <i class="bi bi-pencil-fill text-center text-2 fs-1"></i>
+            <div class="modal-header text-2 fs-4 p-0 ms-3">
+              <i class="bi bi-pencil-square m-1"> </i>
+              <p class="modal-title ft-victoria"> Edit Note</p>
+              <button 
+                class="btn-close me-2" 
+                type="button" 
+                data-bs-dismiss="modal" 
+                aria-label="Close">
+              </button>
             </div>
             <div class="modal-body">
               <form action="/editnote/<%= note._id %>?_method=PUT" method="POST">
                 <div class="mb-3">
-                  <label for="front" class="form-label">Front</label>
-                  <input type="text" class="form-control" name="front" value="<%= note.front %>">
-                </div>
-                <div class="mb-3">
-                  <label for="back" class="form-label">Back</label>
+                  <label for="back" class="form-label text-3 fst-italic fw-bold m-0 p-0 mb-1">Note</label>
                   <input type="text" class="form-control" name="back" value="<%= note.back %>">
                 </div>
                 <div class="mb-3">
-                  <label for="example" class="form-label">Example</label>
+                  <label for="front" class="form-label text-2 fst-italic fw-bold m-0 p-0 mb-1">Answer</label>
+                  <input type="text" class="form-control" name="front" value="<%= note.front %>">
+                </div>
+                <div class="mb-3">
+                  <label for="example" class="form-label text-secondary fst-italic fw-bold m-0 p-0 mb-1">Example</label>
                   <input type="text" class="form-control" name="example" value="<%= note.example %>">
                 </div>
                 <select name="selectedCategory" class="form-select text-capitalize bg-secondary text-white mt-2" onchange="hideContainer2(this)">
@@ -145,7 +156,7 @@
                 </div>
                 <input type="hidden" name="lessonName" value="<%= selectedLesson %>">
                 <input type="hidden" name="userId" value="<%= user._id %>">
-                <button type="submit" class="btn bg-2 mt-2">Save</button>
+                <button type="submit" class="btn bg-3 mt-2">Save</button>
               </form>
             </div>
           </div>

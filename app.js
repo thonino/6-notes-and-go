@@ -324,11 +324,12 @@ const lessonData = new Lesson({
 });
 
 // Route GET "/notes"
+// Route GET "/notes"
 app.get("/notes", async (req, res) => {
   try {
     let notes = res.locals.notes;
     let notesFull = res.locals.notesFull;
-    const filter = req.body.categoryFilter;
+    const filter = req.query.categoryFilter; 
     const quizzes = res.locals.quiz;
     if (filter) {
       notes = notes.filter(note => note.categoryName === filter);
@@ -357,6 +358,7 @@ app.get("/notes", async (req, res) => {
     res.render("error", { message: "Error rendering notes" });
   }
 });
+
 
 // Route POST "/notes"
 app.post("/notes", async (req, res) => {
