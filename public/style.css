@@ -20,8 +20,11 @@ footer {
 .capitalize-once::first-letter {
   text-transform: uppercase;
 }
+
+
 .bg-darkgrey{background-color: #333839;}
 .bg-darkgreyless{background-color: #535b5d;}
+.bg-darkgreyless:hover{background-color: #6c757d;}
 .bg-1{background-color: #22577a;}
 .bg-1:hover{background-color: #6c757d;color: white;}
 .bg-2{background-color: #38a3a5;} 
@@ -53,8 +56,6 @@ footer {
 .show { display: block; }
 
 .cursor-default { cursor: default; }
-
-
 
 .wrapper {
   background-color: #f3f3f3;

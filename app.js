@@ -324,7 +324,6 @@ const lessonData = new Lesson({
 });
 
 // Route GET "/notes"
-// Route GET "/notes"
 app.get("/notes", async (req, res) => {
   try {
     let notes = res.locals.notes;
@@ -338,7 +337,7 @@ app.get("/notes", async (req, res) => {
     const limit = parseInt(req.query.limit) || 10;
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
-    const paginatedNotes = notes.slice(startIndex, endIndex);
+    const paginatedNotes = notes.reverse().slice(startIndex, endIndex);
     const totalPages = Math.ceil(notes.length / limit);
 
     res.render("notes", {
