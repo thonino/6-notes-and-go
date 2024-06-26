@@ -4,7 +4,7 @@
   <%- include('./partials/links') %>
   <title>Notes</title>
 </head>
-<body class="bg-8">
+<body class="bg-8 vw-100">
   <%- include('./partials/nav') %>
   <%- include('./partials/tips') %>
   <%- include('./partials/action') %>
@@ -41,8 +41,8 @@
     </div>
     <!-- List Note -->
     <div class="mt-3">
-      <% notes.forEach((note, index) => { %>
-        <div class="mb-3 mx-2 showleftslow">
+      <% notes.forEach((note, index) => {  %>
+        <div class="mb-3 mx-2 showleftslow ">
           <div class="row g-2 text-center">
             <div class="col-4">
               <div class="card bg-6 rounded-0">
@@ -102,8 +102,8 @@
       <% }) %>
     </div>
     <!-- Pagination -->
-    <nav aria-label="Page navigation example">
-      <ul class="pagination d-flex flex-wrap justify-content-center px-5">
+    <nav aria-label="Page navigation example ">
+      <ul class="pagination d-flex flex-wrap justify-content-center px-5 ">
         <% for(let i = 1; i <= totalPages; i++) { %>
           <li class="page-item <%= currentPage === i ? 'active' : '' %>">
             <a 

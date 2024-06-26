@@ -115,7 +115,7 @@ ScrollReveal().reveal('.showright', {
   duration: 1000,
   origin: 'right',
   easing: 'ease-in-out',
-  interval: 100
+  interval: 100,
 });
 
 // Initialiser ScrollRevealleft
@@ -124,7 +124,7 @@ ScrollReveal().reveal('.showleft', {
   duration: 1000,
   origin: 'left',
   easing: 'ease-in-out',
-  interval: 100
+  interval: 100,
 
 });
 
@@ -134,7 +134,7 @@ ScrollReveal().reveal('.showbottom', {
   duration: 1000,
   origin: 'bottom',
   easing: 'ease-in-out',
-  interval: 100
+  interval: 100,
 });
 
 // Initialiser ScrollReveal top
@@ -143,7 +143,7 @@ ScrollReveal().reveal('.showtop', {
   duration: 1000,
   origin: 'top',
   easing: 'ease-in-out',
-  interval: 100
+  interval: 100,
 });
 
 // Initialiser ScrollReveal top
@@ -152,7 +152,7 @@ ScrollReveal().reveal('.showtopspeed', {
   duration: 500,
   origin: 'top',
   easing: 'ease-in-out',
-  interval: 50
+  interval: 50,
 });
 // Initialiser ScrollReveal top
 ScrollReveal().reveal('.showleftspeed', { 
@@ -160,7 +160,7 @@ ScrollReveal().reveal('.showleftspeed', {
   duration: 500,
   origin: 'left',
   easing: 'ease-in-out',
-  interval: 50
+  interval: 50,
 });
 
 // Initialiser ScrollReveal top
@@ -169,7 +169,7 @@ ScrollReveal().reveal('.showtopslow', {
   duration: 1500,
   origin: 'top',
   easing: 'ease-in-out',
-  interval: 200
+  interval: 200,
 });
 
 // Initialiser ScrollReveal top
@@ -178,7 +178,7 @@ ScrollReveal().reveal('.showleftslow', {
   duration: 500,
   origin: 'left',
   easing: 'ease-in-out',
-  interval: 150
+  interval: 150,
 });
 
 const handleMouseEnter = (event) => {
@@ -190,3 +190,4 @@ const handleMouseEnter = (event) => {
     }, { once: true }); 
   }
 };
+

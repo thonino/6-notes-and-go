@@ -699,7 +699,7 @@ app.get("/alert", (req, res) => {
 });
 
 
-
+// cmd windows-> tape : ipconfig -> ipv4 : 192.168.1.237
 // for phone :  192.168.1.237:5000
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
