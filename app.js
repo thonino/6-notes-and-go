@@ -326,10 +326,17 @@ const lessonData = new Lesson({
 // Route GET "/notes"
 app.get("/notes", async (req, res) => {
   try {
-    let notes = res.locals.notes;
+    let notes = res.locals.notes || [];
     let notesFull = res.locals.notesFull;
     const filter = req.query.categoryFilter; 
     const quizzes = res.locals.quiz;
+    const search = req.query.search;
+    if (search) {
+      notes = notesFull.filter(note => 
+        note.front.toLowerCase().includes(search.toLowerCase()) ||
+        note.back.toLowerCase().includes(search.toLowerCase())
+      );
+    }
     if (filter) {
       notes = notes.filter(note => note.categoryName === filter);
     }
@@ -344,13 +351,9 @@ app.get("/notes", async (req, res) => {
       categories: res.locals.categories,
       selectedLesson: res.locals.selectedLesson,
       lessons: res.locals.lessons,
-      notesFull,
       notes: paginatedNotes,
-      filter,
-      quizzes,
       currentPage: page,
-      totalPages,
-      limit
+      notesFull, filter, search, quizzes, totalPages, limit
     });
   } catch (err) {
     console.error("Error rendering notes:", err);
@@ -358,14 +361,20 @@ app.get("/notes", async (req, res) => {
   }
 });
 
-
 // Route POST "/notes"
 app.post("/notes", async (req, res) => {
   try {
-    let notes = res.locals.notes;
-    let notesFull = res.locals.notesFull;
-    const filter = req.body.categoryFilter;
     const quizzes = res.locals.quiz;
+    let notes = res.locals.notes || [];
+    const filter = req.body.categoryFilter;
+    let notesFull = res.locals.notesFull;
+    const search = req.query.search;
+    if (search) {
+      notes = notesFull.filter(note => 
+        note.front.toLowerCase().includes(search.toLowerCase()) ||
+        note.back.toLowerCase().includes(search.toLowerCase())
+      );
+    }
     if (filter) {
       notes = notes.filter(note => note.categoryName === filter);
     }
@@ -380,13 +389,9 @@ app.post("/notes", async (req, res) => {
       categories: res.locals.categories,
       selectedLesson: res.locals.selectedLesson,
       lessons: res.locals.lessons,
-      notesFull,
       notes: paginatedNotes,
-      filter,
-      quizzes,
       currentPage: page,
-      totalPages,
-      limit
+      notesFull, filter, search, quizzes, totalPages, limit
     });
   } catch (err) {
     console.error("Error rendering notes:", err);
