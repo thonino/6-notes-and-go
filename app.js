@@ -246,7 +246,6 @@ app.get('/logout', (req, res) => {
   });
 });
 
-
 // Forgot password
 app.get('/passwordforgot', (req, res) => {
   res.render('passwordForgot');
@@ -424,7 +423,7 @@ app.post("/addnote", async function (req, res) {
       });
     }
     
-    const noteData = new Note({  // Création de la note avec la catégorie 
+    const noteData = new Note({ // Création de la note avec la catégorie 
       front: req.body.front,
       back: req.body.back,
       example: req.body.example,

@@ -4,10 +4,10 @@
   <%- include('./partials/links') %>
   <title>Notes</title>
 </head>
-<body class="bg-8 vw-100">
-  <%- include('./partials/nav') %>
-  <%- include('./partials/tips') %>
-  <%- include('./partials/action') %>
+  <body class="bg-8 vw-100">
+    <%- include('./partials/nav') %>
+    <%- include('./partials/tips') %>
+    <%- include('./partials/action') %>
     <div class="mt-2 text-center d-flex justify-content-center flex-column">
       <h1 class="text-center ft-victoria text-darkgreyless pt-2">Learn !</h1>
       <% if (search) { %>
@@ -15,7 +15,6 @@
         ( Last search  : 
         <span class=""><%= search %></span> )
       </p>
-
       <% } %>
       <% if (user && lessons && selectedLesson) { %>
         <div class="container d-flex flex-column text-capitalize">
@@ -92,7 +91,6 @@
                     Categorie : 
                     <span class="text-secondary">(<%= note.categoryName %>)</span>
                   </span>
-                  
                   <%= note.example %>
                 </p>
               </div>
@@ -140,7 +138,6 @@
         <% } %>
       </ul>
     </nav>
-
     <!-- Modal Edit Note-->
     <% notes.forEach((note, index) => { %>
       <div class="modal fade" id="editModal<%= index %>" tabindex="-1">
@@ -191,16 +188,16 @@
         </div>
       </div>
     <% }) %>
-  <%- include('./partials/footer') %>
-  <script>
-    // syntaxe toggle 
-    document.querySelector("#toggle").addEventListener("click", () => {
-      var settings = document.querySelectorAll(".cible");
-      settings.forEach((setting) => {
-        setting.classList.toggle("hidden");
+    <%- include('./partials/footer') %>
+    <script>
+      // toggle 
+      document.querySelector("#toggle").addEventListener("click", () => {
+        var settings = document.querySelectorAll(".cible");
+        settings.forEach((setting) => {
+          setting.classList.toggle("hidden");
+        });
       });
-    });
-  </script>
-  <script src="/script.js"></script>
-</body>
+    </script>
+    <script src="/script.js"></script>
+  </body>
 </html>
