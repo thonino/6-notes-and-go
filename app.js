@@ -97,6 +97,26 @@ const makeAvailable = async (req, res, next) => {
 
 app.use(makeAvailable);
 
+//------- Pour render, decommenter avant d'envoyer sur git -------//
+
+function keepAlive() {
+  setInterval(() => {
+    https.get('https://six-notes-and-go.onrender.com/health', (res) => { 
+      res.on('data', () => {});
+      res.on('end', () => console.log('test ping successful.'));
+    }).on('error', (err) => {
+      console.log('test ping failed: ' + err.message);
+    });
+  }, 873737); // Intervalle d'environ 14 minutes et 33 secondes
+}
+
+keepAlive();
+
+// Endpoint de vérification 
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
 //---------------------------------ROOTS---------------------------------//
 
 // Session selected lesson
@@ -340,7 +360,7 @@ app.get("/notes", async (req, res) => {
       notes = notes.filter(note => note.categoryName === filter);
     }
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
+    const limit = parseInt(req.query.limit) || 20;
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
     const paginatedNotes = notes.reverse().slice(startIndex, endIndex);

@@ -16,11 +16,16 @@
         <option hidden>Lessons</option>
         <% lessons.forEach(lesson=> { %>
         <option value="<%= lesson.lessonName %>" >
-          <%= lesson.lessonName %> 
+          <%= lesson.lessonName %>
         </option>
         <% }) %>
       </select>
     </form>
+    <% if (selectedLesson) { %>
+      <p class="fs-6 ft-victoria text-2 text-center ms-2 m-0">
+          <%= selectedLesson %> 
+      </p>
+    <% } %>
   <% } %>
   <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

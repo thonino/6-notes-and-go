@@ -1,6 +1,6 @@
 <% if (user) { %>
   <nav class="bg-darkgrey">
-    <p class="text-center ft-victoria fs-2 fw-light text-light pt-2 m-0"> Action Menu : </p>
+    <p class="text-center ft-victoria fs-2 fw-light text-light pt-2 m-0"> </p>
     <ul class="navbar-nav">
       <div class="d-flex justify-content-center align-items-center" >
         <div class="pt-2 d-flex justify-content-center gap-3">
@@ -80,18 +80,8 @@
           <% } %>
       </div>
     </ul>
-    <% if (selectedLesson) { %>
-        <p 
-          class="fs-3 text-2 ft-roboto fw-bold text-center mt-2 pb-1 m-0 "
-        >
-          Current Lesson : 
-          <span class="fs-4 text-light fw-light fst-italic ">
-            <%= selectedLesson %> 
-          </span> 
-        </p>
-    <% } else { %>
-      <div class="pb-3"></div>
-  <% }} %>  
+    <div class="pb-3"></div>
+  <% } %>  
   </nav>
 <% if (user ) { %>
   <!-- Lesson Modal -->
