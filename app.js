@@ -99,6 +99,8 @@ app.use(makeAvailable);
 
 //------- Pour render, decommenter avant d'envoyer sur git -------//
 
+const https = require('https');
+
 function keepAlive() {
   setInterval(() => {
     https.get('https://six-notes-and-go.onrender.com/health', (res) => { 
