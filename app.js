@@ -103,7 +103,7 @@ const https = require('https');
 
 function keepAlive() {
   setInterval(() => {
-    https.get('https://six-notes-and-go.onrender.com/health', (res) => { 
+    https.get('https://easylearn-04vk.onrender.com/health', (res) => { 
       res.on('data', () => {});
       res.on('end', () => console.log('test ping successful.'));
     }).on('error', (err) => {
@@ -284,10 +284,10 @@ app.post('/passwordforgot', async (req, res) => {
     user.tokenExpires = Date.now() + 3600000; // 1 hour
     await user.save();
     const mailOptions = {
-      from: 'sixnotesandgo@gmail.com',
+      from: 'easylearn.freeapp@gmail.com',
       to: email,
       subject: 'Reset password',
-      text: `Reset your password at this address: http://localhost:5000/reset/${token}`
+      text: `Reset your password at this address: https://easylearn-04vk.onrender.com/reset/${token}`
     };
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
