@@ -99,25 +99,25 @@ app.use(makeAvailable);
 
 //------- Pour render, decommenter avant d'envoyer sur git -------//
 
-const https = require('https');
+// const https = require('https');
 
-function keepAlive() {
-  setInterval(() => {
-    https.get('https://easylearn-04vk.onrender.com/health', (res) => { 
-      res.on('data', () => {});
-      res.on('end', () => console.log('test ping successful.'));
-    }).on('error', (err) => {
-      console.log('test ping failed: ' + err.message);
-    });
-  }, 873737); // Intervalle d'environ 14 minutes et 33 secondes
-}
+// function keepAlive() {
+//   setInterval(() => {
+//     https.get('https://easylearn-04vk.onrender.com/health', (res) => { 
+//       res.on('data', () => {});
+//       res.on('end', () => console.log('test ping successful.'));
+//     }).on('error', (err) => {
+//       console.log('test ping failed: ' + err.message);
+//     });
+//   }, 873737); // Intervalle d'environ 14 minutes et 33 secondes
+// }
 
-keepAlive();
+// keepAlive();
 
-// Endpoint de vérification 
-app.get('/health', (req, res) => {
-  res.status(200).send('OK');
-});
+// // Endpoint de vérification 
+// app.get('/health', (req, res) => {
+//   res.status(200).send('OK');
+// });
 
 //---------------------------------ROOTS---------------------------------//
 

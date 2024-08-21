@@ -7,22 +7,27 @@
     >
   </a> 
   <% if (lessons && lessons.length> 0) { %>
-    <form id="lessonForm" action="/selectLesson" method="POST" class="ms-sm-2 ">
+    <form id="lessonForm" action="/selectLesson" method="POST" class="ms-sm-2">
       <select 
         id="lessonSelect" 
         name="lesson" 
-        class="form-select form-select-sm bg-dark text-2 text-capitalize showright"
+        class="form-select bg-info-dark text-light w-100 border rounded"
+        style="background-color: #4b737a; color: #3A5A60;"
       >
-        <option hidden>Lessons</option>
-        <% lessons.forEach(lesson=> { %>
-        <option value="<%= lesson.lessonName %>" >
-          <%= lesson.lessonName %>
+        <option hidden>Select</option>
+        <% lessons.forEach(lesson => { %>
+        <option value="<%= lesson.lessonName %>">
+            <%= lesson.lessonName %>
         </option>
         <% }) %>
       </select>
+
+      
+
+          
     </form>
     <% if (selectedLesson) { %>
-      <p class="fs-6 ft-victoria text-2 text-center ms-2 m-0">
+      <p class="fs-6 ft-victoria text-2 text-center ms-2 m-0 text-capitalize">
           <%= selectedLesson %> 
       </p>
     <% } %>

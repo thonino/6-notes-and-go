@@ -26,7 +26,7 @@ footer { flex-shrink: 0; }
   .bg-2:hover{background-color: #6c757d}
 .bg-3{background-color: #57cc99 !important;} 
   .bg-3:hover{background-color: #6c757d}
-.bg-4{background-color: #80ed99 !important;} 
+.bg-4{background-color: #39cc8c !important;} 
   .bg-4:hover{background-color: #6c757d;}
 .bg-5{background-color: #c7f9cc !important;} 
   .bg-5:hover{background-color: #6c757d}
@@ -47,6 +47,37 @@ footer { flex-shrink: 0; }
 .text-5{color: #c7f9cc !important;}
 .text-6{color: #d8f8db !important;}
 .text-7{color: #dadada !important;}
+
+/* Couleur grise claire */
+.text-primary-light { color: #A6C9FE; }
+.text-secondary-light { color: #E8E8E8; }
+.text-success-light { color: #B2E5C9; }
+.text-danger-light { color: #FDECEA; }
+.text-warning-light { color: #FFE8A3; }
+.text-info-light { color: #D0F3F6; }
+.bg-primary-light, .bg-primary-light:hover { background-color: #A6C9FE; }
+.bg-secondary-light { background-color: #E8E8E8; }
+.bg-success-light, .bg-success-light:hover { background-color: #B2E5C9; }
+.bg-danger-light, .bg-danger-light:hover { background-color: #FDECEA; }
+.bg-warning-light, .bg-warning-light:hover { background-color: #FFE8A3; }
+.bg-info-light, .bg-info-light:hover { background-color: #D0F3F6; }
+
+/* Bootstrap primary */
+.text-primary-dark { color: #1A4C7C; }
+.text-secondary-dark { color: #5A5A5A; }
+.text-success-dark { color: #3A6F48; }
+.text-danger-dark { color: #803939; }
+.text-warning-dark { color: #B89015; }
+.text-info-dark { color: #3A5A60; }
+.bg-primary-dark, .bg-primary-dark:hover { background-color: #1A4C7C; }
+.bg-secondary-dark { background-color: #5A5A5A; }
+.bg-success-dark, .bg-success-dark:hover { background-color: #3A6F48; }
+.bg-danger-dark, .bg-danger-dark:hover { background-color: #803939; }
+.bg-warning-dark { background-color: #B89015; }
+.bg-info-dark, .bg-info-dark:hover { background-color: #3A5A60; }
+
+
+
 
 .hidden { display: none; }
 .show { display: block; }
@@ -91,11 +122,11 @@ footer { flex-shrink: 0; }
 
 @keyframes bounce { 0%,100% 
   {transform: translateY(0);}
-  40% {transform: translateY(-20px);}
+  40% {transform: translateY(-8px);}
   50% {transform: translateY(0px);}
-  60% {transform: translateY(-15px);}
+  60% {transform: translateY(-6px);}
   70% {transform: translateY(-0px);}
-  80% {transform: translateY(-5px);}
+  80% {transform: translateY(-4px);}
   90% {transform: translateY(0px);}
 }
 .start-bounce{animation:bounce 1s;}

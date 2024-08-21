@@ -1,12 +1,11 @@
 <nav class="bg-secondary <%= tips %>">
-  <div class="d-flex justify-content-center align-items-center flex-wrap p-2" >
+  <div class="d-flex  flex-wrap m-0 p-0" style="height: 30px;" >
       <!-- Block 1 (Center) -->
     <div
-      class="d-flex mx-auto text-white fst-italic mt-2 gap-2"
-      onmouseenter="handleMouseEnter(event)"
+      class="d-flex mx-auto text-white fst-italic  gap-2"
     >
-      <p class="text-4 mt-1">Tips :</p>
-      <div class="mt-1">
+      <p class="text-4" style="margin-top:2px">Tips :</p>
+      <div class="" style="margin-top:2px">
         <% if (!user) { %>
           <p class="showright250"> <!-- stape 1 -->
             Please
@@ -19,18 +18,39 @@
               <% if (notesFull && notesFull.length >= 1 && notesFull.length < 6) { %>
                 <p class="showright250"> <!-- stape 5 -->
                   Take a quiz after
-                  <span class="text-3">6 notes</span>
+                  <span class="text-4">6 notes</span>
                   added !
                 </p>
               <% } else if (notesFull.length < 1) { %>
                 <p class="showright250"> <!-- stape 4 -->
-                  In the action menu, write a new note
+                  Write a new note
+                  <button 
+                    class="btn text-white p-0"  
+                    data-bs-toggle="modal" 
+                    data-bs-target="#noteModal"
+                    style="margin-top:-5px"
+                    onmouseenter="handleMouseEnter(event)"
+                    >
+                    <i class="bi bi-pencil-fill bg-success-dark rounded-2 px-1 border "></i>
+                  </button>
                 </p>
               <% } else if (notesFull.length > 5) { %>
                 <% if (tenQuizzes.length === 0) { %>
                   <p class="showright250"> <!-- stape 6 -->
-                    Start a
-                    <span class="text-3">Quiz</span> in the action menu !
+                    You can start a quiz !
+                    <button 
+                      class="btn text-white p-0" 
+                      style="margin-top:-5px"
+                      onmouseenter="handleMouseEnter(event)"
+                    >
+                    <a  
+                      href="/quiz" 
+                      class="text-light" 
+                      onmouseenter="handleMouseEnter(event)"
+                    >
+                      <i class="bi bi-controller bg-primary-dark rounded-2 px-1 border"></i>
+                    </a>
+                    </button>
                   </p>
                 <% } else if (tenQuizzes.length === 1) { %>
                   <p class="showright250"> <!-- stape 7 -->
@@ -38,34 +58,58 @@
                   </p>
                 <% } else if (tenQuizzes.length > 1) { %>
                   <p class="showright250"> <!-- stape 8 -->
-                    Discover your 10 las quizzes in stats page
+                    Discover your 10 last quizzes 
+                    <button 
+                      class="btn text-white p-0" 
+                      style="margin-top:-5px"
+                      onmouseenter="handleMouseEnter(event)"
+                    >
+                    <a  
+                      href="/stats" 
+                      class="text-light" 
+                      onmouseenter="handleMouseEnter(event)"
+                    >
+                      <i class="bi bi-file-earmark-check bg-danger-dark rounded-2 px-1 border"></i>
+                    </a>
+                    </button>
                   </p>
                 <% } %>
               <% } %>
             <% } else { %>
               <p class="showright250"> <!-- stape 3 -->
-                In the top bar, select the lesson 
+                Select the lesson 
               </p>
             <% } %>
           <% } else { %>
-            <p class="showright250"> <!-- stape 2 -->
-              In the action menu, add a new lesson
-            </p>
+              <!-- stape 2 -->
+              <p class="text-white showright250">
+                Add a new lesson  
+                <button 
+                  class="btn text-white p-0" 
+                  data-bs-toggle="modal" 
+                  data-bs-target="#lessonModal"
+                  style="margin-top:-5px"
+                  onmouseenter="handleMouseEnter(event)"
+                >
+                <i class="bi bi-plus-lg bg-info-dark rounded-2 px-1 border"></i>
+                </button>
+              </p>
+            
           <% } %>
         <% } %>
       </div>
     </div>
-
     <!-- Block 2 (Right) -->
       <% if (!tips || tips !== "d-none") { %>
-        <form action="/tips" method="POST" class="text-white">
+        <form action="/tips" method="POST" class="text-white" style="margin-top:3px">
           <input name="status" value="d-none" type="hidden"/>
           <button 
             type="submit" 
-            class="btn text-4 p-0 me-2 showright"
+            class="btn text-light p-0 me-2 showright"
             style="margin-top: -7px;"
+            onmouseenter="handleMouseEnter(event)"
           >
-            <i class="bi bi-x-circle-fill"></i>
+            <i class="bi bi-x-circle-fill "></i>
           </button>
         </form>
       <% } %>
