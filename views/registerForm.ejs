@@ -8,23 +8,38 @@
     <%- include('./partials/nav') %>
     <%- include('./partials/tips') %>
       <div class="container col-6">
-        <h1 class="text-center ft-victoria text-darkgreyless py-3">Sign-up !</h1>
+        <h1 class="text-center ft-victoria text-secondary py-3">
+          Sign-up !
+        </h1>
         <form method="POST" action="/register">
           <div class="form-group showleft">
-            <label for="name" class="fst-italic fw-bold text-secondary mb-1 showleft">Name :</label>
+            <label for="name" class="fst-italic fw-bold text-secondary mb-1 showleft">
+              Name :
+            </label>
             <input type="text" class="form-control" id="name" name="name" required>
           </div>
           <div class="form-group showleft mt-2">
-            <label for="email" class="fst-italic fw-bold text-secondary mb-1 showleft">Email address :</label>
+            <label for="email" class="fst-italic fw-bold text-secondary mb-1 showleft">
+              Email address :
+            </label>
             <input type="email" class="form-control" id="email" name="email" required>
           </div>
           <div class="form-group showleft mt-2">
-            <label for="password" class="fst-italic fw-bold text-secondary mb-1  showleft">Password :</label>
+            <label for="password" class="fst-italic fw-bold text-secondary mb-1  showleft">
+              Password :
+            </label>
             <input type="password" class="form-control" id="password" name="password" required>
           </div>
           <input type="hidden" class="form-control" id="role" name="role" value="user">
-          <button type="submit" class="btn bg-3 mt-2 showbottom">Create account !</button>
-          <a href="/login" class="btn bg-5 mt-2 showbottom"> Login !</a>
+          <button type="submit" class="btn bg-success text-light mt-2 showbottom">
+            Create account !
+          </button>
+          <a href="/login" class="btn bg-success-light mt-2 showbottom"> 
+            Login !
+          </a>
+          <a href="/passwordForgot" class="btn bg-info-light mt-2 showbottom">
+            Password forgot ?
+          </a>
         </form>
       </div>
       <%- include('./partials/footer') %>

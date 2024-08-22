@@ -1,8 +1,8 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0 py-2">
+<nav class="navbar navbar-expand-sm navbar-dark bg-secondary-light p-0 py-2">
   <a class="navbar-brand m-0 p-0" href="/" >
     <img src="/img/logo.png" 
-      width="35px" 
-      height="35px" 
+      width="30px" 
+      height="30px" 
       class="ms-2 showleft"
     >
   </a> 
@@ -21,19 +21,26 @@
         </option>
         <% }) %>
       </select>
-
-      
-
-          
     </form>
     <% if (selectedLesson) { %>
-      <p class="fs-6 ft-victoria text-2 text-center ms-2 m-0 text-capitalize">
+      <p class="fs-6 ft-victoria text-info-dark fw-bold text-center ms-2 m-0 text-capitalize">
           <%= selectedLesson %> 
       </p>
     <% } %>
+  <% } else {%>
+    <span class='ft-victoria fs-5 text-info-dark fw-bold text-dark-75 ms-2'> 
+      EasyLearn 
+    </span>
   <% } %>
-  <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <button 
+    class="navbar-toggler bg-secondary-dark me-2" 
+    type="button" 
+    data-bs-toggle="collapse" 
+    data-bs-target="#navbarNav"
+    aria-controls="navbarNav" 
+    aria-expanded="false" 
+    aria-label="Toggle navigation"
+  >
     <span class="navbar-toggler-icon"></span>
   </button>
   <div 
@@ -59,10 +66,10 @@
       </ul>
     <% } else { %>
       <ul class="ms-auto d-flex justify-content-end p-0 m-0 mt-2 gap-2 mt-sm-0">
-        <a href="/account" class="btn btn-sm bg-3 text-decoration-none">
+        <a href="/account" class="btn btn-sm bg-success text-light text-decoration-none">
           <i class="bi bi-person-circle"> Account </i>   
         </a>
-        <a href="/logout" class="btn btn-sm bg-5 text-decoration-none">
+        <a href="/logout" class="btn btn-sm bg-danger-dark text-light text-decoration-none">
           <i class="bi bi-box-arrow-left"> Logout </i>
         </a>
         <% if (tips && tips === "d-none") { %>

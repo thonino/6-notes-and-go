@@ -1,10 +1,10 @@
-<nav class="bg-secondary <%= tips %>">
+<nav class="bg-secondary-dark <%= tips %>">
   <div class="d-flex  flex-wrap m-0 p-0" style="height: 30px;" >
       <!-- Block 1 (Center) -->
     <div
-      class="d-flex mx-auto text-white fst-italic  gap-2"
+      class="d-flex mx-auto text-white fst-italic gap-2"
     >
-      <p class="text-4" style="margin-top:2px">Tips :</p>
+      <p class="text-warning" style="margin-top:2px">Tips :</p>
       <div class="" style="margin-top:2px">
         <% if (!user) { %>
           <p class="showright250"> <!-- stape 1 -->
@@ -25,30 +25,26 @@
                 <p class="showright250"> <!-- stape 4 -->
                   Write a new note
                   <button 
-                    class="btn text-white p-0"  
+                    class="btn text-success fw-bold text-decoration-underline p-0"  
                     data-bs-toggle="modal" 
                     data-bs-target="#noteModal"
                     style="margin-top:-5px"
                     onmouseenter="handleMouseEnter(event)"
                     >
-                    <i class="bi bi-pencil-fill bg-success-dark rounded-2 px-1 border "></i>
+                    here
                   </button>
                 </p>
               <% } else if (notesFull.length > 5) { %>
                 <% if (tenQuizzes.length === 0) { %>
                   <p class="showright250"> <!-- stape 6 -->
-                    You can start a quiz !
+                    You can start a quiz
                     <button 
-                      class="btn text-white p-0" 
+                      class="btn p-0" 
                       style="margin-top:-5px"
                       onmouseenter="handleMouseEnter(event)"
                     >
-                    <a  
-                      href="/quiz" 
-                      class="text-light" 
-                      onmouseenter="handleMouseEnter(event)"
-                    >
-                      <i class="bi bi-controller bg-primary-dark rounded-2 px-1 border"></i>
+                    <a  href="/quiz" class="text-primary fw-bold">
+                      here 
                     </a>
                     </button>
                   </p>
@@ -66,10 +62,10 @@
                     >
                     <a  
                       href="/stats" 
-                      class="text-light" 
+                      class="text-danger fw-bold" 
                       onmouseenter="handleMouseEnter(event)"
                     >
-                      <i class="bi bi-file-earmark-check bg-danger-dark rounded-2 px-1 border"></i>
+                      here
                     </a>
                     </button>
                   </p>
@@ -85,13 +81,13 @@
               <p class="text-white showright250">
                 Add a new lesson  
                 <button 
-                  class="btn text-white p-0" 
+                  class="btn text-info fw-bold text-decoration-underline p-0" 
                   data-bs-toggle="modal" 
                   data-bs-target="#lessonModal"
                   style="margin-top:-5px"
                   onmouseenter="handleMouseEnter(event)"
                 >
-                <i class="bi bi-plus-lg bg-info-dark rounded-2 px-1 border"></i>
+                here
                 </button>
               </p>
             
@@ -105,7 +101,7 @@
           <input name="status" value="d-none" type="hidden"/>
           <button 
             type="submit" 
-            class="btn text-light p-0 me-2 showright"
+            class="btn text-warning p-0 me-2 showright"
             style="margin-top: -7px;"
             onmouseenter="handleMouseEnter(event)"
           >
