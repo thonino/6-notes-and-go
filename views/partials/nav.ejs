@@ -49,16 +49,19 @@
   >
     <% if (!user) { %>
       <ul class="ms-auto d-flex justify-content-end gap-2 p-0 m-0 mt-2 mt-sm-0">
-        <a href="/register" class="btn bg-3 btn-sm text-decoration-none">
+        <a href="/register" class="btn bg-success text-light btn-sm text-decoration-none">
           <i class="bi bi-box-arrow-in-right"> Sign-up </i>
         </a>
-        <a  href="/login" class="btn bg-3 btn-sm text-decoration-none">
+        <a  href="/login" class="btn bg-success text-light btn-sm text-decoration-none">
           <i class="bi bi-box-arrow-in-right"> Login </i>
         </a>
         <% if (tips && tips === "d-none") { %>
           <form action="/tips" method="post">
             <input type="hidden" name="status" value=""/>
-            <button type="submit" class="btn btn-sm bg-4 text-dark">
+            <button 
+              type="submit" 
+              class="btn btn-sm bg-warning-dark text-light"
+            >
               Tips
             </button>
           </form>

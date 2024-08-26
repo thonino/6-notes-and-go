@@ -9,7 +9,7 @@
   <%- include('./partials/tips') %>
   <%- include('./partials/action') %>
   <div class="container col-6 d-flex flex-column align-items-center">
-    <h1 class="text-center ft-victoria text-darkgreyless pt-2"> Account ! </h1>
+    <h1 class="text-center ft-victoria text-secondary pt-2"> Account ! </h1>
     <% if (!user) { %>
       <p>Please log in to access this page!</p>
     <% } else { %>
@@ -23,7 +23,7 @@
         <div class="">
           <p class="fs-3">
             Email: <span id="userEmail"><%= user.email %></span>
-            <button id="showInputEmail" class="btn bg-3 btn-sm">
+            <button id="showInputEmail" class="btn bg-success text-light btn-sm">
               <i class="bi bi-pencil-fill"></i>
             </button>
           </p>
@@ -33,7 +33,7 @@
             action="/account/<%= user._id %>?_method=PUT"
             method="POST"
           >
-            <label for="checkPassword" class="fst-italic mb-1 text-2">
+            <label for="checkPassword" class="fst-italic mb-1 text-success">
               Password:
             </label>
             <input
@@ -42,7 +42,7 @@
               name="checkPassword"
               placeholder="write your password"
             />
-            <label for="newEmail" class="fst-italic mb-1 text-2">
+            <label for="newEmail" class="fst-italic mb-1 text-success">
               New email:
             </label>
             <input
@@ -52,7 +52,7 @@
               placeholder="write your new email"
             />
             <div class="mt-2 mb-3 text-center">
-              <button type="submit" class="btn bg-3 ms-1">
+              <button type="submit" class="btn bg-success text-light ms-1">
                 Save
               </button>
             </div>
@@ -64,7 +64,7 @@
         <div class="">
           <p class="fs-3">
             My Password
-            <button id="showInputPassword" class="btn bg-3 btn-sm">
+            <button id="showInputPassword" class="btn bg-success text-light btn-sm">
               <i class="bi bi-pencil-fill"></i>
             </button>
           </p>
@@ -74,7 +74,7 @@
             action="/account/<%= user._id %>?_method=PUT"
             method="POST"
           >
-            <label for="checkPassword" class="fst-italic mb-1 text-2">
+            <label for="checkPassword" class="fst-italic mb-1 text-success">
               Old password:
             </label>
             <input
@@ -83,7 +83,7 @@
               name="checkPassword"
               placeholder="write your old password"
             />
-            <label for="newPassword" class="fst-italic mb-1 text-2">
+            <label for="newPassword" class="fst-italic mb-1 text-success">
               New password:
             </label>
             <input
@@ -93,7 +93,7 @@
               placeholder="write your new password"
             />
             <div class="mt-2 mb-3 text-center">
-              <button type="submit" class="btn bg-3 ms-1">
+              <button type="submit" class="btn bg-success text-light ms-1">
                 Save
               </button>
             </div>
@@ -104,7 +104,7 @@
         <div class="">
           <p class="fs-3">
             Delete Account
-            <button id="showInputDelete" class="btn bg-3 btn-sm">
+            <button id="showInputDelete" class="btn bg-danger text-light btn-sm">
               <i class="bi bi-trash-fill"></i>
             </button>
           </p>
@@ -114,7 +114,7 @@
             action="/account/delete/<%= user._id %>?_method=DELETE"
             method="POST"
           >
-            <label for="checkPassword" class="fst-italic mb-1 text-2">
+            <label for="checkPassword" class="fst-italic mb-1 text-success">
               Password:
             </label>
             <input

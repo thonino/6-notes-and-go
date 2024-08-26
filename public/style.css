@@ -13,40 +13,8 @@ footer { flex-shrink: 0; }
 /* Couper les mots longs */
 .table td { word-break: break-word; }
 
-/* Fixe la largeur des colonnes en fonction de la table */
+/* Fixe width column  */
 .table { table-layout: fixed; width: 100%; }
-
-
-.bg-darkgrey{background-color: #333839 !important;}
-.bg-darkgreyless{background-color: #535b5d !important;}
-.bg-darkgreyless:hover{background-color: #6c757d !important;}
-.bg-1{background-color: #22577a !important;}
-.bg-1:hover{background-color: #6c757d}
-.bg-2{background-color: #38a3a5 !important;} 
-  .bg-2:hover{background-color: #6c757d}
-.bg-3{background-color: #57cc99 !important;} 
-  .bg-3:hover{background-color: #6c757d}
-.bg-4{background-color: #39cc8c !important;} 
-  .bg-4:hover{background-color: #6c757d;}
-.bg-5{background-color: #c7f9cc !important;} 
-  .bg-5:hover{background-color: #6c757d}
-.bg-6{background-color: #d8f8db !important;}
-.bg-7{background-color: #c4e4e6 !important;}
-.bg-8{background-color: #dadada !important;}
-.bg-9{background-color: #d9d9d9 !important;}
-.bg-err{background-color: #dc3545 !important;}
-  .bg-err:hover{background-color: #6c757d;color: white !important;}
-
-.text-darkgrey{color: #333839 !important;}
-.text-darkgreyless{color: #535b5d !important;}
-.text-1{color: #22577a !important;}
-.text-2{color: #38a3a5 !important;}
-.text-2-disable{color: #3d8485 !important;}
-.text-3{color: #57cc99 !important;}
-.text-4{color: #80ed99 !important;}
-.text-5{color: #c7f9cc !important;}
-.text-6{color: #d8f8db !important;}
-.text-7{color: #dadada !important;}
 
 /* light */
 .text-primary-light { color: #b3d7ff !important; }
