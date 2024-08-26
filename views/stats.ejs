@@ -15,10 +15,10 @@
         <i class="bi bi-box-arrow-in-right btn btn-success">Login</i>
       </a>
     <% } else { %>
-      <h1 class="text-center ft-victoria text-darkgreyless pt-2"> My stats ! </h1>
+      <h1 class="text-center ft-victoria text-secondary pt-2"> My stats ! </h1>
       <% if (tenQuizzes && tenQuizzes.length > 0  ) { %>
         <div 
-          class="card ft-roboto text-secondary fst-italic m-0 bg-7 p-2 mb-3 mt-3"
+          class="card ft-roboto text-secondary fst-italic m-0 bg-success-light p-2 mb-3 mt-3"
           onmouseenter="handleMouseEnter(event)"
         >
           <p class="fs-4 fw-bold m-0 p-0 showleft">
@@ -26,25 +26,28 @@
           </p>
             <p class="fs-4 fw-light m-0 p-0 showleft">
               Average : 
-            <span class="fw-light text-2 ">
+            <span class="fw-light text-success ">
               <%= average %> / 6
             </span>
           </p>
         </div>
         <div class="card mb-3 rounded-0">
           <div 
-          class="card-header d-flex justify-content-center align-items-center bg-2 rounded-0 m-0 p-0">
-            <p class="text-white fs-4 m-0 p-0 showleft" onmouseenter="handleMouseEnter(event)">Quiz</p>
+            class="card-header d-flex justify-content-center align-items-center bg-success-dark rounded-0 m-0 p-0"
+            >
+            <p class="text-white fs-4 m-0 p-0 showleft" onmouseenter="handleMouseEnter(event)">
+              Quiz
+            </p>
             <div class="showright">
               <% if (skip > 0) { %> 
                 <a 
                   href="/stats?prev=true&skip=<%= skip %>" 
                   class="text-decoration-none text-white"
                 >
-                  <i class="bi bi-chevron-left fs-4"></i>
+                  <i class="bi bi-chevron-left fs-4 ms-2 ms-2"></i>
                 </a>
               <% } else { %>
-                <i class="bi bi-chevron-left text-2-disable fs-4"></i>
+                <i class="bi bi-chevron-left text-success fs-4 ms-2"></i>
               <% } %>
               <% if (skip < totalQuizzes - 1) { %>
                 <a 
@@ -54,7 +57,7 @@
                   <i class="bi bi-chevron-right fs-4"></i>
                 </a>
               <% } else { %>
-                <i class="bi bi-chevron-right text-2-disable fs-4"></i>
+                <i class="bi bi-chevron-right text-success fs-4"></i>
               <% } %>
             </div>
           </div>
@@ -71,7 +74,7 @@
                   <div class="col-md-4 mb-3">
                     <div class="card rounded-0 showtopspeed" onmouseenter="handleMouseEnter(event)">
                       <div 
-                        class="card-header text-white rounded-0 text-capitalize <%= data[2] ? 'bg-err' : 'bg-2' %>"
+                        class="card-header text-white rounded-0 text-capitalize <%= data[2] ? 'bg-err' : 'bg-success' %>"
                       >
                         <%= data[0] %>
                       </div>
@@ -91,24 +94,24 @@
               <% } %>
             </div>
           </div>
-          <div class="card-footer bg-7 rounded-0">
+          <div class="card-footer bg-success-light rounded-0">
             <% if (showQuiz) { %>
               <div class="d-flex flex-column flex-sm-row">
                 <div class="col fw-bold showleft" onmouseenter="handleMouseEnter(event)">
                   Scores : 
-                  <span class="text-2 text-capitalize">
+                  <span class="text-success-dark text-capitalize">
                     <%= showQuiz.score %> / 6  
                   </span>
                 </div>
                 <div class="col fw-bold showleft" onmouseenter="handleMouseEnter(event)">
                   lesson : 
-                  <span class="text-2 text-capitalize">
+                  <span class="text-success-dark text-capitalize">
                     <%= showQuiz.lessonName %>
                   </span>
                 </div>
                 <div class="col fw-bold showleft" onmouseenter="handleMouseEnter(event)">
                   Category : 
-                  <span class="text-2 text-capitalize text-low">
+                  <span class="text-success-dark text-capitalize text-low">
                     <%= showQuiz.categoryName %>
                   </span>
                 </div>

@@ -32,7 +32,7 @@
                       data-bs-toggle="modal" 
                       data-bs-target="#noteModal"
                     >
-                      <i class="bi bi-pencil-fill"></i>
+                      <i class="bi bi-plus-lg"></i>
                         Note
                     </button>
                 </div>
@@ -92,9 +92,8 @@
     <div class="modal fade" id="lessonModal" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content p-0 m-0">
-          <i class="bi bi-book text-center text-2 fs-1"></i>
-          <div class="modal-header text-darkgreyless  fs-4 p-0 ms-3">
-            <i class="bi bi-plus-lg"></i>
+          <i class="bi bi-plus-lg text-center text-info-dark fs-1"></i>
+          <div class="modal-header text-info-dark  fs-4 p-0 ms-3">
             <p class="modal-title ft-victoria">New Lesson</p>
             <button 
               class="btn-close me-2 showright" 
@@ -106,13 +105,20 @@
           <div class="modal-body">
             <form class="" action="/addlesson" method="POST">
               <div class="mb-3">
-                <label for="Lessonname" class="form-label text-2 fst-italic fw-bold m-0 p-0 mb-1">Lesson Name</label>
+                <label 
+                  for="Lessonname" 
+                  class="form-label text-info-dark fst-italic fw-bold m-0 p-0 mb-1"
+                >
+                  Lesson Name
+                </label>
                 <input type="text" class="form-control" name="lessonName" placeholder="write the lesson name..">
                 <% if (user._id) { %>
                   <input type="hidden" name="userId" value="<%= user._id %>">
                   <% } %>
               </div>
-              <button type="submit" class="btn bg-3">Add</button>
+              <button type="submit" class="btn bg-info-dark text-light">
+                Add
+              </button>
             </form>
           </div>
         </div>
@@ -122,9 +128,8 @@
   <div class="modal fade" id="noteModal" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
-        <i class="bi bi-pencil-fill text-center text-2 fs-1"></i>
-        <div class="modal-header text-darkgreyless fs-4 p-0 ms-3">
-          <i class="bi bi-plus-lg"></i>
+        <i class="bi bi-plus-lg text-center text-success-dark fs-1"></i>
+        <div class="modal-header text-success-dark fs-4 p-0 ms-3">
           <p class="modal-title ft-victoria">New Note</p>
           <button 
             class="btn-close me-2" 
@@ -136,20 +141,38 @@
         <div class="modal-body">
           <form action="/addnote" method="POST">
             <div class="mb-3">
-              <label for="back" class="form-label text-3 fst-italic fw-bold m-0 p-0 mb-1">Note</label>
+              <label 
+                for="back" 
+                class="form-label text-info fst-italic fw-bold m-0 p-0 mb-1"
+              >
+                Note
+              </label>
               <input type="text" class="form-control" name="back" placeholder="write a note to learn...">
             </div>
             <div class="mb-3">
-              <label for="front" class="form-label text-2 fst-italic fw-bold m-0 p-0 mb-1">Answer</label>
+              <label 
+                for="front" 
+                class="form-label text-success fst-italic fw-bold m-0 p-0 mb-1"
+              >
+                Answer
+              </label>
               <input type="text" class="form-control" name="front" placeholder="write it's answer...">
             </div>
             <div class="mb-3">
-              <label for="example" class="form-label text-secondary fst-italic fw-bold m-0 p-0 mb-1">Example</label>
+              <label 
+                for="example" 
+                class="form-label text-warning fst-italic fw-bold m-0 p-0 mb-1"
+              >
+                Example
+              </label>
               <input type="text" class="form-control" name="example" placeholder="give an example...">
             </div>
             <% if (categories) { %>
-              <select name="selectedCategory" class="form-select text-capitalize bg-2 text-white mt-2"
-                onchange="hideContainer(this)">
+              <select 
+                name="selectedCategory" 
+                class="form-select text-capitalize bg-success-light mt-2"
+                onchange="hideContainer(this)"
+              >
                 <option value="uncategorized" hidden>uncategorized</option>
                 <option value="newCat">new category</option>
                 <% categories.forEach(category=> { %>
@@ -169,7 +192,9 @@
               <input type="hidden" name="lessonName" value="<%= selectedLesson %>">
             <% } %>
             <input type="hidden" name="userId" value="<%= user._id %>">
-            <button type="submit" class="btn bg-3 mt-2">Add</button>
+            <button type="submit" class="btn bg-success-dark text-light mt-2">
+              Add
+            </button>
           </form>
         </div>
       </div>

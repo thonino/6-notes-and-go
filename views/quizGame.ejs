@@ -13,17 +13,17 @@
             <i class="bi bi-box-arrow-in-right"></i> Login
           </a>
         <% } else { %>
-          <h1 class="text-center ft-victoria text-darkgreyless py-2">Quiz Game!</h1>
+          <h1 class="text-center ft-victoria text-secondary py-2">Quiz Game!</h1>
           <% if (selectedCategory) { %>
             <form action="/addquiz" method="post">
               <% randomNotes.forEach((note, index) => { %>
                 <div class="row justify-content-center mt-3">
                   <div class="showleft p-0 px-2">
-                    <div class="card bg-2">
+                    <div class="card bg-secondary">
                       <div class="card-body p-0 px-3">
                         <p 
                           for="answer<%= index %>" 
-                          class="text-start fst-italic fw-bold text-6 mb-1 p-0 m-0">
+                          class="text-success-light fst-italic fw-bold text-waring mb-1 p-0 m-0">
                           Answer
                         </p>
                         <input 
@@ -44,7 +44,9 @@
                           value="<%= note.back %>"
                         />
                         <div class="d-flex justify-content-center">
-                          <p class="card-text text-5 fst-italic fw-bold col-2">Note : </p>
+                          <p class="card-text text-info fst-italic fw-bold col-2">
+                            Note : 
+                          </p>
                           <p class="text-white capitalize-once"> <%= note.back %></p> 
                         </div>
                       </div>
@@ -59,7 +61,7 @@
               />
               <button 
                 type="submit" 
-                class="btn bg-3 m-2 mb-2 showbottom"
+                class="btn bg-primary text-light m-2 mb-2 showbottom"
                 onmouseenter="handleMouseEnter(event)"
               > 
                 <i class="bi bi-box-arrow-down"></i>

@@ -688,13 +688,13 @@ app.get("/stats", async (req, res) => {
       const score = showQuiz.score;
       if (score > 5 ) {
         prize = "Perfect !!!";
-        color = "text-3";
+        color = "text-success";
       } else if (score > 3) {
         prize = "Good !!";
-        color = "text-success";
+        color = "text-info";
       } else if (score === 3) {
         prize = "Nice job !!";
-        color = "text-2";
+        color = "text-primary";
       } else {
         prize = "Can do better !";
         color = "text-danger";

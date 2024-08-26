@@ -21,7 +21,7 @@
                 <form action="/selectCategory" method="POST" class="text-center">
                   <select 
                     name="categoryName" 
-                    class="form-select text-2 text-capitalize mt-2 showleft"
+                    class="form-select bg-primary-light text-capitalize mt-2 showleft"
                   >
                     <option value="all" hidden>Category</option>
                     <option value="all">All</option>
@@ -33,9 +33,11 @@
                   </select>
                   <button 
                     type="submit" 
-                    class="btn bg-3 m-2 showbottom"
+                    class="btn bg-primary text-light m-2 showbottom"
                     onmouseenter="handleMouseEnter(event)"
-                  >Start!</button>
+                  >
+                  Start!
+                  </button>
                 </form>
               </div>
             <% } else { %>

@@ -9,7 +9,7 @@
     <%- include('./partials/tips') %>
     <%- include('./partials/action') %>
     <div class="mt-2 text-center d-flex justify-content-center flex-column">
-      <h1 class="text-center ft-victoria text-darkgreyless pt-1">Learn !</h1>
+      <h1 class="text-center ft-victoria text-secondary pt-1">Learn !</h1>
       <% if (search) { %>
       <p class="text-center ft-roboto text-2 fw-bold fs-4 pt-2 fst-italic">
         ( Last search  : 
@@ -30,15 +30,15 @@
             </form>
           </div>
           <!-- Search -->
-          <div class="d-flex justify-content-center gap-2 mt-2">
+          <div class="d-flex justify-content-center gap-2 mt-2 showleft">
             <form method="GET" name="search" action="/notes" class="d-flex">
               <input 
                 type="text" 
                 name="search" 
-                class="form-control showleft" 
+                class="form-control " 
                 placeholder="<%= search ? search : 'search...' %>" 
               />
-              <button type="submit" class="btn btn-secondary ms-2 showleft"> 
+              <button type="submit" class="btn btn-secondary ms-2 "> 
                 <i class="bi bi-search"></i>
               </button>
             </form>
@@ -47,7 +47,7 @@
                 <select 
                   id="categoryFilter" 
                   name="categoryFilter" 
-                  class="form-select text-2 text-capitalize showright" 
+                  class="form-select text-2 text-capitalize" 
                   onchange="this.form.submit()"
                 >
                   <option hidden>Category</option>
@@ -60,7 +60,7 @@
                 </select>
               </form>
             <% } %>
-            <div class="text-center d-inline showright">
+            <div class="text-center d-inline showleft">
               <button id="toggle" class="btn btn-secondary">
                 <i class="bi bi-gear-fill"></i>
               </button>
@@ -77,7 +77,7 @@
             <th class='bg-info'>Note</th>
             <th class='bg-success text-light'>Answer</th>
             <th class='bg-warning '>More</th>
-            <th class='cible hidden bg-8 col-1 col-md-2'>
+            <th class='cible hidden bg-secondary-light col-1 col-md-2'>
               <i class="bi bi-pencil-fill"></i> 
             </th>
           </tr>
@@ -108,7 +108,7 @@
                 <button 
                   type="button" 
                   id="showEdit<%= index %>" 
-                  class="btn bg-2 btn-sm d-flex align-items-center" 
+                  class="btn bg-success btn-sm text-light d-flex align-items-center" 
                   data-bs-toggle="modal" 
                   data-bs-target="#editModal<%= index %>"
                 >
@@ -151,13 +151,14 @@
         <% } %>
       </ul>
     </nav>
+
     <!-- Modal Edit Note-->
     <% notes.forEach((note, index) => { %>
       <div class="modal fade" id="editModal<%= index %>" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
-            <i class="bi bi-pencil-fill text-center text-2 fs-1"></i>
-            <div class="modal-header text-darkgreyless fs-4 p-0 ms-3">
+            <i class="bi bi-pencil-fill text-center text-success fs-1"></i>
+            <div class="modal-header text-secondary fs-4 p-0 ms-3">
               <i class="bi bi-pencil-square m-1"> </i>
               <p class="modal-title ft-victoria"> Edit Note</p>
               <button 
@@ -170,19 +171,40 @@
             <div class="modal-body">
               <form action="/editnote/<%= note._id %>?_method=PUT" method="POST">
                 <div class="mb-3">
-                  <label for="back" class="form-label text-3 fst-italic fw-bold m-0 p-0 mb-1">Note</label>
+                  <label 
+                    for="back" 
+                    class="form-label text-info fst-italic fw-bold m-0 p-0 mb-1"
+                  >
+                    Note
+                  </label>
                   <input type="text" class="form-control" name="back" value="<%= note.back %>">
                 </div>
                 <div class="mb-3">
-                  <label for="front" class="form-label text-2 fst-italic fw-bold m-0 p-0 mb-1">Answer</label>
+                  <label 
+                    for="front" 
+                    class="form-label text-success fst-italic fw-bold m-0 p-0 mb-1"
+                  >
+                    Answer
+                  </label>
                   <input type="text" class="form-control" name="front" value="<%= note.front %>">
                 </div>
                 <div class="mb-3">
-                  <label for="example" class="form-label text-secondary fst-italic fw-bold m-0 p-0 mb-1">Example</label>
+                  <label 
+                    for="example" 
+                    class="form-label text-warning fst-italic fw-bold m-0 p-0 mb-1"
+                  >
+                    Example
+                  </label>
                   <input type="text" class="form-control" name="example" value="<%= note.example %>">
                 </div>
-                <select name="selectedCategory" class="form-select text-capitalize bg-secondary text-white mt-2" onchange="hideContainer2(this)">
-                  <option hidden value="<%= note.categoryName %>"><%= note.categoryName %></option>
+                <select 
+                  name="selectedCategory" 
+                  class="form-select text-capitalize bg-success-light  mt-2" 
+                  onchange="hideContainer2(this)"
+                  >
+                  <option hidden value="<%= note.categoryName %>">
+                    <%= note.categoryName %>
+                  </option>
                   <option value="newCat">New Category</option>
                   <% categories.forEach(category => { %>
                     <option value="<%= category.categoryName %>"><%= category.categoryName %></option>
@@ -194,7 +216,9 @@
                 </div>
                 <input type="hidden" name="lessonName" value="<%= selectedLesson %>">
                 <input type="hidden" name="userId" value="<%= user._id %>">
-                <button type="submit" class="btn bg-3 mt-2">Save</button>
+                <button type="submit" class="btn bg-success text-light mt-2">
+                  Save
+                </button>
               </form>
             </div>
           </div>
