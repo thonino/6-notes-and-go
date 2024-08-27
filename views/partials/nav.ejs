@@ -7,7 +7,7 @@
     >
   </a> 
   <% if (lessons && lessons.length> 0) { %>
-    <form id="lessonForm" action="/selectLesson" method="POST" class="ms-sm-2">
+    <form id="lessonForm" action="/selectLesson" method="POST" class="">
       <select 
         id="lessonSelect" 
         name="lesson" 
@@ -23,7 +23,7 @@
       </select>
     </form>
     <% if (selectedLesson) { %>
-      <p class="fs-6 ft-victoria text-info-dark fw-bold text-center ms-2 m-0 text-capitalize">
+      <p class="fs-6 ft-victoria text-info-dark fw-bold text-center m-0 text-capitalize">
           <%= selectedLesson %> 
       </p>
     <% } %>
