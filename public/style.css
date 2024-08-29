@@ -51,6 +51,7 @@ footer { flex-shrink: 0; }
   border-color: #0a95b8; 
   color: #ffffff; 
 }
+
 /* inactive */
 .pagination .page-item .page-link { color: #0a95b8; }
 

@@ -19,7 +19,6 @@
       <% if (tenQuizzes && tenQuizzes.length > 0  ) { %>
         <div 
           class="card ft-roboto text-secondary fst-italic m-0 bg-success-light p-2 mb-3 mt-3"
-          onmouseenter="handleMouseEnter(event)"
         >
           <p class="fs-4 fw-bold m-0 p-0 showleft">
             10 last quizzes
@@ -35,7 +34,7 @@
           <div 
             class="card-header d-flex justify-content-center align-items-center bg-success-dark rounded-0 m-0 p-0"
             >
-            <p class="text-white fs-4 m-0 p-0 showleft" onmouseenter="handleMouseEnter(event)">
+            <p class="text-white fs-4 m-0 p-0 showleft">
               Quiz
             </p>
             <div class="showright">
@@ -65,7 +64,6 @@
             <div class="row text-capitalize">
               <p 
                 class="fs-2 fst-italic fw-bold my-2 showright <%= color %>"
-                onmouseenter="handleMouseEnter(event)"
               >
                 <%= prize %>
               </p>
