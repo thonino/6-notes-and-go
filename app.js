@@ -109,7 +109,7 @@ function keepAlive() {
     }).on('error', (err) => {
       console.log('test ping failed: ' + err.message);
     });
-  }, 873737); // Intervalle d'environ 14 minutes et 33 secondes
+  }, 873737); // Intervalle de 14 minutes et 33 secondes
 }
 
 keepAlive();
@@ -268,7 +268,7 @@ app.get('/logout', (req, res) => {
   });
 });
 
-// Forgot password
+// GET FORGOT PASSWORD
 app.get('/passwordforgot', (req, res) => {
   res.render('passwordForgot');
 });
@@ -302,7 +302,7 @@ app.post('/passwordforgot', async (req, res) => {
   }
 });
 
-// Reset password
+// GET RESET PASSWORD
 app.get('/reset/:token', (req, res) => {
   const token = req.params.token;
   res.render('passwordReset', { token });
@@ -328,7 +328,7 @@ app.post('/passwordreset', async (req, res) => {
   }
 });
 
-// POST ADD Lesson
+// POST ADD LESSON
 app.post('/addlesson', function(req, res){
 const lessonData = new Lesson({
   lessonName: req.body.lessonName,
@@ -344,7 +344,7 @@ const lessonData = new Lesson({
     });
 });
 
-// Route GET "/notes"
+// GET NOTES
 app.get("/notes", async (req, res) => {
   try {
     let notes = res.locals.notes || [];
@@ -382,7 +382,7 @@ app.get("/notes", async (req, res) => {
   }
 });
 
-// Route POST "/notes"
+// POST NOTES
 app.post("/notes", async (req, res) => {
   try {
     const quizzes = res.locals.quiz;
@@ -420,7 +420,7 @@ app.post("/notes", async (req, res) => {
   }
 });
 
-// ADD NOTE AND CATEGORY
+// POST ADD NOTE AND CATEGORY
 app.post("/addnote", async function (req, res) {
   let newCategoryName = req.body.selectedCategory;
   if (newCategoryName === "newCat") {
@@ -533,7 +533,7 @@ app.delete("/note/delete/:id", async (req, res) => {
   }
 });
 
-// DELETE Lesson
+// DELETE LESSONN
 app.delete("/deletelesson", async (req, res) => {
   try {
     const userId = res.locals.user;
@@ -555,7 +555,7 @@ app.post('/selectCategory', (req, res) => {
   res.redirect(`/quiz/${selectedCategory}`); 
 });
 
-// Quiz
+// GET QUIZZ
 app.get("/quiz", async (req, res) => {
   try {
     const selectedLesson = res.locals.selectedLesson;
@@ -588,7 +588,7 @@ app.get("/quiz", async (req, res) => {
   }
 });
 
-// Quiz game
+// GET QUIZ GAME
 app.get("/quiz/:category", async (req, res) => {
   try {
     const selectedCategory = req.params.category;
@@ -626,7 +626,7 @@ app.get("/quiz/:category", async (req, res) => {
   }
 });
 
-// ADD quizz
+// POST ADD QUIZ
 app.post("/addquiz", async function (req, res) {
   try {
     let score = 0;
@@ -667,7 +667,7 @@ app.post("/addquiz", async function (req, res) {
   }
 });
 
-// stats
+// GETB STATS
 app.get("/stats", async (req, res) => {
   try {
     const tenQuizzes = res.locals.tenQuizzes;
@@ -713,12 +713,12 @@ app.get("/stats", async (req, res) => {
 });
 
 
-// Error
+// GET ERROR
 app.get("/error", (req, res) => {
   res.render("error", { message: "An error occurred" });
 });
 
-// Alert
+// GET ALERT
 app.get("/alert", (req, res) => {
   const message =  req.query.message;
   res.render("alert", { message });
