@@ -145,18 +145,18 @@
                 for="back" 
                 class="form-label text-info fst-italic fw-bold m-0 p-0 mb-1"
               >
-                Note
+                Face A
               </label>
-              <input type="text" class="form-control" name="back" placeholder="write a note to learn...">
+              <input type="text" class="form-control" name="back" placeholder="write face a...">
             </div>
             <div class="mb-3">
               <label 
                 for="front" 
                 class="form-label text-success fst-italic fw-bold m-0 p-0 mb-1"
               >
-                Answer
+                Face B
               </label>
-              <input type="text" class="form-control" name="front" placeholder="write it's answer...">
+              <input type="text" class="form-control" name="front" placeholder="write face b...">
             </div>
             <div class="mb-3">
               <label 
@@ -186,7 +186,12 @@
               <label for="newCategory" class="form-label ms-1 mt-1 fw-bold text-2">
                 Create a new category
               </label>
-              <input type="text" class="form-control" name="newCategory" placeholder="write the category name...">
+              <input 
+                type="text" 
+                class="form-control" 
+                name="newCategory" 
+                placeholder="write the category name..."
+              >
             </div>
             <% if (selectedLesson) { %>
               <input type="hidden" name="lessonName" value="<%= selectedLesson %>">
@@ -195,9 +200,26 @@
             <button type="submit" class="btn bg-success-dark text-light mt-2">
               Add
             </button>
+            <button 
+              type="submit" 
+              name="action" 
+              value="addMore"
+              class="btn bg-success-dark text-light mt-2"
+            >
+              Add More
+            </button>
           </form>
         </div>
       </div>
     </div>
   </div>
 <% } %>
+<script>
+  // Vérifier si le paramètre modal=open est dans l'URL
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('modal') === 'open') { 
+    var noteModal = new bootstrap.Modal(document.getElementById('noteModal'));
+    noteModal.show();
+  }
+</script>
+

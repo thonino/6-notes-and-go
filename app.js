@@ -432,20 +432,19 @@ app.post("/addnote", async function (req, res) {
   const lessonName = req.body.lessonName;
   const userId = req.body.userId;
   try {
-    let existingCategory = await Category.findOne({ // Recherche de la catégorie existante
+    let existingCategory = await Category.findOne({
       categoryName: newCategoryName,
       lessonName,
       userId,
     });
-    if (!existingCategory && newCategoryName) { // Si nouvelle catégorie 
+    if (!existingCategory && newCategoryName) {
       existingCategory = await Category.create({
         categoryName: newCategoryName,
         lessonName,
         userId,
       });
     }
-    
-    const noteData = new Note({ // Création de la note avec la catégorie 
+    const noteData = new Note({
       front: req.body.front,
       back: req.body.back,
       example: req.body.example,
@@ -454,6 +453,13 @@ app.post("/addnote", async function (req, res) {
       userId,
     });
     await noteData.save();
+
+    if (req.body.action === "addMore") {
+      // Si "Add More" a été cliqué, redirigez vers la page actuelle avec le modal ouvert
+      return res.redirect('/notes?modal=open');
+    }
+
+    // Redirection normale si l'action n'est pas "Add More"
     res.redirect("/notes");
   } catch (err) {
     console.log(err);

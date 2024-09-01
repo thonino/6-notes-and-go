@@ -74,8 +74,8 @@
       <table class="table table-striped table-bordered">
         <thead> 
           <tr class="table-secondary text-center ft-victoria">
-            <th class='bg-info'>Note</th>
-            <th class='bg-success text-light'>Answer</th>
+            <th class='bg-info'>Face A</th>
+            <th class='bg-success text-light'>Face B</th>
             <th class='bg-warning '>More</th>
             <th class='cible hidden bg-secondary-light col-1 col-md-2'>
               <i class="bi bi-pencil-fill"></i> 
@@ -175,7 +175,7 @@
                     for="back" 
                     class="form-label text-info fst-italic fw-bold m-0 p-0 mb-1"
                   >
-                    Note
+                    Face A
                   </label>
                   <input type="text" class="form-control" name="back" value="<%= note.back %>">
                 </div>
@@ -184,7 +184,7 @@
                     for="front" 
                     class="form-label text-success fst-italic fw-bold m-0 p-0 mb-1"
                   >
-                    Answer
+                    Face B
                   </label>
                   <input type="text" class="form-control" name="front" value="<%= note.front %>">
                 </div>
@@ -210,8 +210,10 @@
                     <option value="<%= category.categoryName %>"><%= category.categoryName %></option>
                   <% }) %>
                 </select>
-                <div id="categoryContainer2" style="display: none;">
-                  <label for="newCategory" class="form-label ms-1 mt-1 fw-bold text-success">Create a new category</label>
+                <div id="categoryContainer2" style="display: none">
+                  <label for="newCategory" class="form-label ms-1 mt-1 fw-bold text-success">
+                    Create a new category
+                  </label>
                   <input type="text" class="form-control" name="newCategory" placeholder="Write the category name...">
                 </div>
                 <input type="hidden" name="lessonName" value="<%= selectedLesson %>">
