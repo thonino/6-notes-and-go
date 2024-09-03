@@ -2,7 +2,7 @@
 <html>
 <head>
   <%- include('./partials/links') %>
-  <title>My Statistics</title>
+  <title>Review</title>
 </head>
 <body>
   <%- include('./partials/nav') %>
@@ -15,7 +15,7 @@
         <i class="bi bi-box-arrow-in-right btn btn-success">Login</i>
       </a>
     <% } else { %>
-      <h1 class="text-center ft-victoria text-secondary pt-2"> My stats ! </h1>
+      <h1 class="text-center ft-victoria text-secondary pt-2"> Review ! </h1>
       <% if (tenQuizzes && tenQuizzes.length > 0  ) { %>
         <div 
           class="card ft-roboto text-secondary fst-italic m-0 bg-success-light p-2 mb-3 mt-3"
@@ -127,7 +127,7 @@
         <table class="table table-bordered bg-9">
           <thead  class="">
             <tr  class=""></tr>
-              <th scope="col">#</th>
+              <th scope="col">id</th>
               <th scope="col">Lesson</th>
               <th scope="col">Category</th>
               <th scope="col">Score</th>
