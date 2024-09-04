@@ -154,7 +154,6 @@ app.get("/", async (req, res) => {
       quizzes: res.locals.quiz,
       tips: res.locals.tips,
     });
-    
   } 
   catch (err) {
     console.error("Error rendering index:", err);
@@ -214,7 +213,6 @@ app.delete("/account/delete/:id", async (req, res) => {
     if (!bcrypt.compareSync(checkPassword, user.password)) {
       return res.status(400).send("Invalid password");
     }
-
     await User.findByIdAndDelete(req.params.id);
     res.redirect("/logout");
   } catch (error) {
@@ -367,7 +365,6 @@ app.get("/notes", async (req, res) => {
     const endIndex = page * limit;
     const paginatedNotes = notes.reverse().slice(startIndex, endIndex);
     const totalPages = Math.ceil(notes.length / limit);
-
     res.render("notes", {
       categories: res.locals.categories,
       selectedLesson: res.locals.selectedLesson,
@@ -405,7 +402,6 @@ app.post("/notes", async (req, res) => {
     const endIndex = page * limit;
     const paginatedNotes = notes.slice(startIndex, endIndex);
     const totalPages = Math.ceil(notes.length / limit);
-
     res.render("notes", {
       categories: res.locals.categories,
       selectedLesson: res.locals.selectedLesson,
@@ -453,12 +449,10 @@ app.post("/addnote", async function (req, res) {
       userId,
     });
     await noteData.save();
-
     if (req.body.action === "addMore") {
       // Si "Add More" a été cliqué, redirigez vers la page actuelle avec le modal ouvert
       return res.redirect('/notes?modal=open');
     }
-
     // Redirection normale si l'action n'est pas "Add More"
     res.redirect("/notes");
   } catch (err) {
@@ -492,9 +486,7 @@ app.put("/editnote/:id", async (req, res) => {
     noteToUpdate.categoryName = newCategoryName;
     noteToUpdate.lessonName = lessonName;
     noteToUpdate.userId = userId;
-
     await noteToUpdate.save(); // Sauvegarder les modifications de la note
-
     let existingCategory = await Category.findOne({ // Recherche de la catégorie existante
       categoryName: newCategoryName,
       lessonName,
@@ -529,9 +521,7 @@ app.delete("/note/delete/:id", async (req, res) => {
     if(notes.length === 1){  // Supprimer catégorie si c'est le dernier
       await Category.findOneAndDelete({ userId, lessonName, categoryName });
     }
-    
     await Note.findByIdAndDelete(req.params.id);  // Supprimer la note
-
     res.redirect("/notes");
   } catch (err) {
     console.error(err);
@@ -577,7 +567,6 @@ app.get("/quiz", async (req, res) => {
         categoryCounts.push({ categoryName: note.categoryName, count: 1 });
       }
     });
-    
     const categoriesFilter = categoryCounts.filter( // Filter catégories 
       item => item.count >= 6).map(item => item.categoryName
       );
@@ -605,7 +594,6 @@ app.get("/quiz/:category", async (req, res) => {
       notes = res.locals.notes.filter(note => note.categoryName === selectedCategory);
     }
     const randomNotes = getRandomNotes(notes, 6); 
-
     function getRandomNotes(notes, count) {
       const randomNotes = [];
       const totalNotes = notes.length;
@@ -682,11 +670,9 @@ app.get("/stats", async (req, res) => {
     let sum = tenLastScores.reduce(
       (accumulator, currentValue) => accumulator + currentValue, 0);
     let average = tenLastScores.length > 0 ? sum / tenLastScores.length : 0;
-
     let skip = parseInt(req.query.skip) || 0;
     if (req.query.next && skip < tenQuizzes.length - 1){ skip += 1 } 
     else if (req.query.prev && skip > 0) { skip -= 1 }
-
     const showQuiz = tenQuizzes[skip] || null;
     let prize = "";
     let color = "";
@@ -718,7 +704,6 @@ app.get("/stats", async (req, res) => {
   }
 });
 
-
 // GET ERROR
 app.get("/error", (req, res) => {
   res.render("error", { message: "An error occurred" });
@@ -729,7 +714,6 @@ app.get("/alert", (req, res) => {
   const message =  req.query.message;
   res.render("alert", { message });
 });
-
 
 // cmd windows-> tape : ipconfig -> ipv4 : 192.168.0.206:5000
 const PORT = 5000;
