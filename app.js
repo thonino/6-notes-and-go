@@ -97,7 +97,7 @@ const makeAvailable = async (req, res, next) => {
 
 app.use(makeAvailable);
 
-//------- Pour render, decommenter avant d'envoyer sur git -------//
+//------- Decommenter avant d'envoyer sur git -------//
 
 const https = require('https');
 
