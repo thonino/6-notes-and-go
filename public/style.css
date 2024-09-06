@@ -62,7 +62,7 @@ footer { flex-shrink: 0; }
 .hidden { display: none; }
 .show { display: block; }
 
-.cursor-default { cursor: default; }
+.cursor-default { cursor: default !important; }
 
 .wrapper { background-color: #f3f3f3; padding: 3rem }
 .image-container { margin: 10px }
@@ -90,6 +90,11 @@ footer { flex-shrink: 0; }
 .pagination .page-item .page-link:hover { /* bg hover  */
   background-color: #d8f8db; 
   color: #343a40; 
+}
+
+.form-selet {
+  background-color: #4b737a;
+  color: #3A5A60;
 }
 
 @keyframes bounce { 0%,100% 
