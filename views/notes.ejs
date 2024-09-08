@@ -23,7 +23,7 @@
       <% } %>
       <% if (user && lessons && selectedLesson) { %>
         <div class="container d-flex flex-column text-capitalize">
-          <div class="cible hidden">
+          <div class="cible1 hidden">
             <form id="deleteLesson" action="/deletelesson?_method=DELETE" method="POST">
               <button 
                 type="button" 
@@ -68,7 +68,7 @@
               </form>
             <% } %>
             <div class="text-center d-inline showleft">
-              <button id="toggle" class="btn btn-secondary">
+              <button id="toggle1" class="btn btn-secondary">
                 <i class="bi bi-gear-fill"></i>
               </button>
             </div>
@@ -82,9 +82,9 @@
         <thead>
           <tr class="table-secondary text-center ft-victoria">
             <th class='bg-info'>
-              <button class="btn" onclick="toggleColumn('faceA')">
+              <button class="btn fs-6" onclick="toggleColumn('faceA')">
                 Face A
-                <i class="bi bi-eye-slash ms-2"></i>
+                <i class="bi bi-eye-slash ms-2 m-0 p-0"></i>
               </button>
             </th>
             <th class='bg-success'>
@@ -94,9 +94,12 @@
               </button>
             </th>
             <th class='bg-warning '>
-              <button class="btn cursor-default">
-                More
+              <button id="toggle2" class="btn">
+                Option
+                <i class="bi bi-gear-fill ms-1"></i>
               </button>
+            </th>
+            <th class='bg-warning hidden cible2'>
             </th>
           </tr>
         </thead>
@@ -129,6 +132,22 @@
                     <%= note.categoryName %>
                   </td>
                   <% } %>
+                  <td class="cible2 hidden align-middle ">
+                    <div class="d-flex justify-content-center align-items-center gap-2 flex-wrap">
+                      <button type="button" id="showEdit<%= index %>" class="btn bg-success btn-sm text-light d-flex align-items-center"
+                        data-bs-toggle="modal" data-bs-target="#editModal<%= index %>">
+                        <i class="bi bi-pencil-fill"></i>
+                        <span class="d-none d-lg-block ms-1">Edit</span>
+                      </button>
+                      <form id="deleteNote<%= note._id %>" action="/note/delete/<%= note._id %>?_method=DELETE" method="POST">
+                        <button type="button" class="btn btn-danger btn-sm d-flex align-items-center"
+                          onclick="confirmDeleteNote('<%= note._id %>')">
+                          <i class="bi bi-trash-fill"></i>
+                          <span class="d-none d-lg-block ms-1">Delete</span>
+                        </button>
+                      </form>
+                    </div>
+                  </td>
             </tr>
             <% }) %>
         </tbody>
@@ -227,9 +246,16 @@
     <% }) %>
     <%- include('./partials/footer') %>
     <script>
-      // toggle 
-      document.querySelector("#toggle").addEventListener("click", () => {
-        var settings = document.querySelectorAll(".cible");
+      // toggle 1
+      document.querySelector("#toggle1").addEventListener("click", () => {
+        var settings = document.querySelectorAll(".cible1");
+        settings.forEach((setting) => {
+          setting.classList.toggle("hidden");
+        });
+      });
+      // toggle 2
+      document.querySelector("#toggle2").addEventListener("click", () => {
+        var settings = document.querySelectorAll(".cible2");
         settings.forEach((setting) => {
           setting.classList.toggle("hidden");
         });
