@@ -4,17 +4,18 @@
   <%- include('./partials/links') %>
   <title>Notes</title>
 </head>
-<style>
-  .reveal-btn {
-    margin-top: 5px;
-  }
-</style>
+<style>.reveal-btn { margin-top: 5px;}.hidden { display: none;}</style>
   <body class="vw-100">
     <%- include('./partials/nav') %>
     <%- include('./partials/tips') %>
     <%- include('./partials/action') %>
     <div class="mt-2 text-center d-flex justify-content-center flex-column">
-      <h1 class="text-center ft-victoria text-secondary pt-1">Learn !</h1>
+      <h1 class="text-center ft-victoria text-secondary pt-1">
+        Learn <% if (selectedLesson) { %>  <%= selectedLesson %>  <% } %> !
+          <button id="toggle1" class="btn btn-secondary btn-sm showleft mb-2">
+            <i class="bi bi-gear-fill"></i>
+          </button>
+      </h1>
       <% if (search) { %>
       <p class="text-center ft-roboto text-2 fw-bold fs-4 pt-2 fst-italic">
         ( Last search  : 
@@ -41,7 +42,7 @@
                 type="text" 
                 name="search" 
                 class="form-control "
-                style="width: 130px" 
+                style="width: 170px" 
                 placeholder="<%= search ? search : 'search...' %>" 
               />
               <button type="submit" class="btn btn-secondary ms-2"> 
@@ -54,7 +55,7 @@
                   id="categoryFilter" 
                   name="categoryFilter" 
                   class="form-select text-2 text-capitalize" 
-                  style="width: 130px" 
+                  style="width: 170px" 
                   onchange="this.form.submit()"
                 >
                   <option hidden>Category</option>
@@ -67,79 +68,83 @@
                 </select>
               </form>
             <% } %>
-            <div class="text-center d-inline showleft">
-              <button id="toggle1" class="btn btn-secondary">
-                <i class="bi bi-gear-fill"></i>
-              </button>
-            </div>
           </div>
         </div>
       <% } %>
     </div>
-    <!-- List Note -->
-    <div class="mt-3 mx-2">
-      <table class="table table-striped table-bordered">
-        <thead>
-          <tr class="table-secondary text-center ft-victoria">
-            <th class='bg-info'>
-              <button class="btn fs-6" onclick="toggleColumn('faceA')">
-                Face A
-                <i class="bi bi-eye-slash ms-2 m-0 p-0"></i>
-              </button>
-            </th>
-            <th class='bg-success'>
-              <button class="btn text-light" onclick="toggleColumn('faceB')">
-                Face B
-                <i class="bi bi-eye-slash ms-2"></i>
-              </button>
-            </th>
-            <th class='bg-warning '>
-              <button id="toggle2" class="btn">
-                Option
-                <i class="bi bi-gear-fill ms-1"></i>
-              </button>
-            </th>
-            <th class='bg-warning hidden cible2'>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <% notes.forEach((note, index)=> { %>
-            <tr class="text-center ft-roboto">
-              <td class="fw-light faceA">
-                <span id="faceAContent<%= index %>">
-                  <%= note.back %>
-                </span>
-                <button class="btn btn-sm btn-info toggle-btn" onclick="toggleContent(this, 'faceAContent<%= index %>')"
-                  style="display:none;">Afficher</button>
-              </td>
-              <td class="faceB">
-                <span id="faceBContent<%= index %>">
-                  <%= note.front %>
-                </span>
-                <button class="btn btn-sm btn-info toggle-btn" onclick="toggleContent(this, 'faceBContent<%= index %>')"
-                  style="display:none;">Afficher</button>
-              </td>
-              <% if (note.example) { %>
-                <td class="fw-light">
-                  <span class="fw-bold text-secondary text-capitalize">
-                    <%= note.categoryName %> <br>
-                  </span>
-                  <%= note.example %>
-                </td>
+    <!-- note -->
+<div class="mt-3 mx-2 p-0">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr class="table-secondary text-center ft-victoria">
+        <!-- Colonne A avec bouton pour toggle -->
+        <th class='bg-success'>
+          <button class="btn text-light" onclick="toggleColumn('caseA')">
+            A
+            <i class="bi bi-eye-slash"></i>
+          </button>
+        </th>
+        <!-- Colonne B avec bouton pour toggle -->
+        <th class='bg-info'>
+          <button class="btn" onclick="toggleColumn('caseB')">
+            B
+            <i class="bi bi-eye-slash ms-1"></i>
+          </button>
+        </th>
+        <!-- Colonne Option avec bouton pour afficher/masquer Edit/Delete -->
+        <th class='bg-warning'>
+          <button id="toggle2" class="btn">
+            Option
+            <i class="bi bi-gear-fill ms-1"></i>
+          </button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% notes.forEach((note, index)=> { %>
+        <tr class="text-center ft-roboto">
+          <!-- Colonne A -->
+          <td class="fw-light caseA">
+            <span id="caseAContent<%= index %>">
+              <%= note.back %><br>
+            </span>
+            <button class="btn btn-sm btn-info toggle-btn" onclick="toggleContent(this, 'caseAContent<%= index %>')"
+              style="display:none;">Afficher</button>
+          </td>
+
+          <!-- Colonne B -->
+          <td class="caseB">
+            <span id="caseBContent<%= index %>">
+              <%= note.front %><br>
+            </span>
+            <button class="btn btn-sm btn-info toggle-btn" onclick="toggleContent(this, 'caseBContent<%= index %>')"
+              style="display:none;">Afficher</button>
+          </td>
+
+          <!-- Colonne Option avec catégorie, exemple, Edit et Delete -->
+          <td class="optionCase align-middle">
+            <!-- Si une catégorie ou un exemple est présent -->
+            <% if (note.example) { %>
+              <span class="fw-bold text-secondary text-capitalize">
+                <%= note.categoryName %> <br>
+              </span>
+              <%= note.example %>
                 <% } else { %>
-                  <td class="fw-bold text-secondary text-capitalize">
+                  <span class="fw-bold text-secondary text-capitalize">
                     <%= note.categoryName %>
-                  </td>
+                  </span>
                   <% } %>
-                  <td class="cible2 hidden align-middle ">
-                    <div class="d-flex justify-content-center align-items-center gap-2 flex-wrap">
-                      <button type="button" id="showEdit<%= index %>" class="btn bg-success btn-sm text-light d-flex align-items-center"
-                        data-bs-toggle="modal" data-bs-target="#editModal<%= index %>">
+                    <!-- Boutons Edit et Delete ajoutés dans la même cellule -->
+                    <div class="cible2 hidden">
+                    <div class="d-flex justify-content-center align-items-center gap-2 flex-wrap mt-2">
+                      <button type="button" id="showEdit<%= index %>"
+                        class="btn bg-success btn-sm text-light d-flex align-items-center" data-bs-toggle="modal"
+                        data-bs-target="#editModal<%= index %>">
                         <i class="bi bi-pencil-fill"></i>
                         <span class="d-none d-lg-block ms-1">Edit</span>
                       </button>
-                      <form id="deleteNote<%= note._id %>" action="/note/delete/<%= note._id %>?_method=DELETE" method="POST">
+                      <form id="deleteNote<%= note._id %>" action="/note/delete/<%= note._id %>?_method=DELETE"
+                        method="POST">
                         <button type="button" class="btn btn-danger btn-sm d-flex align-items-center"
                           onclick="confirmDeleteNote('<%= note._id %>')">
                           <i class="bi bi-trash-fill"></i>
@@ -147,12 +152,14 @@
                         </button>
                       </form>
                     </div>
-                  </td>
-            </tr>
-            <% }) %>
-        </tbody>
-      </table>
-    </div>
+                    </div>
+
+          </td>
+        </tr>
+        <% }) %>
+    </tbody>
+  </table>
+</div>
 
     <!-- Pagination -->
     <nav aria-label="Page navigation example ">
@@ -192,7 +199,7 @@
                     for="back" 
                     class="form-label text-info fst-italic fw-bold m-0 p-0 mb-1"
                   >
-                    Face A
+                    case A
                   </label>
                   <input type="text" class="form-control" name="back" value="<%= note.back %>">
                 </div>
@@ -201,7 +208,7 @@
                     for="front" 
                     class="form-label text-success fst-italic fw-bold m-0 p-0 mb-1"
                   >
-                    Face B
+                    case B
                   </label>
                   <input type="text" class="form-control" name="front" value="<%= note.front %>">
                 </div>
@@ -253,27 +260,13 @@
           setting.classList.toggle("hidden");
         });
       });
-      // toggle 2
+    // Fonction pour afficher/masquer les boutons Edit/Delete dans la colonne Option
       document.querySelector("#toggle2").addEventListener("click", () => {
         var settings = document.querySelectorAll(".cible2");
         settings.forEach((setting) => {
-          setting.classList.toggle("hidden");
+          setting.classList.toggle("hidden"); // Ajoute ou retire la classe hidden
         });
       });
-
-    // Fonction pour cacher et afficher le contenu avec un bouton toggle
-      function toggleContent(button, contentId) {
-        const content = document.getElementById(contentId);
-
-        // Vérifie si le contenu est visible ou caché
-        if (content.style.display === "none") {
-          content.style.display = "inline"; // Affiche le contenu
-          button.textContent = "Cacher"; // Change le texte du bouton en "Cacher"
-        } else {
-          content.style.display = "none"; // Cache le contenu
-          button.textContent = "Afficher"; // Change le texte du bouton en "Afficher"
-        }
-      }
 
       // Fonction pour masquer/afficher toute une colonne
       function toggleColumn(columnClass) {
@@ -285,13 +278,13 @@
 
           // Si le contenu est caché, on l'affiche et on met le bouton sur "Cacher"
           if (content.style.display === "none") {
-            content.style.display = "inline"; // Affiche le contenu
-            button.textContent = "Cacher"; // Change le texte du bouton
-            button.style.display = "inline"; // Affiche le bouton "Cacher"
+            content.style.display = "inline"; 
+            button.textContent = "Cacher"; 
+            button.style.display = "inline"; 
           } else {
-            content.style.display = "none"; // Cache le contenu
-            button.textContent = "Afficher"; // Change le texte du bouton
-            button.style.display = "inline"; // Affiche le bouton "Afficher"
+            content.style.display = "none";
+            button.textContent = "Afficher";
+            button.style.display = "inline"; 
           }
         });
       }
