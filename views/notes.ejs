@@ -42,7 +42,7 @@
                 type="text" 
                 name="search" 
                 class="form-control "
-                style="width: 170px" 
+                style="width: 160px" 
                 placeholder="<%= search ? search : 'search...' %>" 
               />
               <button type="submit" class="btn btn-secondary ms-2"> 
@@ -55,7 +55,7 @@
                   id="categoryFilter" 
                   name="categoryFilter" 
                   class="form-select text-2 text-capitalize" 
-                  style="width: 170px" 
+                  style="width: 160px" 
                   onchange="this.form.submit()"
                 >
                   <option hidden>Category</option>
@@ -267,6 +267,20 @@
           setting.classList.toggle("hidden"); // Ajoute ou retire la classe hidden
         });
       });
+
+      // Fonction pour cacher et afficher le contenu avec un bouton toggle
+        function toggleContent(button, contentId) {
+          const content = document.getElementById(contentId);
+
+          // Vérifie si le contenu est visible ou caché
+          if (content.style.display === "none") {
+            content.style.display = "inline"; // Affiche le contenu
+            button.textContent = "Cacher"; // Change le texte du bouton en "Cacher"
+          } else {
+            content.style.display = "none"; // Cache le contenu
+            button.textContent = "Afficher"; // Change le texte du bouton en "Afficher"
+          }
+        }
 
       // Fonction pour masquer/afficher toute une colonne
       function toggleColumn(columnClass) {
