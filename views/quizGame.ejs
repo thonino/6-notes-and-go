@@ -19,18 +19,18 @@
               <% randomNotes.forEach((note, index) => { %>
                 <div class="row justify-content-center mt-3">
                   <div class="showleft p-0 px-2">
-                    <div class="card bg-secondary">
+                    <div class="card bg-info-dark">
                       <div class="card-body p-0 px-3">
                         <p 
                           for="answer<%= index %>" 
-                          class="text-success-light fst-italic fw-bold text-waring mb-1 p-0 m-0">
-                          Face B
+                          class="text-light fst-italic fw-bold text-waring mb-1 p-0 m-0">
+                          Write the answer
                         </p>
                         <input 
                           name="answer<%= index %>"
                           type="text" 
                           class="form-control mb-2" 
-                          placeholder="write the answer..."
+                          placeholder="your answer..."
                           onmouseenter="handleMouseEnter(event)"
                         >
                         <input 
@@ -44,10 +44,7 @@
                           value="<%= note.back %>"
                         />
                         <div class="d-flex justify-content-center">
-                          <p class="card-text text-info fst-italic fw-bold col-2">
-                            Face A : 
-                          </p>
-                          <p class="text-white capitalize-once"> <%= note.back %></p> 
+                          <p class="text-info fw-bold capitalize-once"> <%= note.back %></p> 
                         </div>
                       </div>
                     </div>
