@@ -679,13 +679,13 @@ app.get("/stats", async (req, res) => {
     if (showQuiz) {
       const score = showQuiz.score;
       if (score > 5 ) {
-        prize = "Perfect !!!";
+        prize = "Perfect !";
         color = "text-success";
       } else if (score > 3) {
-        prize = "Good !!";
+        prize = "Good !";
         color = "text-info";
       } else if (score === 3) {
-        prize = "Nice job !!";
+        prize = "Nice job !";
         color = "text-primary";
       } else {
         prize = "Can do better !";
@@ -699,7 +699,7 @@ app.get("/stats", async (req, res) => {
       totalQuizzes: tenQuizzes.length, average,
     });
   } catch (err) {
-    console.error("Error rendering quiz:", err);
+    console.error("Error rendering quiz: ", err);
     res.render("error", { message: "Error rendering Quiz.ejs" });
   }
 });

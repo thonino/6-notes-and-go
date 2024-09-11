@@ -1,144 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
   <%- include('./partials/links') %>
-  <title>Account</title>
+    <title>Account</title>
 </head>
+
 <body>
   <%- include('./partials/nav') %>
-  <%- include('./partials/tips') %>
-  <%- include('./partials/action') %>
-  <div class="container col-6 d-flex flex-column align-items-center">
-    <h1 class="text-center ft-victoria text-secondary pt-2"> Account ! </h1>
-    <% if (!user) { %>
-      <p>Please log in to access this page!</p>
-    <% } else { %>
-      <div class="">
-        <h3 class="text-capitalize">
-          Name: <%= user.name %>
-        </h3>
-      </div>
-      <!-- Change Email -->
-      <div class="">
-        <div class="">
-          <p class="fs-3">
-            Email: <span id="userEmail"><%= user.email %></span>
-            <button id="showInputEmail" class="btn bg-success text-light btn-sm">
-              <i class="bi bi-pencil-fill"></i>
-            </button>
-          </p>
-          <form
-            id="inputEmail"
-            class="d-none flex-column"
-            action="/account/<%= user._id %>?_method=PUT"
-            method="POST"
-          >
-            <label for="checkPassword" class="fst-italic mb-1 text-success">
-              Password:
-            </label>
-            <input
-              type="password"
-              class="form-control"
-              name="checkPassword"
-              placeholder="write your password"
-            />
-            <label for="newEmail" class="fst-italic mb-1 text-success">
-              New email:
-            </label>
-            <input
-              type="text"
-              class="form-control"
-              name="newEmail"
-              placeholder="write your new email"
-            />
-            <div class="mt-2 mb-3 text-center">
-              <button type="submit" class="btn bg-success text-light ms-1">
-                Save
-              </button>
+    <%- include('./partials/tips') %>
+      <%- include('./partials/action') %>
+
+        <div class="container mt-5">
+          <div class="row justify-content-center">
+            <div class="col-lg-6">
+              <h1 class="text-center text-secondary mb-4">My Account</h1>
+
+              <% if (!user) { %>
+                <div class="alert alert-warning text-center">
+                  Please log in to access this page!
+                </div>
+                <% } else { %>
+                  <!-- User Information -->
+                  <div class="mb-4">
+                    <h3 class="fw-bold">Name: <%= user.name %>
+                    </h3>
+                  </div>
+
+                  <!-- Change Email Section -->
+                  <div class="mb-4">
+                    <h3 class="fw-bold d-flex align-items-center">
+                      Email: 
+                      <span id="userEmail" class="ms-2">
+                        <%= user.email %>
+                      </span>
+                      <button id="showInputEmail" class="btn btn-outline-secondary ms-3">
+                        <i class="bi bi-pencil-fill"></i> Edit
+                      </button>
+                    </h3>
+                    <form 
+                      id="inputEmail" 
+                      class="d-none mt-3 d-flex" 
+                      action="/account/<%= user._id %>?_method=PUT"
+                      method="POST">
+                      <div class="mb-3">
+                        <label for="checkPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="checkPassword"
+                          placeholder="Enter your password">
+                      </div>
+                      <div class="mb-3">
+                        <label for="newEmail" class="form-label">New Email</label>
+                        <input type="email" class="form-control" name="newEmail" placeholder="Enter your new email">
+                      </div>
+                      <div class="text-center">
+                        <button type="submit" class="btn btn-success ">Save</button>
+                      </div>
+                    </form>
+                  </div>
+
+                  <!-- Change Password Section -->
+                  <div class="mb-4">
+                    <h3 class="fw-bold d-flex align-items-center">
+                      Password
+                      <button id="showInputPassword" class="btn btn-outline-secondary ms-3">
+                        <i class="bi bi-pencil-fill"></i> Change
+                      </button>
+                    </h3>
+                    <form 
+                      id="inputPassword" 
+                      class="d-none d-flex mt-3" 
+                      action="/account/<%= user._id %>?_method=PUT"
+                      method="POST"
+                    >
+                      <div class="mb-3">
+                        <label for="checkPassword" class="form-label">Old Password</label>
+                        <input type="password" class="form-control" name="checkPassword"
+                          placeholder="Enter your old password">
+                      </div>
+                      <div class="mb-3">
+                        <label for="newPassword" class="form-label">New Password</label>
+                        <input type="password" class="form-control" name="newPassword"
+                          placeholder="Enter your new password">
+                      </div>
+                      <div class="text-center">
+                        <button type="submit" class="btn btn-success">Save</button>
+                      </div>
+                    </form>
+                  </div>
+
+                  <!-- Delete Account Section -->
+                  <div class="mb-4">
+                    <h3 class="fw-bold d-flex align-items-center text-danger">Delete Account
+                      <button id="showInputDelete" class="btn btn-sm btn-outline-danger ms-3">
+                        <i class="bi bi-trash-fill"></i> Delete
+                      </button>
+                    </h3>
+                    <form id="inputDelete" class="d-none mt-3" action="/account/delete/<%= user._id %>?_method=DELETE"
+                      method="POST">
+                      <div class="mb-3">
+                        <label for="checkPassword" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" name="checkPassword"
+                          placeholder="Enter your password">
+                      </div>
+                      <div class="text-end">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                      </div>
+                    </form>
+                  </div>
+                  <% } %>
             </div>
-          </form>
+          </div>
         </div>
-      </div>
-      <!-- Change Password -->
-      <div class="">
-        <div class="">
-          <p class="fs-3">
-            My Password
-            <button id="showInputPassword" class="btn bg-success text-light btn-sm">
-              <i class="bi bi-pencil-fill"></i>
-            </button>
-          </p>
-          <form
-            id="inputPassword"
-            class="mt-3 d-none flex-column"
-            action="/account/<%= user._id %>?_method=PUT"
-            method="POST"
-          >
-            <label for="checkPassword" class="fst-italic mb-1 text-success">
-              Old password:
-            </label>
-            <input
-              type="password"
-              class="form-control"
-              name="checkPassword"
-              placeholder="write your old password"
-            />
-            <label for="newPassword" class="fst-italic mb-1 text-success">
-              New password:
-            </label>
-            <input
-              type="password"
-              class="form-control"
-              name="newPassword"
-              placeholder="write your new password"
-            />
-            <div class="mt-2 mb-3 text-center">
-              <button type="submit" class="btn bg-success text-light ms-1">
-                Save
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div class="">
-        <div class="">
-          <p class="fs-3">
-            Delete Account
-            <button id="showInputDelete" class="btn bg-danger text-light btn-sm">
-              <i class="bi bi-trash-fill"></i>
-            </button>
-          </p>
-          <form
-            id="inputDelete"
-            class="d-none flex-column"
-            action="/account/delete/<%= user._id %>?_method=DELETE"
-            method="POST"
-          >
-            <label for="checkPassword" class="fst-italic mb-1 text-success">
-              Password:
-            </label>
-            <input
-              type="password"
-              class="form-control"
-              name="checkPassword"
-              placeholder="write your password"
-            />
-            <div class="mt-2 mb-3 text-center">
-              <button
-                type="button"
-                class="btn btn-danger btn-sm"
-                onclick="confirmDeleteUser()"
-              >
-              Delete
-              <i class="bi bi-trash-fill"></i>
-            </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    <% } %>
-  </div>
-  <%- include('./partials/footer') %>
-  <script src="/script.js"></script>
+
+        <%- include('./partials/footer') %>
+          <script src="/script.js"></script>
 </body>
+
 </html>
