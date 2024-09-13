@@ -11,7 +11,12 @@
     <%- include('./partials/action') %>
     <div class="mt-2 text-center d-flex justify-content-center flex-column">
       <h1 class="text-center ft-victoria text-secondary pt-1">
-        Learn <% if (selectedLesson) { %>  <%= selectedLesson %>  <% } %> !
+        Learn : 
+        <span class="text-info-dark">
+          <% if (selectedLesson) { %>  <%= selectedLesson %>  <% } %> 
+        </span>
+        
+        !
           <button id="toggle1" class="btn btn-secondary btn-sm showleft mb-2">
             <i class="bi bi-gear-fill"></i>
           </button>
@@ -92,7 +97,7 @@
                 <i class="bi bi-eye-slash ms-1"></i>
               </button>
             </th>
-            <!-- Colonne Option avec bouton pour afficher/masquer Edit/Delete -->
+            <!-- Colonne Option avec bouton pour Show/masquer Edit/Delete -->
             <th class='bg-warning'>
               <button id="toggle2" class="btn">
                 Option
@@ -105,20 +110,36 @@
           <% notes.forEach((note, index)=> { %>
             <tr class="text-center ft-roboto">
               <!-- Colonne A -->
-              <td class="fw-light caseA">
-                <span id="caseAContent<%= index %>">
+              <td class="fw-light caseA align-middle">
+                <span 
+                  id="caseAContent<%= index %>" 
+                  class="text-capitalize"
+                >
                   <%= note.back %><br>
                 </span>
-                <button class="btn btn-sm btn-info toggle-btn" onclick="toggleContent(this, 'caseAContent<%= index %>')"
-                  style="display:none;">Afficher</button>
+                <button 
+                  class="btn btn-sm btn-success toggle-btn" 
+                  onclick="toggleContent(this, 'caseAContent<%= index %>')"
+                  style="display:none;"
+                >
+                  Show
+                </button>
               </td>
               <!-- Colonne B -->
-              <td class="caseB">
-                <span id="caseBContent<%= index %>">
+              <td class="fw-bold caseB align-middle">
+                <span 
+                  id="caseBContent<%= index %>" 
+                  class="text-capitalize text-secondary"
+                >
                   <%= note.front %><br>
                 </span>
-                <button class="btn btn-sm btn-info toggle-btn" onclick="toggleContent(this, 'caseBContent<%= index %>')"
-                  style="display:none;">Afficher</button>
+                <button 
+                  class="btn btn-sm btn-info toggle-btn" 
+                  onclick="toggleContent(this, 'caseBContent<%= index %>')"
+                  style="display:none;"
+                >
+                  Show
+                </button>
               </td>
               <!-- Colonne Option avec catégorie, exemple, Edit et Delete -->
               <td class="optionCase align-middle">
@@ -136,16 +157,26 @@
                 <!-- Boutons Edit et Delete ajoutés dans la même cellule -->
                 <div class="cible2 hidden">
                   <div class="d-flex justify-content-center align-items-center gap-2 flex-wrap mt-2">
-                    <button type="button" id="showEdit<%= index %>"
-                      class="btn bg-success btn-sm text-light d-flex align-items-center" data-bs-toggle="modal"
-                      data-bs-target="#editModal<%= index %>">
+                    <button 
+                      type="button" 
+                      id="showEdit<%= index %>"
+                      class="btn bg-success btn-sm text-light d-flex align-items-center" 
+                      data-bs-toggle="modal"
+                      data-bs-target="#editModal<%= index %>"
+                    >
                       <i class="bi bi-pencil-fill"></i>
                       <span class="d-none d-lg-block ms-1">Edit</span>
                     </button>
-                    <form id="deleteNote<%= note._id %>" action="/note/delete/<%= note._id %>?_method=DELETE"
-                      method="POST">
-                      <button type="button" class="btn btn-danger btn-sm d-flex align-items-center"
-                        onclick="confirmDeleteNote('<%= note._id %>')">
+                    <form 
+                      id="deleteNote<%= note._id %>" 
+                      action="/note/delete/<%= note._id %>?_method=DELETE"
+                      method="POST"
+                    >
+                      <button 
+                        type="button" 
+                        class="btn btn-danger btn-sm d-flex align-items-center"
+                        onclick="confirmDeleteNote('<%= note._id %>')"
+                      >
                         <i class="bi bi-trash-fill"></i>
                         <span class="d-none d-lg-block ms-1">Delete</span>
                       </button>
@@ -158,7 +189,6 @@
         </tbody>
       </table>
     </div>
-
 
     <!-- Pagination -->
     <nav aria-label="Page navigation example ">
