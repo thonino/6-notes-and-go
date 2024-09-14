@@ -1,15 +1,35 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-secondary-light p-0 py-2">
   <a class="navbar-brand m-0 p-0" href="/">
-    <img src="/img/logo.png" width="30px" height="30px" class="ms-2 showleft">
+    <img 
+      src="/img/logo.png" 
+      width="30px" 
+      height="30px" 
+      class="ms-2 showleft"
+      style="margin-top:-12px;"
+    >
   </a>
+  <span 
+    class='ft-victoria fs-5 text-info-dark fw-bold text-dark-75 m-0 mt-2'
+    style="margin-top:2px !important ; margin-left:-24px !important;"
+  >
+    EasyLearn
+  </span>
   <% if (lessons && lessons.length> 0) { %>
     <form id="lessonForm" action="/selectLesson" method="POST">
       <select 
         id="lessonSelect" 
         name="lesson" 
-        class="form-select bg-info-dark text-light ms-2 border rounded"
+        class="form-select bg-info-dark text-light border rounded"
       >
-        <option hidden>Select</option>
+        <option hidden>
+          <% if (selectedLesson) { %><br>
+            <p class="fs-6 ft-victoria text-info-dark fw-bold text-center ms-sm-3 m-0 text-capitalize m-3">
+              <%= selectedLesson %>
+            </p>
+          <% } else { %>
+          Select lesson
+          <% } %>
+        </option>
         <% lessons.forEach(lesson=> { %>
           <option value="<%= lesson.lessonName %>">
             <%= lesson.lessonName %>
@@ -17,17 +37,8 @@
           <% }) %>
       </select>
     </form>
-    <% if (selectedLesson) { %>
-      <p class="fs-6 ft-victoria text-info-dark fw-bold text-center ms-sm-3 m-0 text-capitalize">
-        <%= selectedLesson %>
-      </p>
-    <% } %>
-  <% } else { %>
-    <span class='ft-victoria fs-5 text-info-dark fw-bold text-dark-75 m-0 ms-2 mt-2'>
-      EasyLearn
-    </span>
-  <% } %>
-  <button class="navbar-toggler bg-secondary-dark me-2 btn-sm" type="button" data-bs-toggle="collapse"
+  <% }  %>
+  <button class="navbar-toggler bg-secondary-dark mx-2 btn-sm" type="button" data-bs-toggle="collapse"
     data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
