@@ -1,7 +1,7 @@
 // 
-// regler bug afichage de la leçon selectionné quand le nom est trop long
-// cf : leçon argumentation
-// changer taille btn delete account
+//
+// 
+// 
 //
 // express & express-session
 require("dotenv").config();

@@ -7,13 +7,14 @@
       class="ms-2 showleft"
       style="margin-top:-12px;"
     >
+    <span 
+      class='ft-victoria fs-5 text-info-dark fw-bold text-dark-75 me-2' 
+      style="margin-top:1px !important; "
+    >
+      EasyLearn
+    </span>
   </a>
-  <span 
-    class='ft-victoria fs-5 text-info-dark fw-bold text-dark-75 m-0 mt-2'
-    style="margin-top:2px !important ; margin-left:-24px !important;"
-  >
-    EasyLearn
-  </span>
+
   <% if (lessons && lessons.length> 0) { %>
     <form id="lessonForm" action="/selectLesson" method="POST">
       <select 
