@@ -40,7 +40,7 @@
             <div class="showright">
               <% if (skip > 0) { %> 
                 <a 
-                  href="/stats?prev=true&skip=<%= skip %>" 
+                  href="/review?prev=true&skip=<%= skip %>" 
                   class="text-decoration-none text-white"
                 >
                   <i class="bi bi-chevron-left fs-4 ms-2 ms-2"></i>
@@ -50,7 +50,7 @@
               <% } %>
               <% if (skip < totalQuizzes - 1) { %>
                 <a 
-                  href="/stats?next=true&skip=<%= skip %>" 
+                  href="/review?next=true&skip=<%= skip %>" 
                   class="text-decoration-none text-white"
                 >
                   <i class="bi bi-chevron-right fs-4"></i>
