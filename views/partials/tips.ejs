@@ -9,30 +9,36 @@
         <% if (!user) { %>
           <p class="showright250"> <!-- stape 1 -->
             Please
-              <a href="/login" class="text-5 text-decoration-none">Log-in</a>
-            to use the app !
+            <button 
+              class="btn p-0" 
+              onmouseenter="handleMouseEnter(event)"
+              style="margin-top:-5px"
+            >
+            <a href="/login" class="text-success fw-bold text-decoration-none"> 
+              Log-in
+            </a>
+            </button>
+              to use the app !
           </p>
         <% } else { %>
           <% if (lessons && lessons.length > 0) { %>
             <% if (selectedLesson) { %>
               <% if (notesFull && notesFull.length >= 1 && notesFull.length < 6) { %>
                 <p class="showright250"> <!-- stape 5 -->
-                  Take a quiz after
-                  <span class="text-4">6 notes</span>
-                  added !
+                  Take a quiz after 6 notes added !
                 </p>
               <% } else if (notesFull.length < 1) { %>
                 <p class="showright250"> <!-- stape 4 -->
                   Write a new note
                   <button 
-                    class="btn text-success fw-bold text-decoration-underline p-0"  
+                    class="btn text-success fw-bold p-0"  
                     data-bs-toggle="modal" 
                     data-bs-target="#noteModal"
                     style="margin-top:-5px"
                     onmouseenter="handleMouseEnter(event)"
                     >
-                    here
-                  </button>
+                    Here
+                  </button> !
                 </p>
               <% } else if (notesFull.length > 5) { %>
                 <% if (tenQuizzes.length === 0) { %>
@@ -43,10 +49,14 @@
                       style="margin-top:-5px"
                       onmouseenter="handleMouseEnter(event)"
                     >
-                    <a  href="/quiz" class="text-primary fw-bold">
-                      here 
-                    </a>
+                      <a  
+                        href="/quiz" 
+                        class="text-primary fw-bold text-decoration-none"
+                      >
+                        Here 
+                      </a>
                     </button>
+                    !
                   </p>
                 <% } else if (tenQuizzes.length === 1) { %>
                   <p class="showright250"> <!-- stape 7 -->
@@ -61,19 +71,20 @@
                       onmouseenter="handleMouseEnter(event)"
                     >
                     <a  
-                      href="/Review" 
-                      class="text-danger fw-bold" 
+                      href="/review" 
+                      class="text-primary-light fw-bold text-decoration-none" 
                       onmouseenter="handleMouseEnter(event)"
                     >
-                      here
+                      Here
                     </a>
                     </button>
+                    !
                   </p>
                 <% } %>
               <% } %>
             <% } else { %>
               <p class="showright250"> <!-- stape 3 -->
-                Select the lesson 
+                Select the lesson  !
               </p>
             <% } %>
           <% } else { %>
@@ -81,16 +92,16 @@
               <p class="text-white showright250">
                 Add a new lesson  
                 <button 
-                  class="btn text-info fw-bold text-decoration-underline p-0" 
+                  class="btn text-info fw-bold text-decoration-none p-0" 
                   data-bs-toggle="modal" 
                   data-bs-target="#lessonModal"
                   style="margin-top:-5px"
                   onmouseenter="handleMouseEnter(event)"
                 >
-                here
+                Here
                 </button>
+                !
               </p>
-            
           <% } %>
         <% } %>
       </div>

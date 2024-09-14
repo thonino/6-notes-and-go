@@ -352,8 +352,8 @@ app.get("/notes", async (req, res) => {
     const search = req.query.search;
     if (search) {
       notes = notesFull.filter(note => 
-        note.front.toLowerCase().includes(search.toLowerCase()) ||
-        note.back.toLowerCase().includes(search.toLowerCase())
+        note.front.toLowerCase().includes(search.toLowerCase().trim()) ||
+        note.back.toLowerCase().includes(search.toLowerCase().trim())
       );
     }
     if (filter) {
@@ -388,9 +388,10 @@ app.post("/notes", async (req, res) => {
     let notesFull = res.locals.notesFull;
     const search = req.query.search;
     if (search) {
-      notes = notesFull.filter(note => 
-        note.front.toLowerCase().includes(search.toLowerCase()) ||
-        note.back.toLowerCase().includes(search.toLowerCase())
+      notes = notesFull.filter(
+        (note) =>
+          note.front.toLowerCase().includes(search.toLowerCase().trim()) ||
+          note.back.toLowerCase().includes(search.toLowerCase().trim())
       );
     }
     if (filter) {
@@ -625,44 +626,62 @@ app.post("/addquiz", async function (req, res) {
   try {
     let score = 0;
     let data = [];
-    for (let i = 0; i < 6; i++) { 
-      let front = req.body["front" + i].toLowerCase().replace(/ /g, ''); 
+    for (let i = 0; i < 6; i++) {
+      // Supprimer les espaces pour comparaison
+      let front = req.body["front" + i].toLowerCase().replace(/\s+/g, "");
       let frontParts = req.body["front" + i].split("/");
-      let answer = req.body["answer" + i].toLowerCase().replace(/ /g, '');
+
+      // Conserver la version originale de la réponse pour l'affichage
+      let answerOriginal = req.body["answer" + i];
+      let answer = answerOriginal.toLowerCase().replace(/\s+/g, ""); 
+
+      // Si la réponse est vide
       if (answer === "") { answer = "no answer"; }
-      if (front === answer || frontParts.some(part => part.toLowerCase() === answer)) {
-        data.push([
-          req.body["back" + i],
-          req.body["front" + i],
-        ]);
+
+      // Comparaison des réponses compactées
+      if (
+        front === answer || // Comparer la réponse complète
+        frontParts.some(
+          (part) => part.toLowerCase().replace(/\s+/g, "") === answer
+        ) // Comparer les parties séparées par "/"
+      ) {
+      // Si la réponse est correcte, ajouter 1 point 
+        data.push([req.body["back" + i], req.body["front" + i]]);
         score++;
       } else {
+        // Sinon, stocker la réponse incorrecte
         data.push([
           req.body["back" + i],
           req.body["front" + i],
-          answer,
+          answerOriginal,
         ]);
       }
     }
+
+    // Création du quiz
     const selectedLesson = req.session.selectedLesson;
     const quizData = new Quiz({
       userId: res.locals.user,
-      lessonName: selectedLesson, 
-      categoryName: req.body.categoryName, 
-      score: score,
-      data: data,
+      lessonName: selectedLesson,
+      categoryName: req.body.categoryName,
+      score: score, // Stocker le score calculé
+      data: data, // Stocker les réponses
     });
+
+    // Sauvegarder le quiz
     await quizData.save();
-    res.redirect("/stats");
-  }
-  catch (err) {
+
+    // Redirection après la soumission
+    res.redirect("/review");
+  } catch (err) {
     console.log(err);
     res.render("error", { message: "error page addquiz" });
   }
 });
 
-// GETB STATS
-app.get("/stats", async (req, res) => {
+
+// GET review
+app.get("/review", async (req, res) => {
   try {
     const tenQuizzes = res.locals.tenQuizzes;
     let tenLastScores = [];
@@ -670,6 +689,7 @@ app.get("/stats", async (req, res) => {
     let sum = tenLastScores.reduce(
       (accumulator, currentValue) => accumulator + currentValue, 0);
     let average = tenLastScores.length > 0 ? sum / tenLastScores.length : 0;
+    average = average.toFixed(1);
     let skip = parseInt(req.query.skip) || 0;
     if (req.query.next && skip < tenQuizzes.length - 1){ skip += 1 } 
     else if (req.query.prev && skip > 0) { skip -= 1 }
@@ -692,7 +712,7 @@ app.get("/stats", async (req, res) => {
         color = "text-danger";
       }
     }
-    res.render("stats", {
+    res.render("review", {
       user: res.locals.user,
       notes: res.locals.notes, 
       showQuiz, prize, color, tenQuizzes, skip, 
