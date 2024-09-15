@@ -1,5 +1,5 @@
-// 
-//
+// login tips mt
+// quiz : no answer n'a pas fonctionné
 // 
 // 
 //
@@ -639,16 +639,16 @@ app.post("/addquiz", async function (req, res) {
       // Conserver la version originale de la réponse pour l'affichage
       let answerOriginal = req.body["answer" + i];
       let answer = answerOriginal.toLowerCase().replace(/\s+/g, ""); 
-
+      let noAnswer = "no answer";
       // Si la réponse est vide
-      if (answer === "") { answer = "no answer"; }
+      if (answer === "") { answer = noAnswer; }
 
       // Comparaison des réponses compactées
       if (
-        front === answer || // Comparer la réponse complète
-        frontParts.some(
+        front === answer || 
+        frontParts.some( 
           (part) => part.toLowerCase().replace(/\s+/g, "") === answer
-        ) // Comparer les parties séparées par "/"
+        ) 
       ) {
       // Si la réponse est correcte, ajouter 1 point 
         data.push([req.body["back" + i], req.body["front" + i]]);
@@ -658,7 +658,7 @@ app.post("/addquiz", async function (req, res) {
         data.push([
           req.body["back" + i],
           req.body["front" + i],
-          answerOriginal,
+          answer === noAnswer ? noAnswer : answerOriginal,
         ]);
       }
     }

@@ -63,6 +63,7 @@ footer { flex-shrink: 0; }
 .show { display: block; }
 
 .cursor-default { cursor: default !important; }
+.cursor-link { cursor:pointer !important;}
 
 .wrapper { background-color: #f3f3f3; padding: 3rem }
 .image-container { margin: 10px }
