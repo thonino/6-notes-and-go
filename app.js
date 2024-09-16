@@ -1,6 +1,3 @@
-// login tips mt
-// quiz : no answer n'a pas fonctionné
-// 
 // 
 //
 // express & express-session
@@ -558,7 +555,7 @@ app.post('/selectCategory', (req, res) => {
 });
 
 // GET QUIZZ
-app.get("/quiz", async (req, res) => {
+app.get("/test", async (req, res) => {
   try {
     const selectedLesson = res.locals.selectedLesson;
     const allNotes = res.locals.notes.filter(note => note.lessonName === selectedLesson);
@@ -576,7 +573,7 @@ app.get("/quiz", async (req, res) => {
     const categoriesFilter = categoryCounts.filter( // Filter catégories 
       item => item.count >= 6).map(item => item.categoryName
       );
-    res.render("quiz", {
+    res.render("test", {
       user: res.locals.user,
       lessons: res.locals.lessons,
       notes: res.locals.notes,
