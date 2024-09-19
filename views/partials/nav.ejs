@@ -20,7 +20,7 @@
       <select 
         id="lessonSelect" 
         name="lesson" 
-        class="form-select bg-info-dark text-light border rounded"
+        class="form-select form-design text-capitalize bg-info-dark text-light border rounded"
       >
         <option hidden>
           <% if (selectedLesson) { %><br>
@@ -28,13 +28,13 @@
               <%= selectedLesson %>
             </p>
           <% } else { %>
-          Select lesson
+          Select 
           <% } %>
         </option>
-        <% lessons.forEach(lesson=> { %>
-          <option value="<%= lesson.lessonName %>">
-            <%= lesson.lessonName %>
-          </option>
+          <% lessons.forEach(lesson=> { %>
+            <option value="<%= lesson.lessonName %>">
+              <%= lesson.lessonName %>
+            </option>
           <% }) %>
       </select>
     </form>

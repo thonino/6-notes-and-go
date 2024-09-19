@@ -93,9 +93,9 @@ footer { flex-shrink: 0; }
   color: #343a40; 
 }
 
-.form-selet {
-  background-color: #4b737a;
-  color: #3A5A60;
+.form-design {
+  background-color: #11623c;
+  color: #b7e4c7;
 }
 
 @keyframes bounce { 0%,100% 
